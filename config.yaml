@@ -49,6 +49,13 @@ instagram:
   status_timeout_seconds: 300
   max_retries: 4
 
+schedule:
+  # Must match the cron lines in .github/workflows/post.yml and story.yml (UTC).
+  post_hour_utc: 19
+  story_hour_utc: 14
+  # GitHub sometimes starts scheduled runs hours late; later than this, the slot is skipped.
+  max_delay_hours: 6
+
 render:
   jpeg_quality: 92
   post_size: [1080, 1350]

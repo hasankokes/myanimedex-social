@@ -56,7 +56,30 @@ def _safe(key: str) -> str:
 
 # ---------------------------------------------------------------- run
 
+def _scheduled_day(slot: str) -> date | None:
+    """The day whose cron slot this (possibly late) scheduled run belongs to, or None if too late."""
+    cfg = settings()["schedule"]
+    now = datetime.now(timezone.utc)
+    hour = cfg["post_hour_utc"] if slot == "post" else cfg["story_hour_utc"]
+    slot_time = now.replace(hour=hour, minute=0, second=0, microsecond=0)
+    if now < slot_time:
+        slot_time -= timedelta(days=1)
+    late = now - slot_time
+    if late > timedelta(hours=cfg["max_delay_hours"]):
+        warn(f"Scheduled run started {late.total_seconds() / 3600:.1f}h after the {slot_time:%Y-%m-%d %H:%M} UTC "
+             f"slot (limit {cfg['max_delay_hours']}h) — skipping. Run it manually if you still want it.")
+        return None
+    if late > timedelta(minutes=30):
+        log(f"Note: GitHub started this scheduled run {late.total_seconds() / 60:.0f} min late")
+    return slot_time.date()
+
+
 def cmd_run(args) -> int:
+    if args.scheduled and not args.date:
+        scheduled = _scheduled_day(args.slot)
+        if scheduled is None:
+            return 0
+        args.date = scheduled.isoformat()
     day = date.fromisoformat(args.date) if args.date else _today()
     dry = args.dry_run or env_flag("DRY_RUN")
     st = state_mod.load()
@@ -242,6 +265,8 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--type", choices=list(planner.BUILDERS), help="ignore the schedule and build this type now")
     r.add_argument("--dry-run", action="store_true", help="render only, never upload or publish")
     r.add_argument("--force", action="store_true", help="publish even if this slot was already published")
+    r.add_argument("--scheduled", action="store_true",
+                   help="cron run: resolve the slot's day from the schedule and skip if far too late")
 
     for name in ("plan", "preview", "samples"):
         s = sub.add_parser(name)

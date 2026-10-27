@@ -54,6 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           args=(--slot post)
+          [ "${{ github.event_name }}" = "schedule" ] && args+=(--scheduled)
           [ -n "$IN_TYPE" ] && [ "$IN_TYPE" != "scheduled" ] && args+=(--type "$IN_TYPE")
           [ -n "$IN_DATE" ] && args+=(--date "$IN_DATE")
           [ "$IN_FORCE" = "true" ] && args+=(--force)

@@ -311,7 +311,7 @@ Lokal `--dry-run` çalıştırmaları hiçbir şey yüklemez veya paylaşmaz. Pl
 
 - **Hikâye çıkartmaları**: Anket, quiz, soru ve link çıkartmaları API ile eklenemiyor. Hikâyeler bu yüzden "Reply with A or B" (yanıtlar DM'e düşer) ve "Link in bio" ile tasarlandı. İsterseniz paylaşımdan sonra uygulamadan elle anket ekleyebilirsiniz.
 - **Hikâyelerin açıklaması yoktur.** Etiketler sadece postlarda bulunur.
-- **Cron gecikmesi**: GitHub zamanlanmış işleri yoğun saatlerde 5–20 dk geç başlatabilir.
+- **Cron gecikmesi**: GitHub zamanlanmış işleri yoğun saatlerde geç başlatabilir. Bu bazen birkaç saati bulur (27 Ekim'de 5 saat oldu). Zamanlanmış iş, hangi günün slotuna ait olduğunu kendisi hesaplar; böylece gece yarısını aşan bir gecikme yanlış günün içeriğini paylaşmaz. 6 saatten fazla gecikmişse (`config.yaml` → `schedule.max_delay_hours`) paylaşmadan atlar ve logda uyarı bırakır. O içeriği yine de istersen Actions'tan elle çalıştırabilirsin.
 - **60 gün kuralı**: GitHub, 60 gün commit almayan public repolarda cron'u durdurur. Bot her hafta plan ve state commit'lediği için bu olmaz.
 - **Telif**: MyAnimeList veya AniList özet metinleri kullanılmaz; sadece puan, tarih, tür, bölüm sayısı ve stüdyo gibi olgusal veriler kullanılır. Anime gösteren şablonlarda (bu haftanın yayınları, Top 5, anime of the day, weekend pick, A/B) AniList'teki resmî kapak görseli kullanılır; kapak indirilemezse o görsel tipografik düzene düşer, paylaşım durmaz. Uygulama ekran görüntülerindeki kapaklar da olduğu gibi görünür. Görsellerde küçük bir "Data: AniList" kaynak notu var.
 - **Korsan etiketleri** (`#animeizle` vb.) yasak listesindedir ve yayını engeller.
