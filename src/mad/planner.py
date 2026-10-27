@@ -29,7 +29,7 @@ STORY_KINDS = ["story_anime_of_day", "story_tip", "story_your_pick", "story_down
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 KEEP_FIELDS = ["id", "idMal", "title", "format", "status", "episodes", "season", "seasonYear",
-               "averageScore", "popularity", "duration", "genres", "siteUrl", "nextAiringEpisode", "airing"]
+               "averageScore", "popularity", "duration", "genres", "siteUrl", "nextAiringEpisode", "airing", "coverImage"]
 
 
 # ---------------------------------------------------------------- helpers

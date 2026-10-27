@@ -277,6 +277,26 @@ class Canvas:
         ImageDraw.Draw(mask).rounded_rectangle((0, 0, w, h), radius, fill=255)
         self.im.paste(src.resize((w, h), Image.LANCZOS), (x, y), mask)
 
+    def poster(self, path: Path, box, angle=0.0, border=9, shadow=16, shadow_color=INK):
+        """Anime cover, center-cropped to the box, inked border + hard shadow, optionally tilted."""
+        x0, y0, x1, y1 = (int(v) for v in box)
+        w, h = x1 - x0, y1 - y0
+        src = Image.open(path).convert("RGB")
+        scale = max(w / src.width, h / src.height)
+        src = src.resize((max(w, round(src.width * scale)), max(h, round(src.height * scale))), Image.LANCZOS)
+        left, top = (src.width - w) // 2, (src.height - h) // 4
+        src = src.crop((left, top, left + w, top + h))
+        size = (w + border * 2 + shadow + 4, h + border * 2 + shadow + 4)
+
+        def draw(sub: "Canvas"):
+            sub.d.rectangle((shadow, shadow, shadow + w + border * 2, shadow + h + border * 2), fill=shadow_color)
+            sub.d.rectangle((0, 0, w + border * 2, h + border * 2), fill=INK)
+            sub.im.paste(src, (border, border))
+
+        cx = x0 + w / 2 + (shadow) / 2
+        cy = y0 + h / 2 + (shadow) / 2
+        self.rotated(size, draw, (cx, cy), angle)
+
     def save(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
         self.im.convert("RGB").save(path, "JPEG", quality=settings()["render"]["jpeg_quality"],

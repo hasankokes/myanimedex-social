@@ -37,7 +37,12 @@
               "episode": 5
             },
             "studio": "OLM",
-            "airing_day": "Fri"
+            "airing_day": "Fri",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
+              "color": "#e4a128"
+            }
           },
           {
             "id": 195604,
@@ -70,7 +75,12 @@
               "episode": 5
             },
             "studio": "Studio Pierrot",
-            "airing_day": "Sat"
+            "airing_day": "Sat",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg",
+              "color": "#f1a143"
+            }
           },
           {
             "id": 185874,
@@ -99,7 +109,12 @@
               "episode": 10
             },
             "studio": "PIERROT FILMS",
-            "airing_day": "Mon"
+            "airing_day": "Mon",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx185874-aU3e6tBT6wwA.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx185874-aU3e6tBT6wwA.jpg",
+              "color": null
+            }
           },
           {
             "id": 235,
@@ -132,7 +147,12 @@
               "episode": 1218
             },
             "studio": "TMS Entertainment",
-            "airing_day": "Sat"
+            "airing_day": "Sat",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx235-MyYT7K3chBdO.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx235-MyYT7K3chBdO.jpg",
+              "color": "#28a1e4"
+            }
           },
           {
             "id": 180136,
@@ -163,7 +183,12 @@
               "episode": 18
             },
             "studio": "GoHands",
-            "airing_day": "Thu"
+            "airing_day": "Thu",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx180136-gtMTCRlOD4OE.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx180136-gtMTCRlOD4OE.jpg",
+              "color": "#50c9fe"
+            }
           }
         ],
         "date_range": "Oct 26 – Nov 1",
@@ -209,7 +234,12 @@
             "airingAt": 1793201400,
             "episode": 5
           },
-          "studio": "C2C"
+          "studio": "C2C",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx159042-GGFwlDskc5vR.png",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx159042-GGFwlDskc5vR.png",
+            "color": "#f19328"
+          }
         },
         "season": "FALL",
         "year": 2026
@@ -278,7 +308,12 @@
             "airingAt": 1793543400,
             "episode": 6
           },
-          "studio": "J.C.STAFF"
+          "studio": "J.C.STAFF",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212888-NhyvqPt5aIuJ.jpg",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212888-NhyvqPt5aIuJ.jpg",
+            "color": "#f19335"
+          }
         },
         "b": {
           "id": 205909,
@@ -304,7 +339,12 @@
             "airingAt": 1793370600,
             "episode": 4
           },
-          "studio": "david production"
+          "studio": "david production",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx205909-DM0fAzNQulod.jpg",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205909-DM0fAzNQulod.jpg",
+            "color": "#aebb35"
+          }
         },
         "season": "FALL",
         "year": 2026
@@ -351,7 +391,12 @@
           ],
           "siteUrl": "https://anilist.co/anime/210031",
           "nextAiringEpisode": null,
-          "studio": "Lapin Track"
+          "studio": "Lapin Track",
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210031-TppgcHZh46LY.jpg",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210031-TppgcHZh46LY.jpg",
+            "color": "#fe5093"
+          }
         }
       },
       "anime_ids": [
@@ -392,7 +437,12 @@
             },
             "studio": "Studio Pierrot",
             "rank": 1,
-            "movement": "new"
+            "movement": "new",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg",
+              "color": "#f1a143"
+            }
           },
           {
             "id": 210482,
@@ -423,7 +473,12 @@
             },
             "studio": "david production",
             "rank": 2,
-            "movement": "new"
+            "movement": "new",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210482-P1VNKbqdJ6Zj.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210482-P1VNKbqdJ6Zj.jpg",
+              "color": "#f1ae50"
+            }
           },
           {
             "id": 195516,
@@ -451,7 +506,12 @@
             },
             "studio": "OLM",
             "rank": 3,
-            "movement": "new"
+            "movement": "new",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
+              "color": "#e4a128"
+            }
           },
           {
             "id": 195539,
@@ -477,7 +537,12 @@
             "nextAiringEpisode": null,
             "studio": "TRIGGER",
             "rank": 4,
-            "movement": "new"
+            "movement": "new",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195539-4LdfmKIHzuxr.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195539-4LdfmKIHzuxr.png",
+              "color": "#fe286b"
+            }
           },
           {
             "id": 189123,
@@ -506,7 +571,12 @@
             },
             "studio": "Electric Circus",
             "rank": 5,
-            "movement": "new"
+            "movement": "new",
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx189123-0secXELIhkIW.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg",
+              "color": "#e4ae50"
+            }
           }
         ],
         "season": "FALL",

@@ -51,7 +51,7 @@ AniList GraphQL ──► planner (seçim + açıklama) ──► plans/2026-W45
                state/posted_state.json (main dalına commit)
 ```
 
-- **Veri: AniList.** Jikan (MyAnimeList'in gayriresmî API'si) 2026'da kapandı. AniList ücretsizdir, anahtar istemez ve MAL ID'lerini de içerir. İstemci istekleri ~2,1 sn aralıkla gönderir, 429 ve 5xx hatalarında artan aralıklarla tekrar dener, yanıtları 6 saat diskte cache'ler (`.cache/anilist`, Actions'ta da cache'lenir). Özet metni (synopsis) ve posterler **hiç çekilmez**.
+- **Veri: AniList.** Jikan (MyAnimeList'in gayriresmî API'si) 2026'da kapandı. AniList ücretsizdir, anahtar istemez ve MAL ID'lerini de içerir. İstemci istekleri ~2,1 sn aralıkla gönderir, 429 ve 5xx hatalarında artan aralıklarla tekrar dener, yanıtları 6 saat diskte cache'ler (`.cache/anilist`, Actions'ta da cache'lenir). Özet metni (synopsis) **hiç çekilmez**; kapak görselleri `.cache/covers` altına indirilip görsele işlenir.
 - **"Üye sayısı"**: AniList `popularity` alanı, yani animeyi listesine eklemiş kullanıcı sayısı. Görsellerde "ON LISTS" olarak gösterilir.
 - **Görseller**: JPEG. Instagram API yalnızca JPEG kabul eder. Postlar 1080×1350, hikâyeler 1080×1920. Hikâyelerde üst ve alt 250 px boş bırakılır.
 - **Barındırma**: GitHub Pages, `gh-pages` dalı. Dal her seferinde tek bir commit olarak yeniden yazılır, böylece repo şişmez. 30 günden eski medya silinir.
@@ -313,6 +313,6 @@ Lokal `--dry-run` çalıştırmaları hiçbir şey yüklemez veya paylaşmaz. Pl
 - **Hikâyelerin açıklaması yoktur.** Etiketler sadece postlarda bulunur.
 - **Cron gecikmesi**: GitHub zamanlanmış işleri yoğun saatlerde 5–20 dk geç başlatabilir.
 - **60 gün kuralı**: GitHub, 60 gün commit almayan public repolarda cron'u durdurur. Bot her hafta plan ve state commit'lediği için bu olmaz.
-- **Telif**: MyAnimeList veya AniList özet metinleri kullanılmaz; sadece puan, tarih, tür, bölüm sayısı ve stüdyo gibi olgusal veriler kullanılır. Şablonlarda resmî poster veya karakter görseli kullanılmaz, tasarım tipografiktir. Uygulama ekran görüntülerindeki anime kapakları ise olduğu gibi görünür. Görsellerde küçük bir "Data: AniList" kaynak notu var.
+- **Telif**: MyAnimeList veya AniList özet metinleri kullanılmaz; sadece puan, tarih, tür, bölüm sayısı ve stüdyo gibi olgusal veriler kullanılır. Anime gösteren şablonlarda (bu haftanın yayınları, Top 5, anime of the day, weekend pick, A/B) AniList'teki resmî kapak görseli kullanılır; kapak indirilemezse o görsel tipografik düzene düşer, paylaşım durmaz. Uygulama ekran görüntülerindeki kapaklar da olduğu gibi görünür. Görsellerde küçük bir "Data: AniList" kaynak notu var.
 - **Korsan etiketleri** (`#animeizle` vb.) yasak listesindedir ve yayını engeller.
 - Graph API sürümü `config.yaml` → `instagram.graph_version`. Meta sürümleri yaklaşık 2 yıl destekler; yılda bir güncellemek yeterli.

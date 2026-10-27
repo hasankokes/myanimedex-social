@@ -1,7 +1,7 @@
 """AniList GraphQL client: throttled, retried and disk-cached.
 
 AniList is the free replacement for Jikan (MyAnimeList's unofficial API shut down in 2026).
-Only factual fields are requested — no synopsis text, no cover/banner images.
+Only factual fields and the cover image URL are requested — never synopsis text.
 """
 from __future__ import annotations
 
@@ -37,6 +37,7 @@ MEDIA_FIELDS = """
   startDate { year month day }
   studios(isMain: true) { nodes { name } }
   nextAiringEpisode { airingAt episode }
+  coverImage { extraLarge large color }
 """
 
 _last_request_at = 0.0

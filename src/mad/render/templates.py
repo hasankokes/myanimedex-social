@@ -10,6 +10,7 @@ from typing import Any
 
 from ..captions import display_title, score10, season_label
 from ..config import settings
+from ..covers import cover_path
 from .base import (ACCENTS, CREAM, INK, MAGENTA, TEAL, WHITE, YELLOW, Canvas, font, mix,
                    resolve)
 
@@ -153,21 +154,34 @@ def _airing_slide(m, i) -> Canvas:
     accent = ACCENTS[i % 3]
     c = Canvas(POST, INK)
     c.halftone(mix(INK, accent, 0.4), origin="tr", max_r=13, spacing=28)
-    c.burst((175, 190), 135, 98, points=14, fill=accent, shadow=(10, 10), seed=i + 1)
-    c.text((175, 192), f"{i + 1:02d}", "display", 112, fill=INK, anchor="mm")
+    cover = cover_path(m)
     ep = m["airing"]["episode"]
-    c.chip((1020, 110), f"EP {ep}  ·  {m['airing_day'].upper()}", name="display", size=56,
-           fill=CREAM, anchor="ra", pad=(28, 14))
-    c.text((1020, 250), "NEW EPISODE THIS WEEK", "body_xbold", 32, fill=accent, anchor="ra")
-    c.text_block((70, 360, 1010, 790), display_title(m).upper(), "display", 150, 62, fill=WHITE,
-                 valign="middle", shadow=(9, 9), max_lines=4)
-    stat_columns(c, (70, 830, 1010, 1060),
+    if cover:
+        c.poster(cover, (70, 140, 450, 680), angle=-2, shadow_color=accent)
+        c.burst((105, 160), 82, 60, points=14, fill=accent, shadow=(8, 8), seed=i + 1)
+        c.text((105, 162), f"{i + 1:02d}", "display", 68, fill=INK, anchor="mm")
+        c.chip((1010, 140), f"EP {ep}  ·  {m['airing_day'].upper()}", name="display", size=52,
+               fill=CREAM, anchor="ra", pad=(26, 12))
+        c.text((1010, 262), "NEW EPISODE THIS WEEK", "body_xbold", 28, fill=accent, anchor="ra")
+        c.text_block((500, 300, 1010, 700), display_title(m).upper(), "display", 116, 46, fill=WHITE,
+                     valign="middle", shadow=(7, 7), max_lines=5)
+        top = 750
+    else:
+        c.burst((175, 190), 135, 98, points=14, fill=accent, shadow=(10, 10), seed=i + 1)
+        c.text((175, 192), f"{i + 1:02d}", "display", 112, fill=INK, anchor="mm")
+        c.chip((1020, 110), f"EP {ep}  ·  {m['airing_day'].upper()}", name="display", size=56,
+               fill=CREAM, anchor="ra", pad=(28, 14))
+        c.text((1020, 250), "NEW EPISODE THIS WEEK", "body_xbold", 32, fill=accent, anchor="ra")
+        c.text_block((70, 360, 1010, 790), display_title(m).upper(), "display", 150, 62, fill=WHITE,
+                     valign="middle", shadow=(9, 9), max_lines=4)
+        top = 830
+    stat_columns(c, (70, top, 1010, top + 220),
                  [("FAN SCORE", score10(m) or "NEW"), ("ON LISTS", fmt_count(m.get("popularity"))),
                   ("EPISODES", episodes_label(m))])
-    genre_chips(c, 1105, m.get("genres"), fill=accent)
+    genre_chips(c, top + 270, m.get("genres"), fill=accent)
     meta = "  ·  ".join(x for x in [m.get("studio"), (m.get("format") or "").replace("_", " ")] if x)
     if meta:
-        c.text((70, 1215), meta.upper(), "body_bold", 32, fill=mix(CREAM, INK, 0.25), anchor="la")
+        c.text((70, top + 385), meta.upper(), "body_bold", 32, fill=mix(CREAM, INK, 0.25), anchor="la")
     footer(c)
     return c
 
@@ -213,15 +227,25 @@ def _movement(m) -> tuple[str, tuple]:
 def _top5_slide(m, data) -> Canvas:
     rank = m["rank"]
     accent = [YELLOW, MAGENTA, TEAL, YELLOW, MAGENTA][rank - 1]
+    burst_fill = YELLOW if accent != YELLOW else TEAL
     c = Canvas(POST, CREAM)
     c.halftone(mix(CREAM, accent, 0.55), origin="bl", max_r=13, spacing=28)
     c.text((60, 40), "TOP 5 THIS SEASON", "comic", 56, fill=INK, anchor="la")
-    c.text((70, 450), f"#{rank}", "display", 360, fill=accent, anchor="ls", stroke=10, shadow=(16, 16))
-    score_burst(c, (800, 320), m, r=185, fill=YELLOW if accent != YELLOW else TEAL, seed=rank)
     label, color = _movement(m)
-    c.chip((76, 500), label, size=36, fill=color, fg=WHITE if color == MAGENTA else INK)
-    c.text_block((70, 600, 1010, 960), display_title(m).upper(), "display", 140, 60, fill=INK,
-                 valign="middle", max_lines=4)
+    cover = cover_path(m)
+    if cover:
+        c.poster(cover, (70, 130, 450, 670), angle=-3, shadow_color=accent)
+        c.text((490, 420), f"#{rank}", "display", 300, fill=accent, anchor="ls", stroke=10, shadow=(14, 14))
+        c.chip((498, 462), label, size=34, fill=color, fg=WHITE if color == MAGENTA else INK)
+        score_burst(c, (850, 600), m, r=135, fill=burst_fill, seed=rank)
+        c.text_block((70, 700, 1010, 965), display_title(m).upper(), "display", 112, 50, fill=INK,
+                     valign="middle", max_lines=3)
+    else:
+        c.text((70, 450), f"#{rank}", "display", 360, fill=accent, anchor="ls", stroke=10, shadow=(16, 16))
+        score_burst(c, (800, 320), m, r=185, fill=burst_fill, seed=rank)
+        c.chip((76, 500), label, size=36, fill=color, fg=WHITE if color == MAGENTA else INK)
+        c.text_block((70, 600, 1010, 960), display_title(m).upper(), "display", 140, 60, fill=INK,
+                     valign="middle", max_lines=4)
     stat_columns(c, (70, 990, 1010, 1170),
                  [("ON LISTS", fmt_count(m.get("popularity"))), ("EPISODES", episodes_label(m)),
                   ("STUDIO", (m.get("studio") or "-").upper())],
@@ -289,6 +313,28 @@ def story_credit(c: Canvas, fg=INK, data_credit=True):
     c.text((c.w / 2, c.h - SAFE - 20), text, "body_bold", 26, fill=fg, anchor="ms")
 
 
+def _story_anime_body(c: Canvas, m, stats, burst_fill, studio_fg, accent):
+    """Poster (when available), title, score, stats and genres for single-anime stories."""
+    cover = cover_path(m)
+    if cover:
+        c.poster(cover, (80, 560, 500, 1150), angle=-3, shadow_color=INK)
+        c.text_block((540, 570, 1000, 880), display_title(m).upper(), "display", 112, 46, fill=WHITE,
+                     valign="middle", stroke=5, shadow=(9, 9), max_lines=5)
+        meta = "  ·  ".join(x for x in [m.get("studio"), (m.get("format") or "").replace("_", " ")] if x)
+        if meta:
+            c.text((540, 905), meta.upper()[:30], "body_xbold", 30, fill=studio_fg, anchor="la")
+        stat_columns(c, (540, 950, 1000, 1130), stats, label_fg=accent)
+        score_burst(c, (430, 1165), m, r=118, fill=burst_fill)
+        genre_chips(c, 1300, m.get("genres"), fill=YELLOW, center=True, size=34)
+    else:
+        c.text_block((80, 600, 1000, 1000), display_title(m).upper(), "display", 160, 64, fill=WHITE,
+                     valign="middle", stroke=6, shadow=(12, 12), max_lines=4)
+        studio_line(c, m, 1030, fg=studio_fg)
+        score_burst(c, (290, 1180), m, r=165, fill=burst_fill)
+        stat_columns(c, (500, 1080, 1000, 1280), stats, label_fg=accent)
+        genre_chips(c, 1340, m.get("genres"), fill=YELLOW, center=True, size=34)
+
+
 def render_story_anime_of_day(data, out_dir):
     m = data["anime"]
     c = story_canvas(MAGENTA)
@@ -297,14 +343,8 @@ def render_story_anime_of_day(data, out_dir):
     banner(c, (540, SAFE + 110), "ANIME OF THE DAY", 118, fill=INK, fg=YELLOW, angle=-3)
     c.chip((540, SAFE + 250), f"{season_label(data['season'], data['year']).upper()}  ·  AIRING NOW",
            size=36, fill=CREAM, anchor="ma")
-    c.text_block((80, 600, 1000, 1000), display_title(m).upper(), "display", 160, 64, fill=WHITE,
-                 valign="middle", stroke=6, shadow=(12, 12), max_lines=4)
-    studio_line(c, m, 1030, fg=WHITE)
-    score_burst(c, (290, 1180), m, r=165)
-    stat_columns(c, (500, 1080, 1000, 1280),
-                 [("ON LISTS", fmt_count(m.get("popularity"))), ("EPISODES", episodes_label(m))],
-                 label_fg=MAGENTA)
-    genre_chips(c, 1340, m.get("genres"), fill=YELLOW, center=True, size=34)
+    _story_anime_body(c, m, [("ON LISTS", fmt_count(m.get("popularity"))), ("EPISODES", episodes_label(m))],
+                      burst_fill=YELLOW, studio_fg=WHITE, accent=MAGENTA)
     c.panel((80, 1450, 1000, 1610), fill=INK, shadow=0, border=8)
     c.text((540, 1505), "ADD IT TO YOUR WATCHLIST", "condensed", 60, fill=YELLOW, anchor="mm")
     c.text((540, 1570), "MyAnimeDex  ·  link in bio", "body_bold", 36, fill=CREAM, anchor="mm")
@@ -349,17 +389,28 @@ def render_story_your_pick(data, out_dir):
     c.d.line([(0, 1030), (1080, 900)], fill=INK, width=16)
     banner(c, (540, SAFE + 95), "WHICH ONE ARE YOU", 92, fill=INK, fg=YELLOW, angle=-2)
     banner(c, (540, SAFE + 225), "WATCHING THIS WEEK?", 92, fill=INK, fg=YELLOW, angle=-2)
-    for letter, m, top, fill in (("A", a, 510, TEAL), ("B", b, 1110, MAGENTA)):
-        c.burst((170, top + 160), 125, 92, points=12, fill=CREAM, shadow=(10, 10), seed=ord(letter))
-        c.text((170, top + 165), letter, "comic", 150, fill=INK, anchor="mm")
-        c.text_block((330, top, 1010, top + 250), display_title(m).upper(), "display", 104, 48, fill=WHITE,
+    rows = (("A", a, 600, -3), ("B", b, 1110, 3))
+    with_covers = all(cover_path(m) for _, m, _, _ in rows)
+    for letter, m, top, angle in rows:
+        if with_covers:
+            c.poster(cover_path(m), (90, top - 25, 330, top + 315), angle=angle)
+            c.burst((100, top - 15), 66, 48, points=12, fill=CREAM, shadow=(7, 7), seed=ord(letter))
+            c.text((100, top - 11), letter, "comic", 84, fill=INK, anchor="mm")
+            text_x, title_box, meta_y = 380, (380, top, 1010, top + 230), top + 262
+        else:
+            top -= 90 if letter == "A" else 0
+            c.burst((170, top + 160), 125, 92, points=12, fill=CREAM, shadow=(10, 10), seed=ord(letter))
+            c.text((170, top + 165), letter, "comic", 150, fill=INK, anchor="mm")
+            text_x, title_box, meta_y = 330, (330, top, 1010, top + 250), top + 285
+        c.text_block(title_box, display_title(m).upper(), "display", 104, 48, fill=WHITE,
                      valign="middle", stroke=5, shadow=(8, 8), max_lines=3)
         meta = "  ·  ".join(x for x in [f"{score10(m)}/10" if score10(m) else None,
                                          f"{fmt_count(m.get('popularity'))} ON LISTS",
                                          f"EP {m['nextAiringEpisode']['episode']} NEXT" if m.get("nextAiringEpisode") else None] if x)
-        c.text((330, top + 285), meta, "body_xbold", 34, fill=INK, anchor="la")
-    c.burst((540, 968), 110, 80, points=16, fill=YELLOW, shadow=(10, 10), seed=9)
-    c.text((540, 972), "VS", "comic", 100, fill=INK, anchor="mm")
+        c.text((text_x, meta_y), meta, "body_xbold", 32, fill=INK, anchor="la")
+    vs = (930, 950) if with_covers else (540, 968)
+    c.burst(vs, 100, 74, points=16, fill=YELLOW, shadow=(10, 10), seed=9)
+    c.text((vs[0], vs[1] + 4), "VS", "comic", 92, fill=INK, anchor="mm")
     c.chip((540, 1480), "REPLY WITH  A  OR  B", name="comic", size=78, fill=YELLOW, anchor="ma",
            pad=(40, 16))
     c.text((540, 1625), "Data: AniList  ·  " + HANDLE, "body_bold", 26, fill=WHITE, anchor="ms")
@@ -402,16 +453,10 @@ def render_story_weekend(data, out_dir):
     banner(c, (540, SAFE + 110), "WEEKEND BINGE PICK", 110, fill=YELLOW, fg=INK, angle=-3)
     season = f"{(m.get('season') or '').title()} {m.get('seasonYear') or ''}".strip()
     c.chip((540, SAFE + 250), f"FULL SEASON OUT  ·  {season.upper()}", size=36, fill=CREAM, anchor="ma")
-    c.text_block((80, 600, 1000, 1000), display_title(m).upper(), "display", 160, 64, fill=WHITE,
-                 valign="middle", stroke=6, shadow=(12, 12), max_lines=4)
-    studio_line(c, m, 1030, fg=INK)
-    score_burst(c, (290, 1180), m, r=165, fill=MAGENTA)
     eps = m.get("episodes") or 0
     minutes = eps * (m.get("duration") or 24)
-    stat_columns(c, (500, 1080, 1000, 1280),
-                 [("EPISODES", str(eps)), ("BINGE TIME", f"{minutes // 60}H {minutes % 60:02d}M")],
-                 label_fg=MAGENTA)
-    genre_chips(c, 1340, m.get("genres"), fill=YELLOW, center=True, size=34)
+    _story_anime_body(c, m, [("EPISODES", str(eps)), ("BINGE TIME", f"{minutes // 60}H {minutes % 60:02d}M")],
+                      burst_fill=MAGENTA, studio_fg=INK, accent=MAGENTA)
     c.panel((80, 1450, 1000, 1610), fill=INK, shadow=0, border=8)
     c.text((540, 1505), "SAVE IT FOR SATURDAY", "comic", 70, fill=YELLOW, anchor="mm")
     c.text((540, 1570), "Add it to your MyAnimeDex list  ·  link in bio", "body_bold", 34, fill=CREAM,
