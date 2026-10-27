@@ -296,8 +296,10 @@ def _feature_screen(f, shot: Path) -> Canvas:
     c.halftone(mix(INK, MAGENTA, 0.45), origin="br", max_r=12)
     banner(c, (540, 95), "IN THE APP", 76, fill=YELLOW, fg=INK, angle=-2)
     c.image(shot, (300, 190, 780, 1240), radius=40, masks=f.get("mask"))
-    c.burst((945, 330), 100, 74, points=14, fill=MAGENTA, shadow=(10, 10), seed=6)
-    c.text((945, 332), "FREE", "comic", 56, fill=WHITE, anchor="mm", stroke=4)
+    pro = "PRO" in (f.get("kicker") or "").upper()
+    c.burst((945, 330), 100, 74, points=14, fill=YELLOW if pro else MAGENTA, shadow=(10, 10), seed=6)
+    c.text((945, 332), "PRO" if pro else "FREE", "comic", 56, fill=INK if pro else WHITE, anchor="mm",
+           stroke=0 if pro else 4)
     footer(c, data_credit=False)
     return c
 
@@ -358,17 +360,21 @@ def render_story_tip(data, out_dir):
     c = story_canvas(YELLOW)
     c.speed_lines((540, 1000), mix(YELLOW, WHITE, 0.45), count=70, inner=380)
     c.halftone(mix(YELLOW, INK, 0.2), origin="tr", max_r=13)
-    c.burst((240, SAFE + 150), 175, 128, points=14, fill=MAGENTA, shadow=(12, 12), seed=2)
-    c.text((240, SAFE + 152), "APP TIP", "comic", 78, fill=WHITE, anchor="mm", stroke=5)
-    c.logo((1000, SAFE + 40), 190, anchor="ra")
     if shot:
-        c.text_block((80, 520, 1000, 700), tip["title"].upper(), "comic", 130, 70, fill=INK, max_lines=2)
-        c.bubble((80, 730, 1000, 1020), tail_to=(330, 1090), shadow=12)
-        c.text_block((130, 760, 950, 990), tip["text"], "body_bold", 54, 30, fill=INK, valign="middle",
-                     max_lines=4)
-        c.rotated((520, 640), lambda s: s.image(shot, (24, 24, 480, 600), radius=36, masks=tip.get("mask")),
-                  (540, 1360), 3)
+        c.burst((205, SAFE + 115), 140, 102, points=14, fill=MAGENTA, shadow=(10, 10), seed=2)
+        c.text((205, SAFE + 117), "APP TIP", "comic", 64, fill=WHITE, anchor="mm", stroke=4)
+        c.logo((1000, SAFE + 25), 170, anchor="ra")
+        c.image(shot, (575, 520, 1000, 1560), radius=34, masks=tip.get("mask"))
+        c.text_block((70, 520, 545, 880), tip["title"].upper(), "comic", 118, 58, fill=INK,
+                     valign="bottom", max_lines=4)
+        c.bubble((70, 920, 545, 1330), tail_to=(470, 1420), shadow=12)
+        c.text_block((110, 955, 510, 1300), tip["text"], "body_bold", 50, 28, fill=INK, valign="middle",
+                     max_lines=7)
+        c.chip((70, 1470), "LINK IN BIO", size=40, fill=TEAL)
     else:
+        c.burst((240, SAFE + 150), 175, 128, points=14, fill=MAGENTA, shadow=(12, 12), seed=2)
+        c.text((240, SAFE + 152), "APP TIP", "comic", 78, fill=WHITE, anchor="mm", stroke=5)
+        c.logo((1000, SAFE + 40), 190, anchor="ra")
         c.text_block((80, 560, 1000, 860), tip["title"].upper(), "comic", 170, 80, fill=INK,
                      valign="middle", max_lines=2)
         c.bubble((80, 900, 1000, 1280), tail_to=(330, 1370), shadow=14)

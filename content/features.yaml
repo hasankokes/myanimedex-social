@@ -46,4 +46,64 @@ features:
   - id: watch-status
     title: Track every episode
     description: Watching, completed, plan to watch — your whole anime history in one place, synced across devices.
+    screenshot: assets/screenshots/app/dark/watching.jpg
+
+  - id: level-system
+    title: Level up as you watch
+    description: Earn XP for every anime you finish, review or add to a list. Climb from Rookie to Senpai, Sensei, Legend and Kami.
+    screenshot: assets/screenshots/app/dark/profile.jpg
+
+  - id: for-you
+    title: Picks made for you
+    description: For You learns from your whole list. Shows you rate higher weigh more, dropped ones count against, and every pick tells you why.
+    kicker: PRO FEATURE
+    screenshot: assets/screenshots/app/dark/for_you.jpg
+
+  - id: discover-genres
+    title: Find your next anime fast
+    description: Pick up to 5 genres in Discover and get a list made for your taste, or start with popular picks.
+    screenshot: assets/screenshots/app/light/discover.jpg
+
+  - id: themes
+    title: Make the app yours
+    description: Five app themes (Sakura, Midnight, Matcha, Crimson, Violet) plus avatar frames, profile banners and name colors.
+    kicker: PRO FEATURE
+    screenshot: assets/screenshots/app/dark/appearance.jpg
+
+  - id: episode-reminders
+    title: Get pinged when it airs
+    description: Turn on reminders and get a notification when your favorites air. With Pro, add your Watching list and get it 15 or 60 minutes early.
+    screenshot: assets/screenshots/app/light/calendar.jpg
+
+  - id: stats
+    title: Your anime stats
+    description: See your favorite studio, your top genres and how your ratings compare to the community.
+    kicker: PRO FEATURE
     screenshot: assets/screenshots/app/dark/stats.jpg
+
+  - id: top10
+    title: Show off your Top 10
+    description: Pick your all-time Top 10 from your list, reorder it anytime and pin it to your profile.
+    screenshot: assets/screenshots/app/light/top10.jpg
+
+  - id: season-picks
+    title: This season, picked for you
+    description: Season Picks finds new anime this season that match your taste and your favorite studios.
+    kicker: PRO FEATURE
+    screenshot: assets/screenshots/app/light/this_season.jpg
+
+  - id: reviews
+    title: Rate it, review it
+    description: Give stars, write a quick review and keep all your reviews in one place on your profile.
+    screenshot: assets/screenshots/app/light/reviews.jpg
+
+  - id: anime-page
+    title: Everything on one page
+    description: Score, rank, popularity, genres, the trailer and your episode progress for every anime.
+    screenshot: assets/screenshots/app/light/anime_detail.jpg
+
+  - id: roll-dice
+    title: Feeling lucky?
+    description: Tap Roll Dice on Home and get a completely random anime to watch tonight.
+    kicker: TRY THIS
+    screenshot: assets/screenshots/app/light/home.jpg

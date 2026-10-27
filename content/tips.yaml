@@ -1,32 +1,85 @@
 # Tuesday "app tip" stories rotate through this list in order (same rules as features.yaml).
 # Fields: id, title (short), text (1–2 sentences), screenshot (optional), enabled (optional).
 # Stories can't carry links via the API, so tips end with "Link in bio" automatically.
+# Screenshot library: assets/screenshots/app/{dark,light,themes}/
 
 tips:
   - id: calendar-today
     title: What's airing today?
     text: Open the Calendar tab to see today's new episodes with exact air times.
+    screenshot: assets/screenshots/app/dark/calendar.jpg
+
+  - id: episode-plus
+    title: One tap per episode
+    text: Tap + on the Watching tab after each episode and your progress updates instantly.
+    screenshot: assets/screenshots/app/dark/watching.jpg
 
   - id: favorites-filter
     title: Only your shows
     text: Tap "Favorites only" in the calendar to hide everything you don't follow.
+    screenshot: assets/screenshots/app/light/calendar.jpg
+
+  - id: reminders-bell
+    title: Never miss a drop
+    text: Tap the bell in the calendar to turn on episode reminders.
+    screenshot: assets/screenshots/app/dark/my_week.jpg
 
   - id: rate-review
     title: Rate as you watch
     text: Leave a score and a review on any anime page and help other fans choose.
+    screenshot: assets/screenshots/app/dark/reviews.jpg
+
+  - id: discover-genres
+    title: Not sure what to watch?
+    text: Pick up to 5 genres in Discover and get a list made for you.
+    screenshot: assets/screenshots/app/dark/discover.jpg
 
   - id: invite-friend
     title: Watch together
     text: Add a collaborator to a list and plan your next binge with friends.
+    screenshot: assets/screenshots/app/dark/list_detail.jpg
 
   - id: arena-play
-    title: Can't choose?
-    text: Play Arena and let bracket battles decide your next anime.
+    title: Anime Arena
+    text: Pick favorites in head-to-head duels and crown your champion.
+    screenshot: assets/screenshots/app/light/arena.jpg
+
+  - id: sort-favorites
+    title: Sort your favorites
+    text: Sort by date added, title or score, or filter by Watching and Completed.
+    screenshot: assets/screenshots/app/light/favorites.jpg
+
+  - id: earn-xp
+    title: Earn XP
+    text: Finishing an anime or writing a review gives 5 XP, a new list 3 XP. Level up your profile!
+    screenshot: assets/screenshots/app/dark/profile.jpg
+
+  - id: reorder-list
+    title: Reorder your lists
+    text: Long press an item in a list and drag it to a new spot.
+    screenshot: assets/screenshots/app/light/list_detail.jpg
+
+  - id: trailer
+    title: Watch the trailer
+    text: Open any anime and tap Watch Trailer before you start.
+    screenshot: assets/screenshots/app/light/anime_detail.jpg
 
   - id: language-switch
     title: Change the language
-    text: Settings → Language. MyAnimeDex speaks 15 languages.
+    text: Go to Settings > Language. MyAnimeDex speaks 15 languages.
+    screenshot: assets/screenshots/app/light/language.jpg
+
+  - id: roll-dice
+    title: Can't decide?
+    text: Tap Roll Dice on Home for a completely random anime.
+    screenshot: assets/screenshots/app/dark/home.jpg
+
+  - id: top10-pin
+    title: Pin your Top 10
+    text: Go to Profile > My Top 10 > Edit, pick from your list and reorder.
+    screenshot: assets/screenshots/app/light/top10.jpg
 
   - id: dark-mode
     title: Night owl mode
-    text: Switch between dark and light theme with a single tap.
+    text: Switch between dark and light theme with the sun and moon icon at the top.
+    screenshot: assets/screenshots/app/light/home.jpg
