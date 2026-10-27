@@ -262,7 +262,7 @@ Popülerlik eşikleri (`top5_min_popularity` = Top 5'e girmek için gereken mini
 - **Çift paylaşım olmaz.** Paylaşılan her slot (`2026-11-02:post`) `posted_state.json`'a yazılır. Aynı iş tekrar çalışırsa `already published` der ve çıkar (`force` ile aşılabilir). `media_publish` zaman aşımına uğrarsa tekrar denemeden önce container'ın `PUBLISHED` olup olmadığı kontrol edilir.
 - **Aynı anime kısa sürede tekrar gelmez.** Paylaşılan animeler tarihleriyle state'e yazılır ve 21 gün boyunca seçilmez (Top 5 hariç: o gerçek sıralamayı gösterir ve geçen haftaya göre ▲/▼/NEW hareketini işaretler).
 - **Tekrar denemeler**: AniList (429 / 5xx), Graph API'nin geçici hata kodları (rate limit, medya indirilemedi), GitHub Pages yayını (en fazla 10 dk bekler), state push'u (5 deneme).
-- Üç workflow aynı `concurrency` grubunda çalışır, birbirlerinin state commit'lerini ezmez.
+- Üç workflow aynı `concurrency` grubunda sırayla çalışır, birbirlerinin state commit'lerini ve `gh-pages` push'larını ezmez. GitHub bir grupta yalnızca **bir** bekleyen iş tutar: elle art arda üç iş başlatırsanız ortadaki iptal olabilir (zamanlanmış saatler çakışmadığı için cron'u etkilemez). Gerekirse iptal olanı yeniden çalıştırın.
 
 | Log mesajı | Ne yapmalı |
 |---|---|

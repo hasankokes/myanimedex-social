@@ -33,7 +33,7 @@ jobs:
       IN_WEEK: ${{ inputs.week }}
       IN_FORCE: ${{ inputs.force }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
@@ -80,7 +80,7 @@ jobs:
           scripts/commit_state.sh "plan: ${{ steps.week.outputs.week }}"
 
       - name: Upload preview artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: preview-${{ steps.week.outputs.week }}
           path: out/preview/${{ steps.week.outputs.week }}
