@@ -7,6 +7,7 @@
 #   description  1–2 short sentences, shown on the image and in the caption (~160 chars max)
 #   kicker       optional small label above the title (default "APP FEATURE")
 #   screenshot   optional phone screenshot (PNG/JPG/WebP, portrait) inside this repo.
+#                Ready-made library: assets/screenshots/app/{dark,light,themes}/ (see README).
 #                With a screenshot the post becomes a 2-slide carousel:
 #                slide 1 = typographic card, slide 2 = the app screen ("IN THE APP").
 #   mask         optional list of [x0, y0, x1, y1] boxes in the screenshot's own pixels.
@@ -24,23 +25,25 @@ features:
     title: Never miss a new episode
     description: The airing calendar shows every episode of the week in your local time, so you always know what drops today.
     kicker: APP FEATURE
-    screenshot: assets/screenshots/calendar-myweek.webp
+    screenshot: assets/screenshots/app/dark/my_week.jpg
 
   - id: languages
     title: Your anime app, in 15 languages
     description: English, Türkçe, Español, Português, Deutsch, Français and more. Pick yours in settings.
+    screenshot: assets/screenshots/app/dark/language.jpg
 
   - id: shared-lists
     title: Build lists with friends
     description: Create a list, invite collaborators and decide your next watch together.
-    screenshot: assets/screenshots/lists.webp
+    screenshot: assets/screenshots/app/dark/list_detail.jpg
 
   - id: arena
     title: Anime Arena
     description: Bracket battles between anime. Vote match by match and crown your all-time favorite.
     kicker: GAME MODE
+    screenshot: assets/screenshots/app/dark/arena.jpg
 
   - id: watch-status
     title: Track every episode
     description: Watching, completed, plan to watch — your whole anime history in one place, synced across devices.
-    screenshot: assets/screenshots/stats.webp
+    screenshot: assets/screenshots/app/dark/stats.jpg

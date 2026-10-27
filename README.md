@@ -230,6 +230,16 @@ features:
 - Ekran görüntüleri uygulamanın **güncel** hâlini göstermeli. Uygulama ekranlarındaki anime kapakları görünür kalır. `mask` alanı yalnızca bir şeyi gizlemek gerektiğinde (ör. kişisel bilgi) kullanılır.
 - Şu anki girdiler **örnektir**. Kendi metinlerinizle değiştirin.
 
+### Ekran görüntüsü kütüphanesi (`assets/screenshots/app/`)
+Simülatörde (iPhone 17 Pro, uygulama 1.0.16, İngilizce arayüz, 9:41 durum çubuğu) çekilmiş güncel ekranlar. Genişlik 900 px. `features.yaml` ve `tips.yaml` dosyalarındaki `screenshot:` alanında doğrudan kullanılabilir.
+
+| Klasör | İçerik |
+|---|---|
+| `dark/`, `light/` | home, calendar, my_week, anime_detail, discover, for_you, this_season, arena, language, premium, profile, watching, favorites, lists, list_detail, stats, top10, reviews |
+| `themes/` | `<tema>_<dark|light>_<home|profile>.jpg`: sakura, midnight, matcha, crimson, violet |
+
+Örnek: `screenshot: assets/screenshots/app/light/for_you.jpg`. Uygulama değiştikçe ekranları yeniden çekin (eski görsel kullanmayın).
+
 ### `content/tips.yaml` (Salı hikâyesi)
 Alanlar `id`, `title`, `text`, opsiyonel `screenshot` ve `enabled`. Sıralı döner.
 
