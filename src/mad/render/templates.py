@@ -234,32 +234,48 @@ def _top5_slide(m, data) -> Canvas:
 # ---------------------------------------------------------------- Wednesday: app feature
 
 def render_feature(data: dict[str, Any], out_dir: Path) -> list[Path]:
+    """Slide 1: typographic feature card. Slide 2 (only with a screenshot): the app screen."""
     f = data["feature"]
     shot = resolve(f.get("screenshot"))
+    slides = [_feature_card(f, carousel=bool(shot))]
+    if shot:
+        slides.append(_feature_screen(f, shot))
+    return save_all(slides, out_dir)
+
+
+def _feature_card(f, carousel: bool) -> Canvas:
     c = Canvas(POST, TEAL)
     c.halftone(mix(TEAL, INK, 0.25), origin="tl", max_r=12)
     c.speed_lines((900, 1100), mix(TEAL, WHITE, 0.25), count=50, inner=200, seed=4)
     c.logo((60, 50), 130)
     banner(c, (840, 110), (f.get("kicker") or "APP FEATURE").upper(), 54, fill=MAGENTA, fg=WHITE,
            angle=3, name="comic")
-    if shot:
-        c.text_block((60, 240, 600, 700), f["title"].upper(), "comic", 130, 60, fill=WHITE, valign="top",
-                     stroke=8, shadow=(10, 10), max_lines=5)
-        c.bubble((60, 760, 600, 1130), tail_to=(470, 1210))
-        c.text_block((100, 800, 560, 1100), f["description"], "body_bold", 46, 26, fill=INK,
-                     valign="middle", max_lines=7)
-        c.rotated((470, 1020), lambda s: s.image(shot, (24, 24, 430, 970), radius=36), (830, 760), -4)
+    c.text_block((60, 240, 1020, 640), f["title"].upper(), "comic", 170, 70, fill=WHITE,
+                 valign="middle", stroke=10, shadow=(12, 12), max_lines=3)
+    c.bubble((60, 690, 1020, 1010), tail_to=(330, 1110))
+    c.text_block((110, 725, 970, 980), f["description"], "body_bold", 56, 30, fill=INK,
+                 valign="middle", max_lines=5)
+    if carousel:
+        c.text((860, 1190), "SEE IT", "comic", 64, fill=INK, anchor="rm")
+        c.arrow((880, 1190), 130)
     else:
-        c.text_block((60, 240, 1020, 640), f["title"].upper(), "comic", 170, 70, fill=WHITE,
-                     valign="middle", stroke=10, shadow=(12, 12), max_lines=3)
-        c.bubble((60, 690, 1020, 1010), tail_to=(330, 1110))
-        c.text_block((110, 725, 970, 980), f["description"], "body_bold", 56, 30, fill=INK,
-                     valign="middle", max_lines=5)
         c.burst((860, 1130), 150, 110, points=14, fill=YELLOW, shadow=(10, 10), seed=8)
         c.text((860, 1130), "FREE!", "comic", 84, fill=INK, anchor="mm")
     c.chip((60, 1170), "MYANIMEDEX · LINK IN BIO", size=36, fill=YELLOW)
     footer(c, fg=INK, data_credit=False)
-    return save_all([c], out_dir)
+    return c
+
+
+def _feature_screen(f, shot: Path) -> Canvas:
+    c = Canvas(POST, INK)
+    c.speed_lines((540, 700), mix(INK, TEAL, 0.18), count=80, inner=330)
+    c.halftone(mix(INK, MAGENTA, 0.45), origin="br", max_r=12)
+    banner(c, (540, 95), "IN THE APP", 76, fill=YELLOW, fg=INK, angle=-2)
+    c.image(shot, (300, 190, 780, 1240), radius=40, masks=f.get("mask"))
+    c.burst((945, 330), 100, 74, points=14, fill=MAGENTA, shadow=(10, 10), seed=6)
+    c.text((945, 332), "FREE", "comic", 56, fill=WHITE, anchor="mm", stroke=4)
+    footer(c, data_credit=False)
+    return c
 
 
 # ---------------------------------------------------------------- stories
@@ -310,7 +326,8 @@ def render_story_tip(data, out_dir):
         c.bubble((80, 730, 1000, 1020), tail_to=(330, 1090), shadow=12)
         c.text_block((130, 760, 950, 990), tip["text"], "body_bold", 54, 30, fill=INK, valign="middle",
                      max_lines=4)
-        c.rotated((520, 640), lambda s: s.image(shot, (24, 24, 480, 600), radius=36), (540, 1360), 3)
+        c.rotated((520, 640), lambda s: s.image(shot, (24, 24, 480, 600), radius=36, masks=tip.get("mask")),
+                  (540, 1360), 3)
     else:
         c.text_block((80, 560, 1000, 860), tip["title"].upper(), "comic", 170, 80, fill=INK,
                      valign="middle", max_lines=2)

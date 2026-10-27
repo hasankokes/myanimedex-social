@@ -26,6 +26,8 @@ The airing calendar shows every episode of the week in your local time, so you a
 
 Track what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.
 
+👉 Swipe to see it in the app.
+
 #anime #animerecommendations #fall2026anime #myanimedex
 ```
 

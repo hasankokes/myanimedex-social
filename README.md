@@ -219,13 +219,16 @@ features:
     title: Never miss a new episode # görseldeki başlık (~40 karakter)
     description: The airing calendar shows every episode ...  # 1–2 cümle (~160 karakter)
     kicker: APP FEATURE             # opsiyonel küçük etiket
-    screenshot: assets/screenshots/calendar.png   # opsiyonel, dikey PNG/JPG
+    screenshot: assets/screenshots/calendar-myweek.webp   # opsiyonel, dikey PNG/JPG/WebP
+    mask:                           # opsiyonel: kapatılacak alanlar (ekran görüntüsünün kendi pikselleri)
+      - [113, 440, 178, 523]        # [x0, y0, x1, y1]
     caption: |                      # opsiyonel: hazır açıklama yerine kendi metniniz
       ...
     enabled: true                   # false = atla
 ```
 - Liste yukarıdan aşağıya sırayla döner. Son paylaşılan `id` state'te tutulur. Araya yeni özellik ekleyebilirsiniz, sıra korunur.
-- ⚠️ **Ekran görüntülerinde resmî poster veya karakter görseli olmamalı.** Uygulamanın liste, takvim ve detay ekranlarında poster var. Bunları kırpın, bulanıklaştırın ya da `screenshot` alanını boş bırakın. Şablon ekran görüntüsü olmadan da tamamen tipografik çalışır (bkz. `samples/feature/` ve `samples/feature_with_screenshot/`).
+- **Ekran görüntüsü varsa** post 2 slaytlık bir carousel olur: 1. slayt tipografik kart ("SEE IT →"), 2. slayt telefon çerçevesinde uygulama ekranı ("IN THE APP"). Açıklamaya "👉 Swipe to see it in the app." satırı eklenir. Ekran görüntüsü yoksa tek görsel paylaşılır.
+- ⚠️ **Resmî poster, kapak ve karakter avatarları görünmemeli.** Uygulamanın liste, takvim ve izleme ekranlarında kapak resimleri var. Bunların koordinatlarını `mask` alanına yazın; her kutu marka renginde düz bir blokla kapatılır. Koordinatları bulmak için görseli Önizleme'de (Preview) açıp alan seçebilir ya da Claude'dan isteyebilirsiniz. İstatistik ve dil ekranlarında poster yok, bunlarda maske gerekmez.
 - Şu anki girdiler **örnektir**. Kendi metinlerinizle değiştirin.
 
 ### `content/tips.yaml` (Salı hikâyesi)

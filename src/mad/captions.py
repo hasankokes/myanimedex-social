@@ -84,7 +84,7 @@ def hashtags(season: str, year: int, media: dict[str, Any] | None) -> list[str]:
     return tags
 
 
-def build(kind: str, variant_seed: int, fields: dict[str, Any], tags: list[str]) -> str:
+def build(kind: str, variant_seed: int, fields: dict[str, Any], tags: list[str], extra: str | None = None) -> str:
     templates = load_yaml("captions.yaml").get(kind)
     if not templates:
         raise MadError(f"content/captions.yaml has no templates for '{kind}'")
@@ -94,6 +94,8 @@ def build(kind: str, variant_seed: int, fields: dict[str, Any], tags: list[str])
         body = template.format(**fields).strip()
     except KeyError as exc:
         raise MadError(f"Caption template for '{kind}' uses unknown placeholder {exc}") from exc
+    if extra:
+        body = f"{body}\n\n{extra}"
     caption = f"{body}\n\n{' '.join(tags)}"
     if len(caption) > MAX_CAPTION_CHARS:
         raise MadError(f"Caption for '{kind}' is {len(caption)} chars (limit {MAX_CAPTION_CHARS})")

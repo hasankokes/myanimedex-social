@@ -240,11 +240,44 @@
           "id": "airing-calendar",
           "title": "Never miss a new episode",
           "description": "The airing calendar shows every episode of the week in your local time, so you always know what drops today.",
-          "kicker": "APP FEATURE"
+          "kicker": "APP FEATURE",
+          "screenshot": "assets/screenshots/calendar-myweek.webp",
+          "mask": [
+            [
+              113,
+              440,
+              178,
+              523
+            ],
+            [
+              113,
+              555,
+              178,
+              638
+            ],
+            [
+              113,
+              733,
+              178,
+              816
+            ],
+            [
+              113,
+              849,
+              178,
+              932
+            ],
+            [
+              469,
+              109,
+              517,
+              157
+            ]
+          ]
         }
       },
       "anime_ids": [],
-      "caption": "Built for anime fans: Never miss a new episode 💛\n\nThe airing calendar shows every episode of the week in your local time, so you always know what drops today.\n\nTrack what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.\n\n#anime #animerecommendations #fall2026anime #myanimedex"
+      "caption": "Built for anime fans: Never miss a new episode 💛\n\nThe airing calendar shows every episode of the week in your local time, so you always know what drops today.\n\nTrack what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.\n\n👉 Swipe to see it in the app.\n\n#anime #animerecommendations #fall2026anime #myanimedex"
     },
     "2026-10-28:story": {
       "kind": "story_your_pick",

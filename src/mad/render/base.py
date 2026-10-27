@@ -254,9 +254,18 @@ class Canvas:
         self.im.paste(im, (int(x), int(y)), im)
         return (x, y, x + w, y + height)
 
-    def image(self, path: Path, box, border=10, radius=48, shadow=18):
-        """Screenshot inside an inked phone frame, fitted into box (keeps aspect)."""
+    def image(self, path: Path, box, border=10, radius=48, shadow=18, masks=None):
+        """Screenshot inside an inked phone frame, fitted into box (keeps aspect).
+
+        `masks`: [[x0, y0, x1, y1], ...] in source-image pixels — areas (official posters,
+        avatars) that are covered with flat brand-colored blocks before drawing.
+        """
         src = Image.open(path).convert("RGB")
+        if masks:
+            md = ImageDraw.Draw(src)
+            r = max(4, src.width // 70)
+            for i, (mx0, my0, mx1, my1) in enumerate(masks):
+                md.rounded_rectangle((mx0, my0, mx1, my1), r, fill=mix(ACCENTS[i % 3], INK, 0.15))
         x0, y0, x1, y1 = box
         scale = min((x1 - x0) / src.width, (y1 - y0) / src.height)
         w, h = int(src.width * scale), int(src.height * scale)

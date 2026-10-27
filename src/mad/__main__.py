@@ -222,9 +222,9 @@ def cmd_samples(args) -> int:
         if slot.get("caption"):
             captions_md += [f"## {KIND_LABELS[slot['kind']]}", "", "```", slot["caption"], "```", ""]
     features = [f for f in load_yaml("features.yaml").get("features", []) if f.get("enabled", True)]
-    with_shot = next((f for f in features if f.get("screenshot")), None)
-    if with_shot:
-        _render_slot({"kind": "feature", "data": {"feature": with_shot}}, SAMPLES_DIR / "feature_with_screenshot")
+    text_only = next((f for f in features if not f.get("screenshot")), None)
+    if text_only:
+        _render_slot({"kind": "feature", "data": {"feature": text_only}}, SAMPLES_DIR / "feature_text_only")
     (SAMPLES_DIR / "captions.md").write_text("\n".join(captions_md), "utf-8")
     for tmp in SAMPLES_DIR.rglob("caption.txt"):
         tmp.unlink()

@@ -180,9 +180,12 @@ def build_feature(ctx: Ctx) -> dict[str, Any]:
     fields = {"season_label": captions.season_label(ctx.season, ctx.year),
               "title": feature["title"], "description": feature["description"].strip()}
     tags = captions.hashtags(ctx.season, ctx.year, None)
-    caption = feature.get("caption") or captions.build("feature", ctx.seed, fields, tags)
+    swipe = "👉 Swipe to see it in the app." if feature.get("screenshot") else None
     if feature.get("caption"):
-        caption = f"{caption.strip()}\n\n{' '.join(tags)}"
+        body = feature["caption"].strip() + (f"\n\n{swipe}" if swipe else "")
+        caption = f"{body}\n\n{' '.join(tags)}"
+    else:
+        caption = captions.build("feature", ctx.seed, fields, tags, extra=swipe)
     return {"data": {"feature": feature}, "anime_ids": [], "caption": caption}
 
 
