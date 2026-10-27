@@ -1,0 +1,30 @@
+# Each post gets 3–5 hashtags in this order:
+#   base tags → season tag (#fall2026anime) → anime name tag (if any) → brand tag.
+base: ["#anime", "#animerecommendations"]
+brand: "#myanimedex"
+season_format: "#{season}{year}anime"   # -> #fall2026anime
+max_tags: 5
+# Longer generated name tags are skipped (they look spammy and nobody searches them).
+max_name_tag_length: 24
+
+# Optional manual name tags, keyed by AniList id (the generated tag is used otherwise).
+name_overrides:
+  # 161645: "#apothecarydiaries"
+
+# A post fails to build (and nothing is published) if any tag contains one of these.
+# Piracy-associated or "free streaming" tags hurt reach and the brand.
+banned_substrings:
+  - "izle"          # #animeizle, #animeizlesene ...
+  - "free"          # #watchanimefree, #freeanime ...
+  - "download"
+  - "torrent"
+  - "stream"
+  - "dub online"
+  - "online"
+  - "gogo"
+  - "9anime"
+  - "zoro"
+  - "animeflv"
+  - "kissanime"
+  - "crunchyroll"   # third-party brand tags
+  - "netflix"

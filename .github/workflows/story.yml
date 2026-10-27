@@ -1,0 +1,75 @@
+name: Story
+
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"     # Mon–Fri 14:00 UTC (17:00 TR)
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "Content type (scheduled = today's planned story)"
+        type: choice
+        options: [scheduled, story_anime_of_day, story_tip, story_your_pick, story_download, story_weekend]
+        default: scheduled
+      date:
+        description: "Act as this UTC date, YYYY-MM-DD (empty = today)"
+        required: false
+      dry_run:
+        description: "Dry run: render only, don't publish"
+        type: boolean
+        default: true
+      force:
+        description: "Publish even if this slot was already published"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  story:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+      # Manual runs follow the checkbox; scheduled runs follow the repo variable DRY_RUN.
+      DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) || (github.event_name != 'workflow_dispatch' && vars.DRY_RUN == 'true') }}
+      IN_TYPE: ${{ inputs.type }}
+      IN_DATE: ${{ inputs.date }}
+      IN_FORCE: ${{ inputs.force }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+
+      - name: Render and publish
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          args=(--slot story)
+          [ -n "$IN_TYPE" ] && [ "$IN_TYPE" != "scheduled" ] && args+=(--type "$IN_TYPE")
+          [ -n "$IN_DATE" ] && args+=(--date "$IN_DATE")
+          [ "$IN_FORCE" = "true" ] && args+=(--force)
+          echo "DRY_RUN=$DRY_RUN"
+          python -m mad run "${args[@]}"
+
+      - name: Upload rendered files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-${{ github.run_id }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Commit state
+        if: always()
+        run: |
+          scripts/commit_state.sh "state: story ${{ github.run_id }}"

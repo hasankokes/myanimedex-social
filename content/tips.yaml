@@ -1,0 +1,32 @@
+# Tuesday "app tip" stories rotate through this list in order (same rules as features.yaml).
+# Fields: id, title (short), text (1–2 sentences), screenshot (optional), enabled (optional).
+# Stories can't carry links via the API, so tips end with "Link in bio" automatically.
+
+tips:
+  - id: calendar-today
+    title: What's airing today?
+    text: Open the Calendar tab to see today's new episodes with exact air times.
+
+  - id: favorites-filter
+    title: Only your shows
+    text: Tap "Favorites only" in the calendar to hide everything you don't follow.
+
+  - id: rate-review
+    title: Rate as you watch
+    text: Leave a score and a review on any anime page and help other fans choose.
+
+  - id: invite-friend
+    title: Watch together
+    text: Add a collaborator to a list and plan your next binge with friends.
+
+  - id: arena-play
+    title: Can't choose?
+    text: Play Arena and let bracket battles decide your next anime.
+
+  - id: language-switch
+    title: Change the language
+    text: Settings → Language. MyAnimeDex speaks 15 languages.
+
+  - id: dark-mode
+    title: Night owl mode
+    text: Switch between dark and light theme with a single tap.

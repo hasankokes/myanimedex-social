@@ -1,0 +1,56 @@
+# MyAnimeDex Instagram automation — central settings.
+# Every value here is safe to change without touching code.
+
+brand:
+  handle: "@myanimedex"
+  website: "myanimedex.com"
+  app_store_url: "https://apps.apple.com/app/id6758043488"
+  play_store_url: "https://play.google.com/store/apps/details?id=com.myanimedex.app"
+
+anilist:
+  endpoint: "https://graphql.anilist.co"
+  # AniList allows 90 req/min (30 while degraded). 2.1 s spacing stays under 30/min.
+  min_interval_seconds: 2.1
+  max_retries: 5
+  cache_dir: ".cache/anilist"
+  cache_ttl_hours: 6
+  request_timeout_seconds: 30
+
+selection:
+  # Only Japanese productions by default; add "CN", "KR" to include donghua / aeni.
+  countries: ["JP"]
+  formats: ["TV", "TV_SHORT", "ONA"]
+  exclude_genres: ["Hentai", "Ecchi"]
+  # "Members" = AniList popularity (users that have the title on their list).
+  airing_min_popularity: 8000
+  top5_min_popularity: 20000
+  pick_min_popularity: 15000
+  pick_min_score: 70          # AniList averageScore is 0-100
+  weekend_max_episodes: 26
+  # Don't feature the same anime again within this many days (Top 5 ignores it).
+  anime_cooldown_days: 21
+  airing_slides: 5
+  top5_size: 5
+
+hosting:
+  # Public base URL where the gh-pages branch is served.
+  pages_base_url: "https://hasankokes.github.io/myanimedex-social"
+  branch: "gh-pages"
+  media_retention_days: 30
+  preview_retention_weeks: 8
+  # How long to wait for GitHub Pages to serve freshly pushed images.
+  live_timeout_seconds: 600
+
+instagram:
+  graph_base_url: "https://graph.facebook.com"
+  graph_version: "v24.0"
+  # Container processing poll.
+  status_poll_seconds: 5
+  status_timeout_seconds: 300
+  max_retries: 4
+
+render:
+  jpeg_quality: 92
+  post_size: [1080, 1350]
+  story_size: [1080, 1920]
+  story_safe_margin: 250

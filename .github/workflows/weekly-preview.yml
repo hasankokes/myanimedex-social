@@ -1,0 +1,121 @@
+name: Weekly preview
+
+on:
+  schedule:
+    - cron: "0 12 * * 0"   # Sunday 12:00 UTC (15:00 TR)
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "ISO week to plan, e.g. 2026-W45 (empty = the week starting tomorrow)"
+        required: false
+      force:
+        description: "Rebuild the plan even if plans/<week>.json exists"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  issues: write
+
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+      GITHUB_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
+      IN_WEEK: ${{ inputs.week }}
+      IN_FORCE: ${{ inputs.force }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+
+      - name: Resolve week
+        id: week
+        run: |
+          if [ -n "$IN_WEEK" ]; then
+            [[ "$IN_WEEK" =~ ^[0-9]{4}-W[0-9]{2}$ ]] || { echo "::error::week must look like 2026-W45"; exit 1; }
+            week="$IN_WEEK"
+          else
+            week=$(python -c "from datetime import datetime,timedelta,timezone; from mad.planner import week_id; print(week_id((datetime.now(timezone.utc)+timedelta(days=1)).date()))")
+          fi
+          echo "week=$week" >> "$GITHUB_OUTPUT"
+          echo "Planning $week"
+
+      - name: Build plan and render preview
+        run: |
+          args=(--week "${{ steps.week.outputs.week }}" --pages)
+          [ "$IN_FORCE" = "true" ] && args+=(--force)
+          python -m mad preview "${args[@]}"
+
+      - name: Check Instagram token
+        id: token
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          if [ -z "$IG_USER_ID" ] || [ -z "$ACCESS_TOKEN" ]; then
+            echo "status=⚪ Secrets not set yet — posting only works in DRY_RUN mode." >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if out=$(python -m mad check 2>&1); then
+            echo "status=🟢 $(echo "$out" | tail -n 1) — $(echo "$out" | head -n 1)" >> "$GITHUB_OUTPUT"
+          else
+            echo "$out"
+            echo "status=🔴 Token check failed: $(echo "$out" | tail -n 1 | cut -c1-300)" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+      - name: Commit plan
+        run: |
+          scripts/commit_state.sh "plan: ${{ steps.week.outputs.week }}"
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ steps.week.outputs.week }}
+          path: out/preview/${{ steps.week.outputs.week }}
+          retention-days: 30
+
+      - name: Open preview issue
+        env:
+          WEEK: ${{ steps.week.outputs.week }}
+          TOKEN_STATUS: ${{ steps.token.outputs.status }}
+          DRY: ${{ vars.DRY_RUN }}
+        run: |
+          body=out/preview/$WEEK/issue.md
+          {
+            echo "**Instagram token:** ${TOKEN_STATUS:-unknown}"
+            [ "$DRY" = "true" ] && echo "" && echo "> ⚠️ Repo variable \`DRY_RUN\` is \`true\`: scheduled runs will render but **not publish**."
+            echo ""
+            echo "📦 Full-size images: [preview artifact]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) (Pages images may take a minute to appear)."
+            echo ""
+            cat "out/preview/$WEEK/preview.md"
+          } > "$body"
+          gh label create preview --color FACC15 --description "Weekly content preview" --force
+          existing=$(gh issue list --label preview --state open --search "$WEEK in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file "$body"
+            echo "Updated issue #$existing"
+          else
+            gh issue create --title "Weekly preview · $WEEK" --label preview --body-file "$body"
+          fi
+          # Close previews of past weeks
+          for n in $(gh issue list --label preview --state open --json number,title --jq ".[] | select(.title | contains(\"$WEEK\") | not) | .number"); do
+            gh issue close "$n" --comment "Superseded by the $WEEK preview."
+          done
+
+      - name: Fail if the token is broken
+        if: steps.token.outcome == 'failure'
+        run: |
+          echo "::error::Instagram token check failed — see the 'Check Instagram token' step and README → Token."
+          exit 1

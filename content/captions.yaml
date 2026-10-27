@@ -1,0 +1,79 @@
+# Rotating English caption templates. One variant is chosen per week (week number
+# modulo variant count), so captions change every week without any AI service.
+#
+# Placeholders (Python str.format):
+#   all kinds:    {season_label} e.g. "Fall 2026"   {handle} "@myanimedex"
+#   airing_week:  {date_range} "Oct 26 – Nov 1"  {list} numbered lines  {top_title}
+#   top5:         {list} ranked lines  {top_title}  {top_score} e.g. "8.7"
+#   feature:      {title}  {description}
+#
+# Hashtags are appended automatically (see hashtags.yaml) — don't add them here.
+# Keep natural search phrases in the first line: people search Instagram like Google now.
+
+airing_week:
+  - |
+    New anime this season, new episodes this week 📺 Here's what's airing {date_range}:
+
+    {list}
+
+    Which one are you watching first? Tell us in the comments 👇
+    Track every episode for free with MyAnimeDex — link in bio.
+  - |
+    What to watch this week ({date_range}) — our {season_label} anime picks 🔥
+
+    {list}
+
+    Save this post for your watch night and tag a friend who's behind on {top_title}.
+    Get episode reminders in the MyAnimeDex app (link in bio).
+  - |
+    This week's anime episodes you shouldn't miss — {season_label} edition ⚡
+
+    {list}
+
+    Drop a 🔥 for your favorite of the week.
+    Never miss a drop: MyAnimeDex tracks your watchlist and airing calendar. Link in bio.
+
+top5:
+  - |
+    Best anime of {season_label} so far — our Top 5 this season 🏆
+
+    {list}
+
+    {top_title} leads with {top_score}/10. Agree or not? Comment your #1 👇
+    Rankings use AniList average scores (popular titles only). Track them all in MyAnimeDex — link in bio.
+  - |
+    Top 5 {season_label} anime right now, ranked by fans ⭐
+
+    {list}
+
+    Swipe to the end and tell us what's missing from this list.
+    Build your own ranking in MyAnimeDex — free on iOS & Android, link in bio.
+  - |
+    The highest-rated new anime this season ({season_label}) 📊
+
+    {list}
+
+    Is {top_title} really the #1? Comment your pick and save this for later.
+    Track your seasonal watchlist with MyAnimeDex (link in bio).
+
+feature:
+  - |
+    {title} ✨
+
+    {description}
+
+    MyAnimeDex is the free anime tracker app for your {season_label} watchlist. Download it from the link in bio.
+    Which feature should we show next? Comment below 👇
+  - |
+    MyAnimeDex app tip: {title} 📲
+
+    {description}
+
+    Free on the App Store and Google Play — link in bio.
+    Save this post so you don't forget it.
+  - |
+    Built for anime fans: {title} 💛
+
+    {description}
+
+    Track what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.
