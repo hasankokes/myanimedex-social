@@ -220,15 +220,14 @@ features:
     description: The airing calendar shows every episode ...  # 1–2 cümle (~160 karakter)
     kicker: APP FEATURE             # opsiyonel küçük etiket
     screenshot: assets/screenshots/calendar-myweek.webp   # opsiyonel, dikey PNG/JPG/WebP
-    mask:                           # opsiyonel: kapatılacak alanlar (ekran görüntüsünün kendi pikselleri)
-      - [113, 440, 178, 523]        # [x0, y0, x1, y1]
+    mask:                           # opsiyonel: gizlenecek alanlar [x0, y0, x1, y1] (nadiren gerekir)
     caption: |                      # opsiyonel: hazır açıklama yerine kendi metniniz
       ...
     enabled: true                   # false = atla
 ```
 - Liste yukarıdan aşağıya sırayla döner. Son paylaşılan `id` state'te tutulur. Araya yeni özellik ekleyebilirsiniz, sıra korunur.
 - **Ekran görüntüsü varsa** post 2 slaytlık bir carousel olur: 1. slayt tipografik kart ("SEE IT →"), 2. slayt telefon çerçevesinde uygulama ekranı ("IN THE APP"). Açıklamaya "👉 Swipe to see it in the app." satırı eklenir. Ekran görüntüsü yoksa tek görsel paylaşılır.
-- ⚠️ **Resmî poster, kapak ve karakter avatarları görünmemeli.** Uygulamanın liste, takvim ve izleme ekranlarında kapak resimleri var. Bunların koordinatlarını `mask` alanına yazın; her kutu marka renginde düz bir blokla kapatılır. Koordinatları bulmak için görseli Önizleme'de (Preview) açıp alan seçebilir ya da Claude'dan isteyebilirsiniz. İstatistik ve dil ekranlarında poster yok, bunlarda maske gerekmez.
+- Ekran görüntüleri uygulamanın **güncel** hâlini göstermeli. Uygulama ekranlarındaki anime kapakları görünür kalır. `mask` alanı yalnızca bir şeyi gizlemek gerektiğinde (ör. kişisel bilgi) kullanılır.
 - Şu anki girdiler **örnektir**. Kendi metinlerinizle değiştirin.
 
 ### `content/tips.yaml` (Salı hikâyesi)
@@ -304,6 +303,6 @@ Lokal `--dry-run` çalıştırmaları hiçbir şey yüklemez veya paylaşmaz. Pl
 - **Hikâyelerin açıklaması yoktur.** Etiketler sadece postlarda bulunur.
 - **Cron gecikmesi**: GitHub zamanlanmış işleri yoğun saatlerde 5–20 dk geç başlatabilir.
 - **60 gün kuralı**: GitHub, 60 gün commit almayan public repolarda cron'u durdurur. Bot her hafta plan ve state commit'lediği için bu olmaz.
-- **Telif**: MyAnimeList veya AniList özet metinleri kullanılmaz; sadece puan, tarih, tür, bölüm sayısı ve stüdyo gibi olgusal veriler kullanılır. Resmî poster veya karakter görseli kullanılmaz. Tasarım tamamen tipografik. Görsellerde küçük bir "Data: AniList" kaynak notu var.
+- **Telif**: MyAnimeList veya AniList özet metinleri kullanılmaz; sadece puan, tarih, tür, bölüm sayısı ve stüdyo gibi olgusal veriler kullanılır. Şablonlarda resmî poster veya karakter görseli kullanılmaz, tasarım tipografiktir. Uygulama ekran görüntülerindeki anime kapakları ise olduğu gibi görünür. Görsellerde küçük bir "Data: AniList" kaynak notu var.
 - **Korsan etiketleri** (`#animeizle` vb.) yasak listesindedir ve yayını engeller.
 - Graph API sürümü `config.yaml` → `instagram.graph_version`. Meta sürümleri yaklaşık 2 yıl destekler; yılda bir güncellemek yeterli.

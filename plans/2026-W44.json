@@ -241,39 +241,7 @@
           "title": "Never miss a new episode",
           "description": "The airing calendar shows every episode of the week in your local time, so you always know what drops today.",
           "kicker": "APP FEATURE",
-          "screenshot": "assets/screenshots/calendar-myweek.webp",
-          "mask": [
-            [
-              113,
-              440,
-              178,
-              523
-            ],
-            [
-              113,
-              555,
-              178,
-              638
-            ],
-            [
-              113,
-              733,
-              178,
-              816
-            ],
-            [
-              113,
-              849,
-              178,
-              932
-            ],
-            [
-              469,
-              109,
-              517,
-              157
-            ]
-          ]
+          "screenshot": "assets/screenshots/calendar-myweek.webp"
         }
       },
       "anime_ids": [],

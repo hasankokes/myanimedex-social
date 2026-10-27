@@ -10,13 +10,12 @@
 #                With a screenshot the post becomes a 2-slide carousel:
 #                slide 1 = typographic card, slide 2 = the app screen ("IN THE APP").
 #   mask         optional list of [x0, y0, x1, y1] boxes in the screenshot's own pixels.
-#                Each box is covered with a flat brand-colored block — use it for
-#                official posters, cover thumbnails and anime avatars.
+#                Each box is covered with a flat brand-colored block (e.g. to hide
+#                personal info). Not needed normally.
 #   caption      optional hand-written caption (hashtags are still added automatically)
 #   enabled      optional, false = skip
 #
-# ⚠️ Official posters / character art must never be visible (copyright rule): mask them.
-#    Tip: open the image in Preview, drag a selection and read the pixel size, or ask Claude.
+# Use current screenshots (e.g. the language list must show all 15 languages).
 #
 # The entries below are examples — replace them with your own.
 
@@ -26,29 +25,15 @@ features:
     description: The airing calendar shows every episode of the week in your local time, so you always know what drops today.
     kicker: APP FEATURE
     screenshot: assets/screenshots/calendar-myweek.webp
-    mask:  # cover thumbnails + profile avatar
-      - [113, 440, 178, 523]
-      - [113, 555, 178, 638]
-      - [113, 733, 178, 816]
-      - [113, 849, 178, 932]
-      - [469, 109, 517, 157]
 
   - id: languages
     title: Your anime app, in 15 languages
     description: English, Türkçe, Español, Português, Deutsch, Français and more. Pick yours in settings.
-    screenshot: assets/screenshots/language.png
 
   - id: shared-lists
     title: Build lists with friends
     description: Create a list, invite collaborators and decide your next watch together.
     screenshot: assets/screenshots/lists.webp
-    mask:  # cover thumbnails + owner avatar
-      - [24, 440, 138, 602]
-      - [24, 622, 138, 784]
-      - [24, 804, 138, 966]
-      - [24, 986, 138, 1148]
-      - [24, 1162, 138, 1174]
-      - [23, 271, 55, 303]
 
   - id: arena
     title: Anime Arena
@@ -58,4 +43,4 @@ features:
   - id: watch-status
     title: Track every episode
     description: Watching, completed, plan to watch — your whole anime history in one place, synced across devices.
-    screenshot: assets/screenshots/stats.webp   # no posters on this screen
+    screenshot: assets/screenshots/stats.webp
