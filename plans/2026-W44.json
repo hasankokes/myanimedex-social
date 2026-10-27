@@ -1,0 +1,525 @@
+{
+  "week": "2026-W44",
+  "generated_at": "2026-10-27T12:47:57+00:00",
+  "slots": {
+    "2026-10-26:post": {
+      "kind": "airing_week",
+      "slot": "post",
+      "date": "2026-10-26",
+      "data": {
+        "items": [
+          {
+            "id": 195516,
+            "idMal": 61987,
+            "title": {
+              "romaji": "Kusuriya no Hitorigoto 3rd Season",
+              "english": "The Apothecary Diaries Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 85,
+            "popularity": 105810,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "siteUrl": "https://anilist.co/anime/195516",
+            "nextAiringEpisode": {
+              "airingAt": 1793368800,
+              "episode": 5
+            },
+            "airing": {
+              "airingAt": 1793368800,
+              "episode": 5
+            },
+            "studio": "OLM",
+            "airing_day": "Fri"
+          },
+          {
+            "id": 195604,
+            "idMal": 61967,
+            "title": {
+              "romaji": "Black Clover 2nd Season",
+              "english": "Black Clover Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 87,
+            "popularity": 99829,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/195604",
+            "nextAiringEpisode": {
+              "airingAt": 1793455200,
+              "episode": 5
+            },
+            "airing": {
+              "airingAt": 1793455200,
+              "episode": 5
+            },
+            "studio": "Studio Pierrot",
+            "airing_day": "Sat"
+          },
+          {
+            "id": 185874,
+            "idMal": 60636,
+            "title": {
+              "romaji": "BLEACH: Sennen Kessen-hen - Kashin-tan",
+              "english": "BLEACH: Thousand-Year Blood War - The Calamity"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 10,
+            "season": "SUMMER",
+            "seasonYear": 2026,
+            "averageScore": 89,
+            "popularity": 97190,
+            "duration": null,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/185874",
+            "nextAiringEpisode": null,
+            "airing": {
+              "airingAt": 1793026800,
+              "episode": 10
+            },
+            "studio": "PIERROT FILMS",
+            "airing_day": "Mon"
+          },
+          {
+            "id": 235,
+            "idMal": 235,
+            "title": {
+              "romaji": "Meitantei Conan",
+              "english": "Detective Conan"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "WINTER",
+            "seasonYear": 1996,
+            "averageScore": 82,
+            "popularity": 80975,
+            "duration": 25,
+            "genres": [
+              "Adventure",
+              "Comedy",
+              "Mystery",
+              "Psychological"
+            ],
+            "siteUrl": "https://anilist.co/anime/235",
+            "nextAiringEpisode": {
+              "airingAt": 1793437200,
+              "episode": 1218
+            },
+            "airing": {
+              "airingAt": 1793437200,
+              "episode": 1218
+            },
+            "studio": "TMS Entertainment",
+            "airing_day": "Sat"
+          },
+          {
+            "id": 180136,
+            "idMal": 59741,
+            "title": {
+              "romaji": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+              "english": "The Exiled Heavy Knight Knows How to Game the System"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 26,
+            "season": "SUMMER",
+            "seasonYear": 2026,
+            "averageScore": 67,
+            "popularity": 72749,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/180136",
+            "nextAiringEpisode": {
+              "airingAt": 1793287560,
+              "episode": 18
+            },
+            "airing": {
+              "airingAt": 1793287560,
+              "episode": 18
+            },
+            "studio": "GoHands",
+            "airing_day": "Thu"
+          }
+        ],
+        "date_range": "Oct 26 – Nov 1",
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        195516,
+        195604,
+        185874,
+        235,
+        180136
+      ],
+      "caption": "This week's anime episodes you shouldn't miss — Fall 2026 edition ⚡\n\n1. The Apothecary Diaries Season 3 — Ep 5 (Fri)\n2. Black Clover Season 2 — Ep 5 (Sat)\n3. BLEACH: Thousand-Year Blood War - The Calamity — Ep 10 (Mon)\n4. Detective Conan — Ep 1218 (Sat)\n5. The Exiled Heavy Knight Knows How to Game the System — Ep 18 (Thu)\n\nDrop a 🔥 for your favorite of the week.\nNever miss a drop: MyAnimeDex tracks your watchlist and airing calendar. Link in bio.\n\n#anime #animerecommendations #fall2026anime #theapothecarydiaries #myanimedex"
+    },
+    "2026-10-26:story": {
+      "kind": "story_anime_of_day",
+      "slot": "story",
+      "date": "2026-10-26",
+      "data": {
+        "anime": {
+          "id": 159042,
+          "idMal": 53913,
+          "title": {
+            "romaji": "Tensei Shitara Ken Deshita 2nd Season",
+            "english": "Reincarnated as a Sword Season 2"
+          },
+          "format": "ONA",
+          "status": "RELEASING",
+          "episodes": 12,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 75,
+          "popularity": 52537,
+          "duration": 23,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ],
+          "siteUrl": "https://anilist.co/anime/159042",
+          "nextAiringEpisode": {
+            "airingAt": 1793201400,
+            "episode": 5
+          },
+          "studio": "C2C"
+        },
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        159042
+      ]
+    },
+    "2026-10-27:story": {
+      "kind": "story_tip",
+      "slot": "story",
+      "date": "2026-10-27",
+      "data": {
+        "tip": {
+          "id": "calendar-today",
+          "title": "What's airing today?",
+          "text": "Open the Calendar tab to see today's new episodes with exact air times."
+        }
+      },
+      "anime_ids": []
+    },
+    "2026-10-28:post": {
+      "kind": "feature",
+      "slot": "post",
+      "date": "2026-10-28",
+      "data": {
+        "feature": {
+          "id": "airing-calendar",
+          "title": "Never miss a new episode",
+          "description": "The airing calendar shows every episode of the week in your local time, so you always know what drops today.",
+          "kicker": "APP FEATURE"
+        }
+      },
+      "anime_ids": [],
+      "caption": "Built for anime fans: Never miss a new episode 💛\n\nThe airing calendar shows every episode of the week in your local time, so you always know what drops today.\n\nTrack what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.\n\n#anime #animerecommendations #fall2026anime #myanimedex"
+    },
+    "2026-10-28:story": {
+      "kind": "story_your_pick",
+      "slot": "story",
+      "date": "2026-10-28",
+      "data": {
+        "a": {
+          "id": 212888,
+          "idMal": 64340,
+          "title": {
+            "romaji": "Tempal: Item no Chikara",
+            "english": "Overgeared"
+          },
+          "format": "ONA",
+          "status": "RELEASING",
+          "episodes": 12,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 76,
+          "popularity": 50296,
+          "duration": 24,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Fantasy"
+          ],
+          "siteUrl": "https://anilist.co/anime/212888",
+          "nextAiringEpisode": {
+            "airingAt": 1793543400,
+            "episode": 6
+          },
+          "studio": "J.C.STAFF"
+        },
+        "b": {
+          "id": 205909,
+          "idMal": 63293,
+          "title": {
+            "romaji": "Hotaru no Yomeiri",
+            "english": "Firefly Wedding"
+          },
+          "format": "TV",
+          "status": "RELEASING",
+          "episodes": 12,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 75,
+          "popularity": 45950,
+          "duration": 23,
+          "genres": [
+            "Drama",
+            "Romance"
+          ],
+          "siteUrl": "https://anilist.co/anime/205909",
+          "nextAiringEpisode": {
+            "airingAt": 1793370600,
+            "episode": 4
+          },
+          "studio": "david production"
+        },
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        212888,
+        205909
+      ]
+    },
+    "2026-10-29:story": {
+      "kind": "story_download",
+      "slot": "story",
+      "date": "2026-10-29",
+      "data": {
+        "variant": 0
+      },
+      "anime_ids": []
+    },
+    "2026-10-30:story": {
+      "kind": "story_weekend",
+      "slot": "story",
+      "date": "2026-10-30",
+      "data": {
+        "anime": {
+          "id": 210031,
+          "idMal": 63832,
+          "title": {
+            "romaji": "Seihantai na Kimi to Boku 2nd Season",
+            "english": "You and I Are Polar Opposites Season 2"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "episodes": 13,
+          "season": "SUMMER",
+          "seasonYear": 2026,
+          "averageScore": 84,
+          "popularity": 69640,
+          "duration": 24,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance",
+            "Slice of Life"
+          ],
+          "siteUrl": "https://anilist.co/anime/210031",
+          "nextAiringEpisode": null,
+          "studio": "Lapin Track"
+        }
+      },
+      "anime_ids": [
+        210031
+      ]
+    },
+    "2026-10-31:post": {
+      "kind": "top5",
+      "slot": "post",
+      "date": "2026-10-31",
+      "data": {
+        "items": [
+          {
+            "id": 195604,
+            "idMal": 61967,
+            "title": {
+              "romaji": "Black Clover 2nd Season",
+              "english": "Black Clover Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 87,
+            "popularity": 99829,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/195604",
+            "nextAiringEpisode": {
+              "airingAt": 1793455200,
+              "episode": 5
+            },
+            "studio": "Studio Pierrot",
+            "rank": 1,
+            "movement": "new"
+          },
+          {
+            "id": 210482,
+            "idMal": 61469,
+            "title": {
+              "romaji": "JoJo no Kimyou na Bouken: Steel Ball Run - 2nd & 3rd STAGE",
+              "english": "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": 11,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 86,
+            "popularity": 46803,
+            "duration": null,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Drama",
+              "Mystery",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/210482",
+            "nextAiringEpisode": {
+              "airingAt": 1793347200,
+              "episode": 6
+            },
+            "studio": "david production",
+            "rank": 2,
+            "movement": "new"
+          },
+          {
+            "id": 195516,
+            "idMal": 61987,
+            "title": {
+              "romaji": "Kusuriya no Hitorigoto 3rd Season",
+              "english": "The Apothecary Diaries Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 85,
+            "popularity": 105810,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "siteUrl": "https://anilist.co/anime/195516",
+            "nextAiringEpisode": {
+              "airingAt": 1793368800,
+              "episode": 5
+            },
+            "studio": "OLM",
+            "rank": 3,
+            "movement": "new"
+          },
+          {
+            "id": 195539,
+            "idMal": 61990,
+            "title": {
+              "romaji": "Cyberpunk: Edgerunners 2",
+              "english": "Cyberpunk: Edgerunners 2"
+            },
+            "format": "ONA",
+            "status": "FINISHED",
+            "episodes": 10,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 84,
+            "popularity": 107511,
+            "duration": 28,
+            "genres": [
+              "Action",
+              "Drama",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/195539",
+            "nextAiringEpisode": null,
+            "studio": "TRIGGER",
+            "rank": 4,
+            "movement": "new"
+          },
+          {
+            "id": 189123,
+            "idMal": 61323,
+            "title": {
+              "romaji": "Ao no Hako Season 2",
+              "english": "Blue Box Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 81,
+            "popularity": 50392,
+            "duration": 24,
+            "genres": [
+              "Romance",
+              "Slice of Life",
+              "Sports"
+            ],
+            "siteUrl": "https://anilist.co/anime/189123",
+            "nextAiringEpisode": {
+              "airingAt": 1794123000,
+              "episode": 5
+            },
+            "studio": "Electric Circus",
+            "rank": 5,
+            "movement": "new"
+          }
+        ],
+        "season": "FALL",
+        "year": 2026,
+        "min_popularity_label": "20K"
+      },
+      "anime_ids": [
+        195604,
+        210482,
+        195516,
+        195539,
+        189123
+      ],
+      "caption": "The highest-rated new anime this season (Fall 2026) 📊\n\n#1 Black Clover Season 2 — 8.7/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.4/10\n#5 Blue Box Season 2 — 8.1/10\n\nIs Black Clover Season 2 really the #1? Comment your pick and save this for later.\nTrack your seasonal watchlist with MyAnimeDex (link in bio).\n\n#anime #animerecommendations #fall2026anime #blackclover #myanimedex"
+    }
+  }
+}
