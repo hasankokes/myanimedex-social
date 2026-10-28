@@ -78,6 +78,10 @@ class Instagram:
         if code in TOKEN_CODES:
             return GraphError(f"ACCESS_TOKEN is invalid or expired. Generate a new token (see README → Token) "
                               f"and update the secret. {detail}", code)
+        if "blocked" in msg.lower() or sub in (2207050, 2207051):
+            return GraphError(f"Meta blocked API access for this app/account (not a token expiry). Check the App "
+                              f"Dashboard for alerts, Business Support Home → Account quality, and Instagram → "
+                              f"Settings → Account status. {detail}", code)
         if code in PERMISSION_CODES:
             return GraphError(f"Missing permission. The token needs instagram_basic, instagram_content_publish, "
                               f"pages_show_list, pages_read_engagement and business_management. {detail}", code)
