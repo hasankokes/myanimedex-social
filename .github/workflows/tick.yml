@@ -1,0 +1,66 @@
+name: Tick
+
+# The scheduler. GitHub starts cron runs late (sometimes hours), so instead of one cron per
+# slot this runs every 10 minutes (off the top of the hour) and publishes whatever is due:
+# stories 14:00, posts and reels 19:00 UTC (see config.yaml → schedule). Late or dropped
+# ticks are caught up by the next one; failures retry every 30 min, 3 attempts max.
+on:
+  schedule:
+    - cron: "4-59/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: src
+      DRY_RUN: ${{ vars.DRY_RUN == 'true' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+
+      - name: What's due
+        id: due
+        run: |
+          python -m mad tick --list | tee due.txt
+          if grep -q '^reel ' due.txt; then echo "reel=true" >> "$GITHUB_OUTPUT"; fi
+          if [ -s due.txt ]; then echo "any=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Ensure ffmpeg
+        if: steps.due.outputs.reel == 'true'
+        run: command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Publish due slots
+        if: steps.due.outputs.any == 'true'
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "DRY_RUN=$DRY_RUN"
+          python -m mad tick
+
+      - name: Upload rendered files
+        if: always() && steps.due.outputs.any == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: tick-${{ github.run_id }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Commit state
+        if: always() && steps.due.outputs.any == 'true'
+        run: |
+          scripts/commit_state.sh "state: tick ${{ github.run_id }}"

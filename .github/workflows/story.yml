@@ -1,8 +1,7 @@
 name: Story
 
 on:
-  schedule:
-    - cron: "0 14 * * 1-5"     # Mon–Fri 14:00 UTC (17:00 TR)
+  # Manual only — scheduled publishing is done by tick.yml.
   workflow_dispatch:
     inputs:
       type:
@@ -36,8 +35,7 @@ jobs:
     timeout-minutes: 30
     env:
       PYTHONPATH: src
-      # Manual runs follow the checkbox; scheduled runs follow the repo variable DRY_RUN.
-      DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) || (github.event_name != 'workflow_dispatch' && vars.DRY_RUN == 'true') }}
+      DRY_RUN: ${{ inputs.dry_run }}
       IN_TYPE: ${{ inputs.type }}
       IN_DATE: ${{ inputs.date }}
       IN_FORCE: ${{ inputs.force }}
@@ -54,7 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           args=(--slot story)
-          [ "${{ github.event_name }}" = "schedule" ] && args+=(--scheduled)
           [ -n "$IN_TYPE" ] && [ "$IN_TYPE" != "scheduled" ] && args+=(--type "$IN_TYPE")
           [ -n "$IN_DATE" ] && args+=(--date "$IN_DATE")
           [ "$IN_FORCE" = "true" ] && args+=(--force)

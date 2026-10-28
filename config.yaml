@@ -51,12 +51,15 @@ instagram:
   max_retries: 4
 
 schedule:
-  # Must match the cron lines in .github/workflows/post.yml and story.yml (UTC).
+  # Slot times (UTC). The tick workflow checks every 10 minutes and publishes what is due.
   post_hour_utc: 19
   story_hour_utc: 14
   reel_hour_utc: 19
-  # GitHub sometimes starts scheduled runs hours late; later than this, the slot is skipped.
+  # A slot that couldn't go out within this window is skipped (no 3 a.m. posts).
   max_delay_hours: 6
+  # Failed slots are retried every retry_minutes, at most max_attempts times.
+  retry_minutes: 30
+  max_attempts: 3
 
 render:
   jpeg_quality: 92

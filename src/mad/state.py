@@ -19,6 +19,8 @@ EMPTY: dict[str, Any] = {
     "tips": {"last_id": None},
     "reel_demos": {"last_id": None},
     "top5_last": [],    # anilist ids of the last published Top 5, rank order
+    "failures": {},     # slot key -> {count, last, error} (tick retry bookkeeping)
+    "dry_done": {},     # slot key -> when a DRY_RUN tick rendered it (don't repeat every tick)
 }
 
 

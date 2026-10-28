@@ -1,8 +1,7 @@
 name: Reel
 
 on:
-  schedule:
-    - cron: "0 19 * * 0,2,4"   # Sun, Tue, Thu 19:00 UTC (22:00 TR)
+  # Manual only — scheduled publishing is done by tick.yml.
   workflow_dispatch:
     inputs:
       type:
@@ -36,8 +35,7 @@ jobs:
     timeout-minutes: 45
     env:
       PYTHONPATH: src
-      # Manual runs follow the checkbox; scheduled runs follow the repo variable DRY_RUN.
-      DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) || (github.event_name != 'workflow_dispatch' && vars.DRY_RUN == 'true') }}
+      DRY_RUN: ${{ inputs.dry_run }}
       IN_TYPE: ${{ inputs.type }}
       IN_DATE: ${{ inputs.date }}
       IN_FORCE: ${{ inputs.force }}
@@ -56,7 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           args=(--slot reel)
-          [ "${{ github.event_name }}" = "schedule" ] && args+=(--scheduled)
           [ -n "$IN_TYPE" ] && [ "$IN_TYPE" != "scheduled" ] && args+=(--type "$IN_TYPE")
           [ -n "$IN_DATE" ] && args+=(--date "$IN_DATE")
           [ "$IN_FORCE" = "true" ] && args+=(--force)

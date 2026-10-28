@@ -78,52 +78,34 @@ def _scheduled_day(slot: str) -> date | None:
     return slot_time.date()
 
 
-def cmd_run(args) -> int:
-    if args.scheduled and not args.date:
-        scheduled = _scheduled_day(args.slot)
-        if scheduled is None:
-            return 0
-        args.date = scheduled.isoformat()
-    day = date.fromisoformat(args.date) if args.date else _today()
-    dry = args.dry_run or env_flag("DRY_RUN")
-    st = state_mod.load()
+def _resolve_scheduled(day: date, slot_name: str, st: dict[str, Any]):
+    """(kind, key, slot) for the planned slot of `day`, or None when nothing should be posted."""
     week = planner.week_id(day)
+    kind = planner.kind_for(day, slot_name)
+    if not kind:
+        log(f"No {slot_name} is scheduled on {day:%A} ({day}). Use --type to post something anyway.")
+        return None
+    key = planner.slot_key(day, slot_name)
+    plan = planner.load_plan(week)
+    if not plan:
+        warn(f"No plan for {week} — building it now (normally the Sunday preview does this)")
+        with group(f"Build plan {week}"):
+            plan = planner.build_plan(week, st)
+            planner.save_plan(plan)
+    elif key not in plan["slots"]:
+        warn(f"plans/{week}.json has no {key} slot — adding just that one, other picks stay as they are")
+        with group(f"Build {kind}"):
+            plan = planner.add_slot(plan, day, slot_name, st)
+            planner.save_plan(plan)
+    slot = plan["slots"][key]
+    if slot.get("skip"):
+        log(f"{key} is marked skip in plans/{week}.json — nothing to do")
+        return None
+    return kind, key, slot
 
-    if args.type:
-        kind = args.type
-        slot_name = planner.slot_of(kind)
-        key = planner.slot_key(day, slot_name)
-        if planner.kind_for(day, slot_name) != kind:
-            key += f"#{kind}"  # manual extra post: don't collide with the scheduled slot
-        with group(f"Build {kind} (manual)"):
-            slot = planner.build_slot(kind, day, st)
-    else:
-        slot_name = args.slot
-        kind = planner.kind_for(day, slot_name)
-        if not kind:
-            log(f"No {slot_name} is scheduled on {day:%A} ({day}). Use --type to post something anyway.")
-            return 0
-        key = planner.slot_key(day, slot_name)
-        plan = planner.load_plan(week)
-        if not plan:
-            warn(f"No plan for {week} — building it now (normally the Sunday preview does this)")
-            with group(f"Build plan {week}"):
-                plan = planner.build_plan(week, st)
-                planner.save_plan(plan)
-        elif key not in plan["slots"]:
-            warn(f"plans/{week}.json has no {key} slot — adding just that one, other picks stay as they are")
-            with group(f"Build {kind}"):
-                plan = planner.add_slot(plan, day, slot_name, st)
-                planner.save_plan(plan)
-        slot = plan["slots"][key]
-        if slot.get("skip"):
-            log(f"{key} is marked skip in plans/{week}.json — nothing to do")
-            return 0
 
-    if key in st["slots"] and not args.force:
-        log(f"{key} was already published ({st['slots'][key]['published_at']}). Use --force to post again.")
-        return 0
-
+def _publish(day: date, slot_name: str, kind: str, key: str, slot: dict[str, Any], st: dict[str, Any],
+             dry: bool) -> None:
     log(f"{key}: {KIND_LABELS[kind]}{' [DRY RUN]' if dry else ''}")
     with group("Render"):
         paths = _render_slot(slot, OUT_DIR / _safe(key))
@@ -135,7 +117,7 @@ def cmd_run(args) -> int:
         log("DRY RUN: images and caption generated, nothing was uploaded or published.")
         summary(f"### {key} — {KIND_LABELS[kind]} (dry run)\n\n{len(paths)} file(s) rendered.\n\n"
                 f"```\n{slot.get('caption', '(story — no caption)')}\n```")
-        return 0
+        return
 
     from .instagram import Instagram  # needs secrets; imported late so dry runs work without them
 
@@ -163,7 +145,109 @@ def cmd_run(args) -> int:
     state_mod.save(st)
     log(f"Published {key} as media {media_id}")
     summary(f"### ✅ Published {key} — {KIND_LABELS[kind]}\n\nMedia id `{media_id}` · {len(urls)} file(s)")
+
+
+def cmd_run(args) -> int:
+    if args.scheduled and not args.date:
+        scheduled = _scheduled_day(args.slot)
+        if scheduled is None:
+            return 0
+        args.date = scheduled.isoformat()
+    day = date.fromisoformat(args.date) if args.date else _today()
+    dry = args.dry_run or env_flag("DRY_RUN")
+    st = state_mod.load()
+
+    if args.type:
+        kind = args.type
+        slot_name = planner.slot_of(kind)
+        key = planner.slot_key(day, slot_name)
+        if planner.kind_for(day, slot_name) != kind:
+            key += f"#{kind}"  # manual extra post: don't collide with the scheduled slot
+        with group(f"Build {kind} (manual)"):
+            slot = planner.build_slot(kind, day, st)
+    else:
+        slot_name = args.slot
+        resolved = _resolve_scheduled(day, slot_name, st)
+        if not resolved:
+            return 0
+        kind, key, slot = resolved
+
+    if key in st["slots"] and not args.force:
+        log(f"{key} was already published ({st['slots'][key]['published_at']}). Use --force to post again.")
+        return 0
+    _publish(day, slot_name, kind, key, slot, st, dry)
     return 0
+
+
+# ---------------------------------------------------------------- tick (the scheduler)
+
+def _due(now: datetime, st: dict[str, Any]) -> list[tuple[date, str, str]]:
+    """Slots whose time has come (within the max delay window) and that weren't published yet."""
+    cfg = settings()["schedule"]
+    due = []
+    for slot_name in ("story", "post", "reel"):
+        for back in (1, 0):
+            day = (now - timedelta(days=back)).date()
+            at = datetime.combine(day, datetime.min.time(), timezone.utc).replace(hour=cfg[f"{slot_name}_hour_utc"])
+            key = planner.slot_key(day, slot_name)
+            if at <= now <= at + timedelta(hours=cfg["max_delay_hours"]) and planner.kind_for(day, slot_name) \
+                    and key not in st["slots"] and key not in st.get("dry_done", {}):
+                due.append((at, day, slot_name))
+    return [(day, slot_name, planner.slot_key(day, slot_name)) for _, day, slot_name in sorted(due)]
+
+
+def cmd_tick(args) -> int:
+    """Runs every few minutes: publishes whatever is due, retries failures with back-off."""
+    cfg = settings()["schedule"]
+    now = datetime.now(timezone.utc)
+    st = state_mod.load()
+    fails = st.setdefault("failures", {})
+    ready = []
+    for day, slot_name, key in _due(now, st):
+        f = fails.get(key)
+        if f and f["count"] >= cfg["max_attempts"]:
+            continue
+        if f and now - datetime.fromisoformat(f["last"]) < timedelta(minutes=cfg["retry_minutes"]):
+            continue
+        ready.append((day, slot_name, key))
+    if args.list:
+        for _, slot_name, key in ready:
+            print(f"{slot_name} {key}")
+        return 0
+    if not ready:
+        log(f"{now:%Y-%m-%d %H:%M} UTC — nothing due")
+        return 0
+    dry = env_flag("DRY_RUN")
+    final_failure = False
+    for day, slot_name, key in ready:
+        log(f"Due: {key}")
+        try:
+            resolved = _resolve_scheduled(day, slot_name, st)
+            if resolved:
+                kind, key, slot = resolved
+                _publish(day, slot_name, kind, key, slot, st, dry)
+            if dry or not resolved:
+                st.setdefault("dry_done", {})[key] = now.isoformat(timespec="seconds")
+            fails.pop(key, None)
+        except Exception as exc:  # isolate slots: one failure must not block the others
+            f = fails.setdefault(key, {"count": 0})
+            f["count"] += 1
+            f["last"] = now.isoformat(timespec="seconds")
+            f["error"] = str(exc)[:300]
+            last = f["count"] >= cfg["max_attempts"]
+            final_failure |= last
+            msg = f"{key} failed (attempt {f['count']}/{cfg['max_attempts']}): {exc}"
+            if last:
+                error(msg + " — giving up; run it manually from Actions when the cause is fixed.")
+            else:
+                warn(msg + f" — retrying in {cfg['retry_minutes']} min")
+        state_mod.save(st)
+    # keep the bookkeeping small
+    cutoff = (now - timedelta(days=3)).isoformat()
+    st["dry_done"] = {k: v for k, v in st.get("dry_done", {}).items() if v >= cutoff}
+    st["failures"] = {k: v for k, v in fails.items() if v.get("last", "") >= cutoff}
+    state_mod.save(st)
+    return 1 if final_failure else 0
 
 
 # ---------------------------------------------------------------- plan / preview
@@ -302,10 +386,12 @@ def main(argv: list[str] | None = None) -> int:
             s.add_argument("--pages", action="store_true", help="upload preview images to GitHub Pages")
 
     sub.add_parser("check", help="verify IG_USER_ID / ACCESS_TOKEN and permissions")
+    tk = sub.add_parser("tick", help="publish every slot that is due now (run by cron every few minutes)")
+    tk.add_argument("--list", action="store_true", help="only print the due slots")
 
     args = p.parse_args(argv)
     handler = {"run": cmd_run, "plan": cmd_plan, "preview": cmd_preview, "check": cmd_check,
-               "samples": cmd_samples}[args.cmd]
+               "samples": cmd_samples, "tick": cmd_tick}[args.cmd]
     try:
         return handler(args)
     except MadError as exc:
