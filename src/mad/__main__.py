@@ -28,6 +28,10 @@ KIND_LABELS = {
     "story_your_pick": "Story · Your pick (reply A/B)",
     "story_download": "Story · Download the app",
     "story_weekend": "Story · Weekend binge pick",
+    "reel_app_demo": "Reel · App demo",
+    "reel_weekend": "Reel · Episodes this weekend",
+    "reel_top5": "Reel · Top 5 countdown",
+    "reel_teaser": "Reel · App teaser",
 }
 
 
@@ -60,7 +64,7 @@ def _scheduled_day(slot: str) -> date | None:
     """The day whose cron slot this (possibly late) scheduled run belongs to, or None if too late."""
     cfg = settings()["schedule"]
     now = datetime.now(timezone.utc)
-    hour = cfg["post_hour_utc"] if slot == "post" else cfg["story_hour_utc"]
+    hour = cfg[f"{slot}_hour_utc"]
     slot_time = now.replace(hour=hour, minute=0, second=0, microsecond=0)
     if now < slot_time:
         slot_time -= timedelta(days=1)
@@ -87,7 +91,7 @@ def cmd_run(args) -> int:
 
     if args.type:
         kind = args.type
-        slot_name = "post" if kind in planner.POST_KINDS else "story"
+        slot_name = planner.slot_of(kind)
         key = planner.slot_key(day, slot_name)
         if planner.kind_for(day, slot_name) != kind:
             key += f"#{kind}"  # manual extra post: don't collide with the scheduled slot
@@ -101,10 +105,15 @@ def cmd_run(args) -> int:
             return 0
         key = planner.slot_key(day, slot_name)
         plan = planner.load_plan(week)
-        if not plan or key not in plan["slots"]:
+        if not plan:
             warn(f"No plan for {week} — building it now (normally the Sunday preview does this)")
             with group(f"Build plan {week}"):
                 plan = planner.build_plan(week, st)
+                planner.save_plan(plan)
+        elif key not in plan["slots"]:
+            warn(f"plans/{week}.json has no {key} slot — adding just that one, other picks stay as they are")
+            with group(f"Build {kind}"):
+                plan = planner.add_slot(plan, day, slot_name, st)
                 planner.save_plan(plan)
         slot = plan["slots"][key]
         if slot.get("skip"):
@@ -124,7 +133,7 @@ def cmd_run(args) -> int:
 
     if dry:
         log("DRY RUN: images and caption generated, nothing was uploaded or published.")
-        summary(f"### {key} — {KIND_LABELS[kind]} (dry run)\n\n{len(paths)} image(s) rendered.\n\n"
+        summary(f"### {key} — {KIND_LABELS[kind]} (dry run)\n\n{len(paths)} file(s) rendered.\n\n"
                 f"```\n{slot.get('caption', '(story — no caption)')}\n```")
         return 0
 
@@ -133,13 +142,17 @@ def cmd_run(args) -> int:
     ig = Instagram()
     with group("Preflight"):
         ig.ensure_quota(1)
-    with group("Upload images"):
+    with group("Upload media"):
         stamp = datetime.now(timezone.utc).strftime("%H%M%S")
         folder = f"media/{day.isoformat()}-{_safe(key.split(':', 1)[1])}-{stamp}"
         urls = list(hosting.upload({f"{folder}/{p.name}": p for p in paths}, day, key).values())
         hosting.wait_live(urls)
     with group("Publish to Instagram"):
-        if slot_name == "story":
+        if slot_name == "reel":
+            cover = next((u for u in urls if u.endswith(".jpg")), None)
+            video = next(u for u in urls if u.endswith(".mp4"))
+            media_id = ig.publish_reel(video, slot["caption"], cover_url=cover)
+        elif slot_name == "story":
             media_id = ig.publish_story(urls[0])
         elif len(urls) > 1:
             media_id = ig.publish_carousel(urls, slot["caption"])
@@ -149,7 +162,7 @@ def cmd_run(args) -> int:
     state_mod.record_publish(st, key, slot, media_id, published_at)
     state_mod.save(st)
     log(f"Published {key} as media {media_id}")
-    summary(f"### ✅ Published {key} — {KIND_LABELS[kind]}\n\nMedia id `{media_id}` · {len(urls)} image(s)")
+    summary(f"### ✅ Published {key} — {KIND_LABELS[kind]}\n\nMedia id `{media_id}` · {len(urls)} file(s)")
     return 0
 
 
@@ -184,6 +197,10 @@ def cmd_preview(args) -> int:
     base = None
     if args.pages:
         files = {f"preview/{week}/{_safe(k)}/{p.name}": p for k, ps in rendered.items() for p in ps}
+        for k, ps in rendered.items():
+            silent = next((p.parent / "reel_silent.mp4" for p in ps if p.suffix == ".mp4"), None)
+            if silent and silent.exists():
+                files[f"preview/{week}/{_safe(k)}/{silent.name}"] = silent
         with group("Upload preview images"):
             hosting.upload(files, _today(), f"preview {week}")
         base = f"{settings()['hosting']['pages_base_url'].rstrip('/')}/preview/{week}"
@@ -197,9 +214,15 @@ def cmd_preview(args) -> int:
         lines.append(f"### {day:%a %b %-d} — {KIND_LABELS[slot['kind']]}" + (" — ⏭️ SKIPPED" if slot.get("skip") else ""))
         if rendered[key]:
             width = 160 if slot["slot"] == "post" else 140
-            for p in rendered[key]:
-                src = f"{base}/{_safe(key)}/{p.name}" if base else f"{_safe(key)}/{p.name}"
-                lines.append(f'<img src="{src}" width="{width}">')
+            url = (lambda name: f"{base}/{_safe(key)}/{name}" if base else f"{_safe(key)}/{name}")
+            if slot["slot"] == "reel":
+                lines.append(f'<a href="{url("reel.mp4")}"><img src="{url("cover.jpg")}" width="{width}"></a>')
+                lines.append("")
+                lines.append(f'▶️ [Reel with music]({url("reel.mp4")}) · 🔇 [Silent version for a trending sound]'
+                             f'({url("reel_silent.mp4")})')
+            else:
+                for p in rendered[key]:
+                    lines.append(f'<img src="{url(p.name)}" width="{width}">')
             lines.append("")
         if slot.get("caption"):
             lines += ["<details><summary>Caption</summary>", "", "```", slot["caption"], "```", "", "</details>", ""]
@@ -249,7 +272,8 @@ def cmd_samples(args) -> int:
     if text_only:
         _render_slot({"kind": "feature", "data": {"feature": text_only}}, SAMPLES_DIR / "feature_text_only")
     (SAMPLES_DIR / "captions.md").write_text("\n".join(captions_md), "utf-8")
-    for tmp in SAMPLES_DIR.rglob("caption.txt"):
+    # Reels: keep only the cover in samples/ (videos would bloat the repo on every regeneration)
+    for tmp in [*SAMPLES_DIR.rglob("caption.txt"), *SAMPLES_DIR.rglob("*.mp4")]:
         tmp.unlink()
     log(f"Samples written to {SAMPLES_DIR.relative_to(ROOT)}/")
     return 0
@@ -260,7 +284,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
 
     r = sub.add_parser("run", help="render and publish today's scheduled post or story")
-    r.add_argument("--slot", choices=["post", "story"], required=True)
+    r.add_argument("--slot", choices=["post", "story", "reel"], required=True)
     r.add_argument("--date", help="UTC date to act as (YYYY-MM-DD), default today")
     r.add_argument("--type", choices=list(planner.BUILDERS), help="ignore the schedule and build this type now")
     r.add_argument("--dry-run", action="store_true", help="render only, never upload or publish")

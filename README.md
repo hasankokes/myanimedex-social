@@ -12,6 +12,9 @@
 | Çar 14:00 | 17:00 | Hikâye: "Which one are you watching?" (A/B, yanıtla) | Story |
 | Per 14:00 | 17:00 | Hikâye: Uygulamayı indir | Story |
 | Cum 14:00 | 17:00 | Hikâye: Weekend binge pick | Story |
+| Sal 19:00 | 22:00 | **Reel: App demo**: uygulama ekran kaydı + hook (`content/reels.yaml` sırasıyla) | Reel ~8 sn |
+| Per 19:00 | 22:00 | **Reel: Episodes this weekend**: Cuma–Pazar yayınlanan 5 anime, posterli | Reel ~13 sn |
+| Paz 19:00 | 22:00 | **Reel: Top 5 countdown**: Cumartesi Top 5'in videosu (#5 → #1) | Reel ~15 sn |
 | **Paz 12:00** | 15:00 | Haftanın planını kilitler, önizleme Issue'su + artifact | — |
 
 Örnek çıktılar `samples/` klasöründe, örnek açıklamalar `samples/captions.md` dosyasında.
@@ -33,6 +36,17 @@
 11. [Bilinen sınırlar ve kurallar](#11-bilinen-sınırlar-ve-kurallar)
 
 ---
+
+
+## Reels
+
+- Videolar Python'da kare kare çizilir (Pillow) ve ffmpeg ile H.264/AAC 1080×1920 30 fps olarak kodlanır (`src/mad/render/reels.py`). GitHub Actions'ta ffmpeg hazır gelir.
+- **Müzik**: teaser için Python'da sentezlenmiş özgün müzikten (`assets/audio/`, tamamen sizin) her hafta farklı bir bölüm. Instagram'ın müzik kütüphanesi API ile eklenemez.
+- **Trend ses için**: Pazar önizleme Issue'sunda her Reel için 🔇 *sessiz versiyon* linki var. İndirip telefondan Instagram'da trend bir ses ekleyerek paylaşabilirsiniz (o zaman o haftanın otomatik Reel'ini planda `"skip": true` yapın).
+- **Kapak**: her Reel'in ilk saniyelerinden bir kare `cover.jpg` olarak üretilir ve kapak olarak gönderilir.
+- **App demo** sırası `content/reels.yaml` → `demos`. Yeni klip eklemek için dikey ekran kaydını `assets/clips/` altına koyup listeye `hook`, `title`, `sub`, `clip` ile ekleyin.
+- **Teaser** elle: *Actions → Reel → Run workflow → type: reel_teaser*.
+- Reels hem Reels sekmesinde hem ana akışta görünür (`share_to_feed=true`).
 
 ## 1. Nasıl çalışır
 

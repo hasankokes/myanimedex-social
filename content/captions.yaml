@@ -77,3 +77,61 @@ feature:
     {description}
 
     Track what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.
+
+# ---------------------------------------------------------------- reels
+# reel_top5:    {season_label} {list} {top_title} {top_score}
+# reel_weekend: {season_label} {date_range} {list} {top_title}
+# reel_app_demo:{season_label} {hook} {title} {sub}
+# reel_teaser:  {season_label}
+
+reel_top5:
+  - |
+    Top 5 anime this season ({season_label}) — counting down to #1 🏆
+
+    {list}
+
+    Did your favorite make it? Comment your #1 👇
+    Track the whole season in MyAnimeDex — link in bio.
+  - |
+    The best new anime of {season_label}, ranked by fans ⭐ Watch till #1.
+
+    {list}
+
+    Save this for your next watch night and tell us what's missing.
+    MyAnimeDex · free anime tracker · link in bio.
+
+reel_weekend:
+  - |
+    Anime episodes dropping this weekend ({date_range}) 📺 Your weekend watchlist:
+
+    {list}
+
+    Which one are you watching first? 👇
+    Get episode reminders in MyAnimeDex — link in bio.
+  - |
+    What to watch this weekend: new {season_label} episodes 🍿
+
+    {list}
+
+    Tag the friend you're watching {top_title} with.
+    Never miss an episode with MyAnimeDex (link in bio).
+
+reel_app_demo:
+  - |
+    {hook} 📲 {title}: {sub}
+
+    MyAnimeDex is the free anime tracker app for your {season_label} watchlist. Link in bio.
+    What should we show next? Comment below 👇
+  - |
+    {title} in MyAnimeDex ✨ {sub}
+
+    Free on the App Store and Google Play — link in bio.
+    Follow for more anime app tips.
+
+reel_teaser:
+  - |
+    Your anime. All of it. 📲
+
+    Track what you watch, never miss a new episode, level up your profile and find your next favorite anime — all in one free app.
+
+    MyAnimeDex is free on iOS & Android. Link in bio 💛

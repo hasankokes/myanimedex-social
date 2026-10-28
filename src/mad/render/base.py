@@ -233,13 +233,20 @@ class Canvas:
 
     # ------------------------------------------------------------ layers
 
+    @classmethod
+    def layer(cls, size) -> "Canvas":
+        """A transparent RGBA canvas (for sprites and rotated elements)."""
+        sub = cls.__new__(cls)
+        sub.w, sub.h = int(size[0]), int(size[1])
+        sub.im = Image.new("RGBA", (sub.w, sub.h), (0, 0, 0, 0))
+        sub.d = ImageDraw.Draw(sub.im)
+        return sub
+
     def rotated(self, size, draw_fn, center, angle):
         """Draw on a transparent layer via draw_fn(Canvas-like) and paste it rotated."""
-        layer = Image.new("RGBA", size, (0, 0, 0, 0))
-        sub = Canvas.__new__(Canvas)
-        sub.w, sub.h, sub.im, sub.d = size[0], size[1], layer, ImageDraw.Draw(layer)
+        sub = Canvas.layer(size)
         draw_fn(sub)
-        layer = layer.rotate(angle, resample=Image.BICUBIC, expand=True)
+        layer = sub.im.rotate(angle, resample=Image.BICUBIC, expand=True)
         self.im.paste(layer, (int(center[0] - layer.width / 2), int(center[1] - layer.height / 2)), layer)
 
     def logo(self, xy, height, anchor="la"):

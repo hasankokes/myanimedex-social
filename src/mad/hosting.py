@@ -102,7 +102,7 @@ def _request_pages_build() -> None:
 
 
 def wait_live(urls: list[str]) -> None:
-    """Block until every URL serves a JPEG — Instagram fetches them right away."""
+    """Block until every URL serves its JPEG/MP4 — Instagram fetches them right away."""
     timeout = settings()["hosting"]["live_timeout_seconds"]
     deadline = time.time() + timeout
     pending = list(urls)
@@ -111,7 +111,7 @@ def wait_live(urls: list[str]) -> None:
         for url in pending:
             try:
                 r = requests.head(url, timeout=20, allow_redirects=True)
-                ok = r.status_code == 200 and r.headers.get("Content-Type", "").startswith("image/jpeg")
+                ok = r.status_code == 200 and r.headers.get("Content-Type", "").split(";")[0] in ("image/jpeg", "video/mp4")
             except requests.RequestException:
                 ok = False
             if not ok:

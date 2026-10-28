@@ -485,6 +485,9 @@ RENDERERS = {
 
 def render(slot: dict[str, Any], out_dir: Path) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
-    for old in out_dir.glob("*.jpg"):
+    for old in [*out_dir.glob("*.jpg"), *out_dir.glob("*.mp4")]:
         old.unlink()
+    if slot["kind"].startswith("reel_"):
+        from .reels import REEL_RENDERERS  # needs ffmpeg; only loaded for reels
+        return REEL_RENDERERS[slot["kind"]](slot["data"], out_dir)
     return RENDERERS[slot["kind"]](slot["data"], out_dir)

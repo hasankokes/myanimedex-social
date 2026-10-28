@@ -17,6 +17,7 @@ EMPTY: dict[str, Any] = {
     "anime": {},        # anilist id (str) -> last date featured (YYYY-MM-DD)
     "features": {"last_id": None},
     "tips": {"last_id": None},
+    "reel_demos": {"last_id": None},
     "top5_last": [],    # anilist ids of the last published Top 5, rank order
 }
 
@@ -53,6 +54,8 @@ def record_publish(state: dict[str, Any], slot_key: str, slot: dict[str, Any], m
         state["anime"][str(aid)] = day
     if slot["kind"] == "feature":
         state["features"]["last_id"] = slot["data"]["feature"]["id"]
+    elif slot["kind"] == "reel_app_demo":
+        state["reel_demos"]["last_id"] = slot["data"]["demo"]["id"]
     elif slot["kind"] == "story_tip":
         state["tips"]["last_id"] = slot["data"]["tip"]["id"]
     elif slot["kind"] == "top5":

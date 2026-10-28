@@ -23,9 +23,13 @@ SCHEDULE: list[tuple[int, str, str]] = [
     (3, "story", "story_your_pick"),
     (4, "story", "story_download"),
     (5, "story", "story_weekend"),
+    (2, "reel", "reel_app_demo"),
+    (4, "reel", "reel_weekend"),
+    (7, "reel", "reel_top5"),
 ]
 POST_KINDS = ["airing_week", "feature", "top5"]
 STORY_KINDS = ["story_anime_of_day", "story_tip", "story_your_pick", "story_download", "story_weekend"]
+REEL_KINDS = ["reel_app_demo", "reel_weekend", "reel_top5", "reel_teaser"]
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 KEEP_FIELDS = ["id", "idMal", "title", "format", "status", "episodes", "season", "seasonYear",
@@ -228,6 +232,66 @@ def build_story_download(ctx: Ctx) -> dict[str, Any]:
     return {"data": {"variant": ctx.seed % 2}, "anime_ids": []}
 
 
+def build_reel_top5(ctx: Ctx) -> dict[str, Any]:
+    """Sunday reel: the video version of Saturday's Top 5 (same ranking, fresh caption)."""
+    base = build_top5(ctx)
+    d = base["data"]
+    fields = {
+        "season_label": captions.season_label(d["season"], d["year"]),
+        "top_title": captions.display_title(d["items"][0]),
+        "top_score": captions.score10(d["items"][0]),
+        "list": "\n".join(f"#{m['rank']} {captions.display_title(m)} — {captions.score10(m)}/10" for m in d["items"]),
+    }
+    tags = captions.hashtags(d["season"], d["year"], d["items"][0])
+    return {"data": {**d, "seed": ctx.seed}, "anime_ids": base["anime_ids"],
+            "caption": captions.build("reel_top5", ctx.seed, fields, tags)}
+
+
+def build_reel_weekend(ctx: Ctx) -> dict[str, Any]:
+    """Thursday reel: episodes airing Friday–Sunday, most popular first."""
+    friday = ctx.day + timedelta(days=(4 - ctx.day.weekday()) % 7)
+    start = datetime.combine(friday, time(), timezone.utc)
+    pool = [m for m in anilist.airing_between(start, start + timedelta(days=3))
+            if (m.get("popularity") or 0) >= ctx.sel["airing_min_popularity"]]
+    pool.sort(key=lambda m: -(m.get("popularity") or 0))
+    anilist.log_count("anime airing this weekend (above popularity floor)", pool)
+    chosen = _pick(pool, ctx.sel["airing_slides"], ctx.blocked, "Weekend episodes")
+    items = []
+    for m in chosen:
+        snap = snapshot(m)
+        snap["airing_day"] = WEEKDAYS[datetime.fromtimestamp(m["airing"]["airingAt"], timezone.utc).weekday()]
+        items.append(snap)
+    end = friday + timedelta(days=2)
+    date_range = f"{friday:%b %-d} – {end:%-d}" if end.month == friday.month else f"{friday:%b %-d} – {end:%b %-d}"
+    fields = {
+        "season_label": captions.season_label(ctx.season, ctx.year),
+        "date_range": date_range,
+        "top_title": captions.display_title(items[0]),
+        "list": "\n".join(f"{i}. {captions.display_title(m)} — Ep {m['airing']['episode']} ({m['airing_day']})"
+                          for i, m in enumerate(items, 1)),
+    }
+    tags = captions.hashtags(ctx.season, ctx.year, items[0])
+    return {"data": {"items": items, "date_range": date_range, "seed": ctx.seed},
+            "anime_ids": [m["id"] for m in items],
+            "caption": captions.build("reel_weekend", ctx.seed, fields, tags)}
+
+
+def build_reel_app_demo(ctx: Ctx) -> dict[str, Any]:
+    demo = _rotate(load_yaml("reels.yaml").get("demos") or [], ctx.state["reel_demos"]["last_id"], "reels")
+    fields = {"season_label": captions.season_label(ctx.season, ctx.year),
+              "hook": demo["hook"].capitalize(), "title": demo["title"], "sub": demo["sub"]}
+    tags = captions.hashtags(ctx.season, ctx.year, None)
+    return {"data": {"demo": demo, "seed": ctx.seed}, "anime_ids": [],
+            "caption": captions.build("reel_app_demo", ctx.seed, fields, tags)}
+
+
+def build_reel_teaser(ctx: Ctx) -> dict[str, Any]:
+    teaser = load_yaml("reels.yaml")["teaser"]
+    tags = captions.hashtags(ctx.season, ctx.year, None)
+    fields = {"season_label": captions.season_label(ctx.season, ctx.year)}
+    return {"data": dict(teaser), "anime_ids": [], "caption": captions.build("reel_teaser", 0, fields, tags)}
+
+
 BUILDERS: dict[str, Callable[[Ctx], dict[str, Any]]] = {
     "airing_week": build_airing_week,
     "feature": build_feature,
@@ -237,7 +301,15 @@ BUILDERS: dict[str, Callable[[Ctx], dict[str, Any]]] = {
     "story_your_pick": build_story_your_pick,
     "story_download": build_story_download,
     "story_weekend": build_story_weekend,
+    "reel_app_demo": build_reel_app_demo,
+    "reel_weekend": build_reel_weekend,
+    "reel_top5": build_reel_top5,
+    "reel_teaser": build_reel_teaser,
 }
+
+
+def slot_of(kind: str) -> str:
+    return "post" if kind in POST_KINDS else "reel" if kind in REEL_KINDS else "story"
 
 
 def build_slot(kind: str, day: date, st: dict[str, Any], taken: set[int] | None = None) -> dict[str, Any]:
@@ -247,7 +319,7 @@ def build_slot(kind: str, day: date, st: dict[str, Any], taken: set[int] | None 
     log(f"Building {kind} for {day.isoformat()}")
     built = BUILDERS[kind](Ctx(day, st, taken))
     taken.update(built["anime_ids"])
-    slot = "post" if kind in POST_KINDS else "story"
+    slot = slot_of(kind)
     return {"kind": kind, "slot": slot, "date": day.isoformat(), **built}
 
 
@@ -262,11 +334,23 @@ def build_plan(week: str, st: dict[str, Any]) -> dict[str, Any]:
     taken: set[int] = set()
     slots: dict[str, Any] = {}
     # Posts first so they get first choice of anime, stories fill around them.
-    for weekday, slot, kind in sorted(SCHEDULE, key=lambda s: (s[1] != "post", s[0])):
+    order = {"post": 0, "reel": 1, "story": 2}
+    for weekday, slot, kind in sorted(SCHEDULE, key=lambda s: (order[s[1]], s[0])):
         day = monday + timedelta(days=weekday - 1)
         slots[slot_key(day, slot)] = build_slot(kind, day, st, taken)
     return {"week": week, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "slots": dict(sorted(slots.items()))}
+
+
+def add_slot(plan: dict[str, Any], day: date, slot: str, st: dict[str, Any]) -> dict[str, Any]:
+    """Build one missing slot into an existing plan without touching the other picks."""
+    kind = kind_for(day, slot)
+    if not kind:
+        raise MadError(f"No {slot} is scheduled on {day:%A}")
+    taken = {aid for s in plan["slots"].values() for aid in s.get("anime_ids", [])}
+    plan["slots"][slot_key(day, slot)] = build_slot(kind, day, st, taken)
+    plan["slots"] = dict(sorted(plan["slots"].items()))
+    return plan
 
 
 def load_plan(week: str) -> dict[str, Any] | None:

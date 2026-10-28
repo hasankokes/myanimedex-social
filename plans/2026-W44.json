@@ -248,6 +248,23 @@
         159042
       ]
     },
+    "2026-10-27:reel": {
+      "kind": "reel_app_demo",
+      "slot": "reel",
+      "date": "2026-10-27",
+      "data": {
+        "demo": {
+          "id": "calendar",
+          "hook": "NEVER MISS AN EPISODE",
+          "title": "Airing calendar",
+          "sub": "Every new episode, in your local time.",
+          "clip": "assets/clips/calendar.mp4"
+        },
+        "seed": 44
+      },
+      "anime_ids": [],
+      "caption": "Never miss an episode 📲 Airing calendar: Every new episode, in your local time.\n\nMyAnimeDex is the free anime tracker app for your Fall 2026 watchlist. Link in bio.\nWhat should we show next? Comment below 👇\n\n#anime #animerecommendations #fall2026anime #myanimedex"
+    },
     "2026-10-27:story": {
       "kind": "story_tip",
       "slot": "story",
@@ -353,6 +370,211 @@
         212888,
         205909
       ]
+    },
+    "2026-10-29:reel": {
+      "kind": "reel_weekend",
+      "slot": "reel",
+      "date": "2026-10-29",
+      "data": {
+        "items": [
+          {
+            "id": 178083,
+            "idMal": 59088,
+            "title": {
+              "romaji": "Tokyo Revengers: Santen Sensou-hen",
+              "english": "Tokyo Revengers: War of the Three Titans Arc"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 13,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 76,
+            "popularity": 37261,
+            "duration": null,
+            "genres": [
+              "Action",
+              "Drama",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/178083",
+            "nextAiringEpisode": {
+              "airingAt": 1793379180,
+              "episode": 5
+            },
+            "airing": {
+              "airingAt": 1793379180,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178083-bg7pg6TCHwtG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx178083-bg7pg6TCHwtG.jpg",
+              "color": "#c99350"
+            },
+            "studio": "LIDENFILMS",
+            "airing_day": "Fri"
+          },
+          {
+            "id": 206814,
+            "idMal": 63367,
+            "title": {
+              "romaji": "Dragon Ball Super: Beerus",
+              "english": "Dragon Ball Super: Beerus"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 81,
+            "popularity": 28575,
+            "duration": 23,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/206814",
+            "nextAiringEpisode": {
+              "airingAt": 1793542560,
+              "episode": 4
+            },
+            "airing": {
+              "airingAt": 1793542560,
+              "episode": 4
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx206814-PVVzRbf1IQpe.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206814-PVVzRbf1IQpe.jpg",
+              "color": "#e48643"
+            },
+            "studio": "Toei Animation",
+            "airing_day": "Sun"
+          },
+          {
+            "id": 185756,
+            "idMal": 60601,
+            "title": {
+              "romaji": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+              "english": "As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 70,
+            "popularity": 28508,
+            "duration": 24,
+            "genres": [
+              "Adventure",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/185756",
+            "nextAiringEpisode": {
+              "airingAt": 1793543400,
+              "episode": 6
+            },
+            "airing": {
+              "airingAt": 1793543400,
+              "episode": 6
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx185756-xPCl0RyQ7fXD.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx185756-xPCl0RyQ7fXD.jpg",
+              "color": "#d6f1c9"
+            },
+            "studio": "GeyeG Pictures",
+            "airing_day": "Sun"
+          },
+          {
+            "id": 186541,
+            "idMal": 60948,
+            "title": {
+              "romaji": "Mezametara Saikyou Soubi to Uchuusen-mochi datta node, Ikkodate Mezashite Youhei to shite Jiyuu ni Ikitai",
+              "english": "Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship!"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 13,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 69,
+            "popularity": 26793,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Comedy",
+              "Drama",
+              "Mecha",
+              "Romance",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/186541",
+            "nextAiringEpisode": {
+              "airingAt": 1793536200,
+              "episode": 5
+            },
+            "airing": {
+              "airingAt": 1793536200,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx186541-caYpLsLmbCh7.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186541-caYpLsLmbCh7.jpg",
+              "color": "#d6bb78"
+            },
+            "studio": "studio A-CAT",
+            "airing_day": "Sun"
+          },
+          {
+            "id": 191788,
+            "idMal": 61603,
+            "title": {
+              "romaji": "Aoashi 2nd Season",
+              "english": "Aoashi Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 24,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 80,
+            "popularity": 25992,
+            "duration": 24,
+            "genres": [
+              "Sports"
+            ],
+            "siteUrl": "https://anilist.co/anime/191788",
+            "nextAiringEpisode": {
+              "airingAt": 1793520000,
+              "episode": 5
+            },
+            "airing": {
+              "airingAt": 1793520000,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx191788-XC6F24LdX6a4.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191788-XC6F24LdX6a4.jpg",
+              "color": "#e4ae50"
+            },
+            "studio": "TMS Entertainment",
+            "airing_day": "Sun"
+          }
+        ],
+        "date_range": "Oct 30 – Nov 1",
+        "seed": 44
+      },
+      "anime_ids": [
+        178083,
+        206814,
+        185756,
+        186541,
+        191788
+      ],
+      "caption": "Anime episodes dropping this weekend (Oct 30 – Nov 1) 📺 Your weekend watchlist:\n\n1. Tokyo Revengers: War of the Three Titans Arc — Ep 5 (Fri)\n2. Dragon Ball Super: Beerus — Ep 4 (Sun)\n3. As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3 — Ep 6 (Sun)\n4. Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship! — Ep 5 (Sun)\n5. Aoashi Season 2 — Ep 5 (Sun)\n\nWhich one are you watching first? 👇\nGet episode reminders in MyAnimeDex — link in bio.\n\n#anime #animerecommendations #fall2026anime #tokyorevengers #myanimedex"
     },
     "2026-10-29:story": {
       "kind": "story_download",
@@ -591,6 +813,196 @@
         189123
       ],
       "caption": "The highest-rated new anime this season (Fall 2026) 📊\n\n#1 Black Clover Season 2 — 8.7/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.4/10\n#5 Blue Box Season 2 — 8.1/10\n\nIs Black Clover Season 2 really the #1? Comment your pick and save this for later.\nTrack your seasonal watchlist with MyAnimeDex (link in bio).\n\n#anime #animerecommendations #fall2026anime #blackclover #myanimedex"
+    },
+    "2026-11-01:reel": {
+      "kind": "reel_top5",
+      "slot": "reel",
+      "date": "2026-11-01",
+      "data": {
+        "items": [
+          {
+            "id": 195604,
+            "idMal": 61967,
+            "title": {
+              "romaji": "Black Clover 2nd Season",
+              "english": "Black Clover Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 87,
+            "popularity": 100365,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/195604",
+            "nextAiringEpisode": {
+              "airingAt": 1793455200,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg",
+              "color": "#f1a143"
+            },
+            "studio": "Studio Pierrot",
+            "rank": 1,
+            "movement": "new"
+          },
+          {
+            "id": 210482,
+            "idMal": 61469,
+            "title": {
+              "romaji": "JoJo no Kimyou na Bouken: Steel Ball Run - 2nd & 3rd STAGE",
+              "english": "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": 11,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 86,
+            "popularity": 47055,
+            "duration": null,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Drama",
+              "Mystery",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/210482",
+            "nextAiringEpisode": {
+              "airingAt": 1793347200,
+              "episode": 6
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210482-P1VNKbqdJ6Zj.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210482-P1VNKbqdJ6Zj.jpg",
+              "color": "#f1ae50"
+            },
+            "studio": "david production",
+            "rank": 2,
+            "movement": "new"
+          },
+          {
+            "id": 195516,
+            "idMal": 61987,
+            "title": {
+              "romaji": "Kusuriya no Hitorigoto 3rd Season",
+              "english": "The Apothecary Diaries Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 85,
+            "popularity": 106255,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "siteUrl": "https://anilist.co/anime/195516",
+            "nextAiringEpisode": {
+              "airingAt": 1793368800,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
+              "color": "#e4a128"
+            },
+            "studio": "OLM",
+            "rank": 3,
+            "movement": "new"
+          },
+          {
+            "id": 195539,
+            "idMal": 61990,
+            "title": {
+              "romaji": "Cyberpunk: Edgerunners 2",
+              "english": "Cyberpunk: Edgerunners 2"
+            },
+            "format": "ONA",
+            "status": "FINISHED",
+            "episodes": 10,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 84,
+            "popularity": 109100,
+            "duration": 28,
+            "genres": [
+              "Action",
+              "Drama",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/195539",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195539-4LdfmKIHzuxr.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195539-4LdfmKIHzuxr.png",
+              "color": "#fe286b"
+            },
+            "studio": "TRIGGER",
+            "rank": 4,
+            "movement": "new"
+          },
+          {
+            "id": 189123,
+            "idMal": 61323,
+            "title": {
+              "romaji": "Ao no Hako Season 2",
+              "english": "Blue Box Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 81,
+            "popularity": 50621,
+            "duration": 24,
+            "genres": [
+              "Romance",
+              "Slice of Life",
+              "Sports"
+            ],
+            "siteUrl": "https://anilist.co/anime/189123",
+            "nextAiringEpisode": {
+              "airingAt": 1794123000,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx189123-0secXELIhkIW.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg",
+              "color": "#e4ae50"
+            },
+            "studio": "Electric Circus",
+            "rank": 5,
+            "movement": "new"
+          }
+        ],
+        "season": "FALL",
+        "year": 2026,
+        "min_popularity_label": "20K",
+        "seed": 44
+      },
+      "anime_ids": [
+        195604,
+        210482,
+        195516,
+        195539,
+        189123
+      ],
+      "caption": "Top 5 anime this season (Fall 2026) — counting down to #1 🏆\n\n#1 Black Clover Season 2 — 8.7/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.4/10\n#5 Blue Box Season 2 — 8.1/10\n\nDid your favorite make it? Comment your #1 👇\nTrack the whole season in MyAnimeDex — link in bio.\n\n#anime #animerecommendations #fall2026anime #blackclover #myanimedex"
     }
   }
 }

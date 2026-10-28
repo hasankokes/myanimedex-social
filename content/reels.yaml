@@ -1,0 +1,59 @@
+# Reels: Tuesday = app demo, Thursday = weekend episodes, Sunday = Top 5 countdown
+# (all 19:00 UTC). Videos are rendered in Python (Pillow frames -> ffmpeg) and get
+# a slice of the teaser's original music (assets/audio, fully owned, no licensing).
+# A silent copy of every reel is also published in the Sunday preview issue so you
+# can re-post it from your phone with a trending Instagram sound.
+
+# Music beds, cycled week by week. `offsets` are start seconds (on the beat).
+music:
+  - file: assets/audio/bed_promo.m4a
+    offsets: [0, 8, 16]
+  - file: assets/audio/bed_store.m4a
+    offsets: [0, 8, 14]
+
+# Tuesday app demos rotate top -> bottom (last published id is kept in state).
+#   hook   big first-second text (the scroll stopper)
+#   title  headline above the phone
+#   sub    one short line in the speech bubble
+#   clip   portrait screen recording (assets/clips/*.mp4)
+demos:
+  - id: calendar
+    hook: NEVER MISS AN EPISODE
+    title: Airing calendar
+    sub: Every new episode, in your local time.
+    clip: assets/clips/calendar.mp4
+
+  - id: dice
+    hook: "CAN'T DECIDE WHAT TO WATCH?"
+    title: Roll the dice
+    sub: One tap, one random anime for tonight.
+    clip: assets/clips/dice.mp4
+
+  - id: tracker
+    hook: TRACK EVERY EPISODE
+    title: One tap per episode
+    sub: Tap + after each episode. Done.
+    clip: assets/clips/tracker.mp4
+
+  - id: lists
+    hook: YOUR TOP 10, YOUR RULES
+    title: Lists you can reorder
+    sub: Long press and drag. Share it with friends.
+    clip: assets/clips/lists.mp4
+
+  - id: profile
+    hook: LEVEL UP AS YOU WATCH
+    title: XP and ranks
+    sub: From Rookie to Senpai, Sensei, Legend and Kami.
+    clip: assets/clips/profile.mp4
+
+  - id: home
+    hook: YOUR ANIME, ALL IN ONE APP
+    title: Track · Discover · Watch
+    sub: Free on iOS and Android.
+    clip: assets/clips/hero.mp4
+
+# Manual-only: python -m mad run --slot reel --type reel_teaser
+teaser:
+  file: assets/video/teaser_1080x1920.mp4
+  thumb_offset_ms: 1000

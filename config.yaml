@@ -47,12 +47,14 @@ instagram:
   # Container processing poll.
   status_poll_seconds: 5
   status_timeout_seconds: 300
+  video_status_timeout_seconds: 900
   max_retries: 4
 
 schedule:
   # Must match the cron lines in .github/workflows/post.yml and story.yml (UTC).
   post_hour_utc: 19
   story_hour_utc: 14
+  reel_hour_utc: 19
   # GitHub sometimes starts scheduled runs hours late; later than this, the slot is skipped.
   max_delay_hours: 6
 
@@ -61,3 +63,5 @@ render:
   post_size: [1080, 1350]
   story_size: [1080, 1920]
   story_safe_margin: 250
+  reel_size: [1080, 1920]
+  reel_fps: 30

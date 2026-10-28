@@ -111,8 +111,9 @@ class Instagram:
     def _status(self, container_id: str) -> str:
         return self._call("GET", container_id, {"fields": "status_code,status"}).get("status_code", "")
 
-    def _wait_ready(self, ids: list[str]) -> None:
-        deadline = time.time() + self.cfg["status_timeout_seconds"]
+    def _wait_ready(self, ids: list[str], timeout: int | None = None) -> None:
+        timeout = timeout or self.cfg["status_timeout_seconds"]
+        deadline = time.time() + timeout
         pending = set(ids)
         while pending:
             for cid in sorted(pending):
@@ -124,7 +125,7 @@ class Instagram:
                     raise MadError(f"Container {cid} failed processing ({status}): {detail}. Nothing was published.")
             if pending:
                 if time.time() > deadline:
-                    raise MadError(f"Containers still processing after {self.cfg['status_timeout_seconds']}s: "
+                    raise MadError(f"Containers still processing after {timeout}s: "
                                    f"{sorted(pending)}. Nothing was published.")
                 time.sleep(self.cfg["status_poll_seconds"])
         log(f"All {len(ids)} container(s) FINISHED")
@@ -171,6 +172,19 @@ class Instagram:
         cid = self._create({"image_url": url, "media_type": "STORIES"})
         log(f"Created story container {cid}")
         self._wait_ready([cid])
+        return self._publish(cid)
+
+    def publish_reel(self, video_url: str, caption: str, cover_url: str | None = None,
+                     thumb_offset_ms: int | None = None, share_to_feed: bool = True) -> str:
+        params: dict[str, Any] = {"media_type": "REELS", "video_url": video_url, "caption": caption,
+                                  "share_to_feed": "true" if share_to_feed else "false"}
+        if cover_url:
+            params["cover_url"] = cover_url
+        elif thumb_offset_ms is not None:
+            params["thumb_offset"] = str(thumb_offset_ms)
+        cid = self._create(params)
+        log(f"Created reel container {cid}; Instagram is processing the video")
+        self._wait_ready([cid], timeout=self.cfg["video_status_timeout_seconds"])
         return self._publish(cid)
 
     def ensure_quota(self, needed: int = 1) -> None:
