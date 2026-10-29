@@ -1,12 +1,10 @@
 name: Tick
 
-# The scheduler. GitHub starts cron runs late (sometimes hours), so instead of one cron per
-# slot this runs every 10 minutes (off the top of the hour) and publishes whatever is due:
-# stories 14:00, posts and reels 19:00 UTC (see config.yaml → schedule). Late or dropped
-# ticks are caught up by the next one; failures retry every 30 min, 3 attempts max.
+# Publishes every slot that is due (stories 14:00, posts/reels 19:00 UTC; config.yaml → schedule).
+# Triggered at those exact times (+35 and +70 min retries) by pg_cron in the app's Supabase
+# project (migration 20261029170000_instagram_tick_cron.sql in hasankokes/my-anime-dex), because
+# GitHub's own cron skipped most runs. Idempotent: nothing due -> no-op. Can also be run by hand.
 on:
-  schedule:
-    - cron: "4-59/10 * * * *"
   workflow_dispatch:
 
 permissions:

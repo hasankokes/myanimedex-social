@@ -1,9 +1,7 @@
 name: Weekly preview
 
 on:
-  schedule:
-    - cron: "7 12 * * 0"    # Sunday 12:07 UTC (15:07 TR)
-    - cron: "37 14 * * 0"   # backup in case GitHub drops/delays the first one (re-run is harmless)
+  # Triggered Sunday 12:00 UTC by pg_cron in Supabase (see tick.yml); can also be run by hand.
   workflow_dispatch:
     inputs:
       week:
