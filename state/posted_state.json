@@ -3,6 +3,8 @@
     "205909": "2026-10-28",
     "212888": "2026-10-28"
   },
+  "dry_done": {},
+  "failures": {},
   "features": {
     "last_id": "airing-calendar"
   },
@@ -42,6 +44,12 @@
       "kind": "story_your_pick",
       "media_id": "18126938725675786",
       "published_at": "2026-10-28T19:33:25+00:00"
+    },
+    "2026-10-29:story": {
+      "anime_ids": [],
+      "kind": "story_download",
+      "media_id": "18115186088117033",
+      "published_at": "2026-10-29T16:30:01+00:00"
     }
   },
   "tips": {
