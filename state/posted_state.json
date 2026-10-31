@@ -10,7 +10,13 @@
     "212888": "2026-10-28"
   },
   "dry_done": {},
-  "failures": {},
+  "failures": {
+    "2026-10-31:post": {
+      "count": 1,
+      "error": "Graph API 17841479700535258/media_publish failed (code 9007/2207027, trace AmyJ6VrztgtQor4C7Tc_bfx): The media is not ready to be published. Please wait a moment.",
+      "last": "2026-10-31T19:00:17+00:00"
+    }
+  },
   "features": {
     "last_id": "airing-calendar"
   },
