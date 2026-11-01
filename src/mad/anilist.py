@@ -38,6 +38,7 @@ MEDIA_FIELDS = """
   studios(isMain: true) { nodes { name } }
   nextAiringEpisode { airingAt episode }
   coverImage { extraLarge large color }
+  trending
 """
 
 _last_request_at = 0.0
@@ -190,6 +191,23 @@ def finished_in_season(season: str, year: int, min_popularity: int, max_episodes
         {"season": season, "year": year, "minPop": min_popularity, "maxEp": max_episodes + 1},
         pages=1,
     )
+
+
+_ARG_TYPES = {
+    "season": "MediaSeason", "seasonYear": "Int", "status": "MediaStatus", "genre": "String",
+    "popularity_greater": "Int", "popularity_lesser": "Int", "averageScore_greater": "Int",
+    "episodes_lesser": "Int", "format_in": "[MediaFormat]", "sort": "[MediaSort]",
+}
+
+
+def find_media(pages: int = 1, **filters: Any) -> list[dict[str, Any]]:
+    """Generic media search, e.g. find_media(genre="Romance", status="FINISHED", sort=["SCORE_DESC"])."""
+    unknown = set(filters) - set(_ARG_TYPES)
+    if unknown:
+        raise MadError(f"Unsupported AniList filter(s): {', '.join(sorted(unknown))}")
+    args = ", ".join(f"${k}: {_ARG_TYPES[k]}" for k in filters)
+    where = ", ".join(f"{k}: ${k}" for k in filters)
+    return _paged_media(where, args, filters, pages)
 
 
 def now_utc() -> datetime:

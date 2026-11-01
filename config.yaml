@@ -26,6 +26,7 @@ selection:
   top5_min_popularity: 20000
   pick_min_popularity: 15000
   pick_min_score: 70          # AniList averageScore is 0-100
+  hidden_gem_max_popularity: 25000
   weekend_max_episodes: 26
   # Don't feature the same anime again within this many days (Top 5 ignores it).
   anime_cooldown_days: 21

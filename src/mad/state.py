@@ -60,7 +60,7 @@ def record_publish(state: dict[str, Any], slot_key: str, slot: dict[str, Any], m
         state["reel_demos"]["last_id"] = slot["data"]["demo"]["id"]
     elif slot["kind"] == "story_tip":
         state["tips"]["last_id"] = slot["data"]["tip"]["id"]
-    elif slot["kind"] == "top5":
+    elif slot["kind"] == "top5" and slot["data"].get("lens", {}).get("id", "season_score") == "season_score":
         state["top5_last"] = [a["id"] for a in slot["data"]["items"]]
     # Keep the file small: drop anime entries older than a year.
     cutoff = (date.fromisoformat(day) - timedelta(days=365)).isoformat()

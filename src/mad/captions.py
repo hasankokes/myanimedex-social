@@ -62,11 +62,20 @@ def anime_name_tag(media: dict[str, Any]) -> str | None:
     return None
 
 
-def hashtags(season: str, year: int, media: dict[str, Any] | None) -> list[str]:
+def genre_tag(genre: str) -> str:
+    return f"#{_slug(genre)}anime"
+
+
+def hashtags(season: str, year: int, media: dict[str, Any] | None, extra: list[str] | None = None,
+             season_tag: bool = True) -> list[str]:
     cfg = load_yaml("hashtags.yaml")
     tags = list(cfg["base"])
-    tags.append(cfg["season_format"].format(season=season.lower(), year=year))
-    if media:
+    if season_tag:
+        tags.append(cfg["season_format"].format(season=season.lower(), year=year))
+    for tag in extra or []:
+        if tag not in tags:
+            tags.append(tag)
+    if media and len(tags) < cfg["max_tags"] - 1:
         name = anime_name_tag(media)
         if name and name not in tags:
             tags.append(name)

@@ -135,3 +135,44 @@ reel_teaser:
     Track what you watch, never miss a new episode, level up your profile and find your next favorite anime — all in one free app.
 
     MyAnimeDex is free on iOS & Android. Link in bio 💛
+
+# Top 5 lenses other than "season score" (trending, hidden gems, genre, all-time genre).
+# Placeholders: {headline} {list} {cta} {top_title}
+top5_lens:
+  - |
+    {headline} 🏆
+
+    {list}
+
+    {cta}
+    Track them all in MyAnimeDex — free anime tracker, link in bio.
+  - |
+    {headline} ⭐ Swipe through all five.
+
+    {list}
+
+    {cta}
+    Save this post and add them to your MyAnimeDex list (link in bio).
+  - |
+    {headline} 📊
+
+    {list}
+
+    Is {top_title} really #1? {cta}
+    MyAnimeDex · track what you watch · link in bio.
+
+reel_top5_lens:
+  - |
+    {headline} — counting down to #1 🏆
+
+    {list}
+
+    {cta}
+    Follow for a new Top 5 every weekend. Track them in MyAnimeDex — link in bio.
+  - |
+    {headline}. Watch till #1 👀
+
+    {list}
+
+    {cta}
+    MyAnimeDex · free on iOS & Android · link in bio.

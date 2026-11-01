@@ -143,40 +143,162 @@ def build_airing_week(ctx: Ctx) -> dict[str, Any]:
     }
 
 
-def build_top5(ctx: Ctx) -> dict[str, Any]:
+# ---------------------------------------------------------------- Top 5 "lenses"
+# The season's score ranking barely moves week to week, so Saturday's carousel and Sunday's
+# reel rotate through different angles. Saturday uses lens i, Sunday lens i+2 of the same
+# week, so the two never show the same list. Override per slot with "lens" in the plan file.
+
+TOP5_LENSES = ["trending", "hidden_gems", "alltime_genre", "season_genre", "season_score"]
+GENRE_ROTATION = ["Action", "Romance", "Fantasy", "Comedy", "Drama", "Slice of Life", "Sci-Fi", "Mystery",
+                  "Sports", "Supernatural", "Psychological", "Adventure"]
+
+
+def top5_lens(day: date, kind: str) -> str:
+    i = day.isocalendar()[1] % len(TOP5_LENSES)
+    return TOP5_LENSES[(i + 2) % len(TOP5_LENSES) if kind == "reel_top5" else i]
+
+
+def _scored(pool: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Scored entries, one per franchise (no Gintama S2 / S2 Part 2 / S3 in the same list)."""
+    seen, out = set(), []
+    for m in pool:
+        if not m.get("averageScore"):
+            continue
+        title = m.get("title") or {}
+        key = captions._slug(captions._name_core(title.get("romaji") or title.get("english") or ""))[:12]
+        if key and key in seen:
+            continue
+        seen.add(key)
+        out.append(m)
+    return out
+
+
+def _genre_pool(ctx: Ctx, offset: int, fetch) -> tuple[str, list[dict[str, Any]]]:
+    """First genre (starting at this week's rotation slot) with at least 5 results."""
     size = ctx.sel["top5_size"]
-    season, year = ctx.season, ctx.year
-    for _ in range(2):
-        pool = [m for m in anilist.season_ranked(season, year, ctx.sel["top5_min_popularity"])
-                if m.get("averageScore")]
+    start = ctx.day.isocalendar()[1] + offset
+    for k in range(len(GENRE_ROTATION)):
+        genre = GENRE_ROTATION[(start + k) % len(GENRE_ROTATION)]
+        pool = _scored(fetch(genre))
         if len(pool) >= size:
-            break
-        warn(f"Top 5: only {len(pool)} scored {season} {year} anime yet; using the previous season")
-        season, year = anilist.previous_season(season, year)
+            return genre, pool
+        warn(f"Top 5: only {len(pool)} {genre} anime found, trying the next genre")
+    raise MadError("Top 5: no genre has enough anime right now")
+
+
+def _top5(ctx: Ctx, kind: str, lens: str) -> dict[str, Any]:
+    sel, size = ctx.sel, ctx.sel["top5_size"]
+    season, year = ctx.season, ctx.year
+    label = captions.season_label(season, year)
+    extra_tags: list[str] = []
+    season_tag = True
+    badge = None
+
+    if lens == "season_score":
+        for _ in range(2):
+            pool = _scored(anilist.season_ranked(season, year, sel["top5_min_popularity"]))
+            if len(pool) >= size:
+                break
+            warn(f"Top 5: only {len(pool)} scored {season} {year} anime yet; using the previous season")
+            season, year = anilist.previous_season(season, year)
+        else:
+            raise MadError("Top 5: not enough scored anime in the current or previous season")
+        label = captions.season_label(season, year)
+        pool.sort(key=lambda m: (-m["averageScore"], -(m.get("popularity") or 0)))
+        chosen = pool[:size]
+        meta = {"hook": ["TOP 5", "ANIME THIS", "SEASON"], "cover_title": "THIS SEASON",
+                "banner": "RANKED BY FAN SCORE", "header": "TOP 5 THIS SEASON", "chip": label.upper(),
+                "footnote": f"Popular titles only ({_fmt_count(sel['top5_min_popularity'])}+ on lists)"}
+        headline, cta = None, None
+
+    elif lens == "trending":
+        pool = _scored(anilist.find_media(status="RELEASING", popularity_greater=sel["pick_min_popularity"],
+                                          sort=["TRENDING_DESC"]))
+        chosen = pool[:size]
+        badge = "TRENDING"
+        meta = {"hook": ["TOP 5", "TRENDING", "THIS WEEK"], "cover_title": "TRENDING NOW",
+                "banner": "WHAT FANS ARE WATCHING", "header": "TRENDING THIS WEEK", "chip": "THIS WEEK",
+                "footnote": "Ranked by AniList trending activity this week"}
+        headline = "Top 5 trending anime this week"
+        cta = "Which one are you watching right now? 👇"
+
+    elif lens == "hidden_gems":
+        cap = sel.get("hidden_gem_max_popularity", 25000)
+        pool = []
+        for _ in range(2):
+            pool = _scored(anilist.find_media(season=season, seasonYear=year, popularity_greater=2000,
+                                              popularity_lesser=cap, averageScore_greater=69,
+                                              sort=["SCORE_DESC"], pages=2))
+            if len(pool) >= size:
+                break
+            season, year = anilist.previous_season(season, year)
+        label = captions.season_label(season, year)
+        chosen = _pick(pool, size, ctx.blocked, "Hidden gems")
+        badge = "UNDERRATED"
+        meta = {"hook": ["TOP 5", "HIDDEN", "GEMS"], "cover_title": "HIDDEN GEMS",
+                "banner": "HIGH SCORES, LOW HYPE", "header": f"HIDDEN GEMS · {label.upper()}", "chip": label.upper(),
+                "footnote": f"7.0+ fan score, under {_fmt_count(cap)} on lists"}
+        headline = f"Top 5 hidden gem anime of {label}"
+        cta = "Did you know them? Save this for your next binge 👀"
+
+    elif lens == "season_genre":
+        genre, pool = _genre_pool(ctx, 0, lambda g: anilist.find_media(
+            season=season, seasonYear=year, genre=g, popularity_greater=3000, sort=["SCORE_DESC"]))
+        chosen = pool[:size]
+        badge = genre.upper()
+        extra_tags = [captions.genre_tag(genre)]
+        meta = {"hook": ["TOP 5", genre.upper(), "THIS SEASON"], "cover_title": f"{genre.upper()} ANIME",
+                "banner": "THIS SEASON · BY FAN SCORE", "header": f"TOP 5 {genre.upper()} · {label.upper()}",
+                "chip": label.upper(), "footnote": f"{genre} anime airing in {label}"}
+        headline = f"Top 5 {genre.lower()} anime this season ({label})"
+        cta = f"What's the best {genre.lower()} anime of the season? 👇"
+
+    elif lens == "alltime_genre":
+        genre, pool = _genre_pool(ctx, 6, lambda g: anilist.find_media(
+            genre=g, status="FINISHED", popularity_greater=50000, sort=["SCORE_DESC"]))
+        chosen = pool[:size]
+        extra_tags = [captions.genre_tag(genre)]
+        season_tag = False
+        meta = {"hook": ["ALL-TIME", "TOP 5", genre.upper()], "cover_title": f"ALL-TIME {genre.upper()}",
+                "banner": "THE BEST EVER, BY FAN SCORE", "header": f"ALL-TIME TOP 5 {genre.upper()}",
+                "chip": "ALL-TIME", "footnote": "Finished series with 50K+ fans on AniList"}
+        headline = f"The best {genre.lower()} anime of all time — our Top 5"
+        cta = "What's missing from this list? 👇"
     else:
-        raise MadError("Top 5: not enough scored anime in the current or previous season")
-    pool.sort(key=lambda m: (-m["averageScore"], -(m.get("popularity") or 0)))
+        raise MadError(f"Unknown Top 5 lens '{lens}'. Valid: {', '.join(TOP5_LENSES)}")
+
+    if len(chosen) < size:
+        raise MadError(f"Top 5 ({lens}): AniList returned only {len(chosen)} anime")
     last = ctx.state.get("top5_last") or []
     items = []
-    for rank, m in enumerate(pool[:size], 1):
+    for rank, m in enumerate(chosen, 1):
         snap = snapshot(m)
         snap["rank"] = rank
-        snap["studio"] = snap.get("studio")
-        snap["movement"] = "new" if m["id"] not in last else last.index(m["id"]) + 1 - rank
+        if lens == "season_score":
+            snap["movement"] = "new" if m["id"] not in last else last.index(m["id"]) + 1 - rank
+        else:
+            snap["badge"] = badge or str(m.get("seasonYear") or "")
         items.append(snap)
-    fields = {
-        "season_label": captions.season_label(season, year),
-        "top_title": captions.display_title(items[0]),
-        "top_score": captions.score10(items[0]),
-        "list": "\n".join(f"#{m['rank']} {captions.display_title(m)} — {captions.score10(m)}/10" for m in items),
-    }
-    tags = captions.hashtags(season, year, items[0])
+    lines = "\n".join(f"#{m['rank']} {captions.display_title(m)} — {captions.score10(m)}/10" for m in items)
+    tags = captions.hashtags(season, year, items[0], extra=extra_tags, season_tag=season_tag)
+    if lens == "season_score":
+        fields = {"season_label": label, "top_title": captions.display_title(items[0]),
+                  "top_score": captions.score10(items[0]), "list": lines}
+        caption = captions.build(kind, ctx.seed, fields, tags)
+    else:
+        fields = {"headline": headline, "cta": cta, "list": lines, "top_title": captions.display_title(items[0])}
+        caption = captions.build(f"{kind}_lens", ctx.seed, fields, tags)
+    log(f"Top 5 lens: {lens} ({meta['header']})")
     return {
-        "data": {"items": items, "season": season, "year": year,
-                 "min_popularity_label": _fmt_count(ctx.sel["top5_min_popularity"])},
+        "data": {"items": items, "season": season, "year": year, "lens": {"id": lens, **meta},
+                 "min_popularity_label": _fmt_count(sel["top5_min_popularity"]), "seed": ctx.seed},
         "anime_ids": [m["id"] for m in items],
-        "caption": captions.build("top5", ctx.seed, fields, tags),
+        "caption": caption,
     }
+
+
+def build_top5(ctx: Ctx) -> dict[str, Any]:
+    return _top5(ctx, "top5", top5_lens(ctx.day, "top5"))
 
 
 def build_feature(ctx: Ctx) -> dict[str, Any]:
@@ -233,18 +355,8 @@ def build_story_download(ctx: Ctx) -> dict[str, Any]:
 
 
 def build_reel_top5(ctx: Ctx) -> dict[str, Any]:
-    """Sunday reel: the video version of Saturday's Top 5 (same ranking, fresh caption)."""
-    base = build_top5(ctx)
-    d = base["data"]
-    fields = {
-        "season_label": captions.season_label(d["season"], d["year"]),
-        "top_title": captions.display_title(d["items"][0]),
-        "top_score": captions.score10(d["items"][0]),
-        "list": "\n".join(f"#{m['rank']} {captions.display_title(m)} — {captions.score10(m)}/10" for m in d["items"]),
-    }
-    tags = captions.hashtags(d["season"], d["year"], d["items"][0])
-    return {"data": {**d, "seed": ctx.seed}, "anime_ids": base["anime_ids"],
-            "caption": captions.build("reel_top5", ctx.seed, fields, tags)}
+    """Sunday reel: a Top 5 countdown with a different lens than Saturday's carousel."""
+    return _top5(ctx, "reel_top5", top5_lens(ctx.day, "reel_top5"))
 
 
 def build_reel_weekend(ctx: Ctx) -> dict[str, Any]:

@@ -196,22 +196,50 @@ def render_top5(data: dict[str, Any], out_dir: Path) -> list[Path]:
     return save_all(slides, out_dir)
 
 
+# Each Top 5 lens gets its own palette so consecutive lists never look alike in the grid.
+LENS_STYLE = {
+    "season_score": {"bg": MAGENTA, "top": YELLOW, "burst": YELLOW, "chip": YELLOW, "chip_fg": INK, "fg": INK},
+    "trending": {"bg": INK, "top": YELLOW, "burst": MAGENTA, "chip": MAGENTA, "chip_fg": WHITE, "fg": CREAM},
+    "hidden_gems": {"bg": TEAL, "top": YELLOW, "burst": MAGENTA, "chip": INK, "chip_fg": YELLOW, "fg": INK},
+    "alltime_genre": {"bg": YELLOW, "top": MAGENTA, "burst": TEAL, "chip": INK, "chip_fg": YELLOW, "fg": INK},
+    "season_genre": {"bg": CREAM, "top": MAGENTA, "burst": YELLOW, "chip": MAGENTA, "chip_fg": WHITE, "fg": INK},
+}
+LEGACY_LENS = {"id": "season_score", "cover_title": "THIS SEASON", "banner": "RANKED BY FAN SCORE",
+               "header": "TOP 5 THIS SEASON", "hook": ["TOP 5", "ANIME THIS", "SEASON"]}
+
+
+def top5_lens(data) -> dict[str, Any]:
+    lens = {**LEGACY_LENS, **(data.get("lens") or {})}
+    lens.setdefault("chip", season_label(data["season"], data["year"]).upper())
+    lens.setdefault("footnote", f"Popular titles only ({data.get('min_popularity_label', '20K')}+ on lists)")
+    return lens
+
+
+def lens_style(lens) -> dict[str, Any]:
+    return LENS_STYLE.get(lens["id"], LENS_STYLE["season_score"])
+
+
 def _top5_cover(data) -> Canvas:
-    c = Canvas(POST, MAGENTA)
-    c.speed_lines((560, 520), mix(MAGENTA, WHITE, 0.22), count=76, inner=280)
-    c.halftone(mix(MAGENTA, INK, 0.3), origin="bl", max_r=12)
+    lens = top5_lens(data)
+    st = lens_style(lens)
+    bg = st["bg"]
+    c = Canvas(POST, bg)
+    c.speed_lines((560, 520), mix(bg, WHITE if bg != CREAM else INK, 0.18), count=76, inner=280)
+    c.halftone(mix(bg, INK if bg != INK else TEAL, 0.3), origin="bl", max_r=12)
     c.logo((60, 50), 150)
-    c.chip((1020, 92), season_label(data["season"], data["year"]).upper(), size=40, fill=YELLOW, anchor="ra")
-    c.text((90, 690), "TOP", "comic", 330, fill=YELLOW, anchor="ls", stroke=14, shadow=(20, 20))
-    c.burst((800, 520), 250, 190, points=18, fill=YELLOW, shadow=(16, 16), seed=11)
-    c.text((800, 540), "5", "display", 360, fill=INK, anchor="mm")
-    c.text((540, 900), "THIS SEASON", "comic", 180, fill=WHITE, anchor="ms", stroke=12, shadow=(16, 16))
-    banner(c, (540, 1035), "RANKED BY FAN SCORE", 64, fill=INK, fg=YELLOW, angle=-2, name="condensed")
-    c.text((850, 1210), "SWIPE", "comic", 64, fill=INK, anchor="rm")
-    c.arrow((870, 1210), 130)
-    c.text((60, 1210), f"Popular titles only ({data['min_popularity_label']}+ on lists)", "body_bold", 28,
-           fill=INK, anchor="lm")
-    footer(c, fg=INK)
+    c.chip((1020, 92), lens["chip"], size=40, fill=st["chip"], fg=st["chip_fg"], anchor="ra")
+    c.text((90, 690), "TOP", "comic", 330, fill=st["top"], anchor="ls", stroke=14, shadow=(20, 20))
+    c.burst((800, 520), 250, 190, points=18, fill=st["burst"], shadow=(16, 16), seed=11)
+    c.text((800, 540), "5", "display", 360, fill=INK if st["burst"] != MAGENTA else WHITE, anchor="mm",
+           stroke=0 if st["burst"] != MAGENTA else 8)
+    c.text_block((50, 740, 1030, 960), lens["cover_title"], "comic", 180, 90, fill=WHITE, align="center",
+                 valign="middle", stroke=12, shadow=(16, 16), max_lines=2)
+    banner(c, (540, 1035), lens["banner"], 60, fill=INK if bg != INK else YELLOW, fg=YELLOW if bg != INK else INK,
+           angle=-2, name="condensed")
+    c.text((850, 1210), "SWIPE", "comic", 64, fill=st["fg"], anchor="rm")
+    c.arrow((870, 1210), 130, color=st["fg"])
+    c.text((60, 1210), lens["footnote"], "body_bold", 28, fill=st["fg"], anchor="lm")
+    footer(c, fg=st["fg"])
     return c
 
 
@@ -230,14 +258,14 @@ def _top5_slide(m, data) -> Canvas:
     burst_fill = YELLOW if accent != YELLOW else TEAL
     c = Canvas(POST, CREAM)
     c.halftone(mix(CREAM, accent, 0.55), origin="bl", max_r=13, spacing=28)
-    c.text((60, 40), "TOP 5 THIS SEASON", "comic", 56, fill=INK, anchor="la")
-    label, color = _movement(m)
+    c.text((60, 40), top5_lens(data)["header"], "comic", 56, fill=INK, anchor="la")
+    label, color = (m["badge"], MAGENTA) if m.get("badge") else _movement(m)
     cover = cover_path(m)
     if cover:
         c.poster(cover, (70, 130, 450, 670), angle=-3, shadow_color=accent)
         c.text((490, 420), f"#{rank}", "display", 300, fill=accent, anchor="ls", stroke=10, shadow=(14, 14))
         c.chip((498, 462), label, size=34, fill=color, fg=WHITE if color == MAGENTA else INK)
-        score_burst(c, (850, 600), m, r=135, fill=burst_fill, seed=rank)
+        score_burst(c, (875, 545), m, r=122, fill=burst_fill, seed=rank)
         c.text_block((70, 700, 1010, 965), display_title(m).upper(), "display", 112, 50, fill=INK,
                      valign="middle", max_lines=3)
     else:

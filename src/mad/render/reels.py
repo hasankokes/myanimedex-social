@@ -16,7 +16,7 @@ from typing import Any, Callable
 
 from PIL import Image, ImageDraw
 
-from ..captions import display_title, score10, season_label
+from ..captions import display_title, score10
 from ..config import ROOT, MadError, load_yaml, log, settings
 from ..covers import cover_path
 from .base import CREAM, INK, MAGENTA, TEAL, WHITE, YELLOW, Canvas, mix
@@ -201,8 +201,12 @@ def hook_scene(lines: list[tuple[str, int, tuple]], chip: str | None, bg_color, 
     bg = background(bg_color, mix(bg_color, WHITE, 0.22), mix(bg_color, INK, 0.28), origin="bl")
     sprites = []
     for text, size, color in lines:
-        sprites.append(text_sprite(text, "comic", size, fill=color, stroke=14, shadow=(16, 16)))
-    chip_spr = chip_sprite(chip, 46, fill=chip_fill, fg=INK if chip_fill != MAGENTA else WHITE) if chip else None
+        spr = text_sprite(text, "comic", size, fill=color, stroke=14, shadow=(16, 16))
+        if spr.width > 1000:
+            spr = spr.resize((1000, round(spr.height * 1000 / spr.width)), Image.LANCZOS)
+        sprites.append(spr)
+    chip_spr = chip_sprite(chip, 46, fill=chip_fill, fg=YELLOW if chip_fill == INK else
+                           WHITE if chip_fill == MAGENTA else INK) if chip else None
 
     def draw(t):
         f = bg.copy()
@@ -272,8 +276,11 @@ def _rank_scene(m: dict[str, Any], dur=2.3) -> Scene:
                          sub="FAN SCORE /10" if score else None, seed=rank)
     title = block_sprite(960, 220, display_title(m).upper(), "display", 124, 50, fill=INK, max_lines=2)
     mv = m.get("movement")
-    label = "NEW ENTRY" if mv == "new" else "SAME SPOT" if not mv else (f"UP {mv}" if mv > 0 else f"DOWN {-mv}")
-    mv_chip = chip_sprite(label, 38, fill=MAGENTA if mv == "new" else TEAL, fg=WHITE if mv == "new" else INK)
+    if m.get("badge"):
+        mv_chip = chip_sprite(m["badge"], 38, fill=MAGENTA, fg=WHITE)
+    else:
+        label = "NEW ENTRY" if mv == "new" else "SAME SPOT" if not mv else (f"UP {mv}" if mv > 0 else f"DOWN {-mv}")
+        mv_chip = chip_sprite(label, 38, fill=MAGENTA if mv == "new" else TEAL, fg=WHITE if mv == "new" else INK)
     meta = chip_sprite(f"{_fmt_count(m.get('popularity'))} ON LISTS", 32, fill=INK, fg=CREAM)
 
     def draw(t):
@@ -299,11 +306,15 @@ def _rank_scene(m: dict[str, Any], dur=2.3) -> Scene:
 
 
 def render_reel_top5(data: dict[str, Any], out_dir: Path) -> list[Path]:
-    label = season_label(data["season"], data["year"]).upper()
-    scenes = [hook_scene([("TOP 5", 400, YELLOW), ("ANIME THIS", 170, WHITE), ("SEASON", 170, WHITE)], label,
-                         MAGENTA, top=470)]
+    from .templates import lens_style, top5_lens
+
+    lens = top5_lens(data)
+    st = lens_style(lens)
+    hook = [(line, 400 if i == 0 and len(line) <= 6 else 170, st["top"] if i == 0 else WHITE)
+            for i, line in enumerate(lens["hook"])]
+    scenes = [hook_scene(hook, lens["chip"], st["bg"], chip_fill=st["chip"], top=470)]
     scenes += [_rank_scene(m) for m in sorted(data["items"], key=lambda m: -m["rank"])]
-    scenes.append(outro_scene("WHAT'S YOUR #1?", "Comment below and track the season in MyAnimeDex."))
+    scenes.append(outro_scene("WHAT'S YOUR #1?", "Comment below and track them in MyAnimeDex."))
     return encode(scenes, out_dir, cover_at=1.2, music_seed=data.get("seed", 0))
 
 
