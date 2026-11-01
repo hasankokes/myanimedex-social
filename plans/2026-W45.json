@@ -632,6 +632,75 @@
       "data": {
         "items": [
           {
+            "id": 212888,
+            "idMal": 64340,
+            "title": {
+              "romaji": "Tempal: Item no Chikara",
+              "english": "Overgeared"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 76,
+            "popularity": 54201,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/212888",
+            "nextAiringEpisode": {
+              "airingAt": 1794148200,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212888-NhyvqPt5aIuJ.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212888-NhyvqPt5aIuJ.jpg",
+              "color": "#f19335"
+            },
+            "studio": "J.C.STAFF",
+            "rank": 1,
+            "badge": "TRENDING"
+          },
+          {
+            "id": 206814,
+            "idMal": 63367,
+            "title": {
+              "romaji": "Dragon Ball Super: Beerus",
+              "english": "Dragon Ball Super: Beerus"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 81,
+            "popularity": 29212,
+            "duration": 23,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/206814",
+            "nextAiringEpisode": {
+              "airingAt": 1794147360,
+              "episode": 5
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx206814-PVVzRbf1IQpe.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206814-PVVzRbf1IQpe.jpg",
+              "color": "#e48643"
+            },
+            "studio": "Toei Animation",
+            "rank": 2,
+            "badge": "TRENDING"
+          },
+          {
             "id": 195604,
             "idMal": 61967,
             "title": {
@@ -663,156 +732,106 @@
               "color": "#f1a143"
             },
             "studio": "Studio Pierrot",
-            "rank": 1,
-            "movement": 0
-          },
-          {
-            "id": 210482,
-            "idMal": 61469,
-            "title": {
-              "romaji": "JoJo no Kimyou na Bouken: Steel Ball Run - 2nd & 3rd STAGE",
-              "english": "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE"
-            },
-            "format": "ONA",
-            "status": "RELEASING",
-            "episodes": 11,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 86,
-            "popularity": 48340,
-            "duration": 23,
-            "genres": [
-              "Action",
-              "Adventure",
-              "Drama",
-              "Mystery",
-              "Supernatural"
-            ],
-            "siteUrl": "https://anilist.co/anime/210482",
-            "nextAiringEpisode": {
-              "airingAt": 1793952000,
-              "episode": 7
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210482-P1VNKbqdJ6Zj.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210482-P1VNKbqdJ6Zj.jpg",
-              "color": "#f1ae50"
-            },
-            "studio": "david production",
-            "rank": 2,
-            "movement": 0
-          },
-          {
-            "id": 195516,
-            "idMal": 61987,
-            "title": {
-              "romaji": "Kusuriya no Hitorigoto 3rd Season",
-              "english": "The Apothecary Diaries Season 3"
-            },
-            "format": "TV",
-            "status": "RELEASING",
-            "episodes": 12,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 85,
-            "popularity": 108141,
-            "duration": 24,
-            "genres": [
-              "Drama",
-              "Mystery"
-            ],
-            "siteUrl": "https://anilist.co/anime/195516",
-            "nextAiringEpisode": {
-              "airingAt": 1793973600,
-              "episode": 6
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
-              "color": "#e4a128"
-            },
-            "studio": "OLM",
             "rank": 3,
-            "movement": 0
+            "badge": "TRENDING"
           },
           {
-            "id": 195539,
-            "idMal": 61990,
+            "id": 205896,
+            "idMal": 63292,
             "title": {
-              "romaji": "Cyberpunk: Edgerunners 2",
-              "english": "Cyberpunk: Edgerunners 2"
-            },
-            "format": "ONA",
-            "status": "FINISHED",
-            "episodes": 10,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 83,
-            "popularity": 114005,
-            "duration": 28,
-            "genres": [
-              "Action",
-              "Drama",
-              "Sci-Fi"
-            ],
-            "siteUrl": "https://anilist.co/anime/195539",
-            "nextAiringEpisode": null,
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195539-4LdfmKIHzuxr.png",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195539-4LdfmKIHzuxr.png",
-              "color": "#fe286b"
-            },
-            "studio": "TRIGGER",
-            "rank": 4,
-            "movement": 0
-          },
-          {
-            "id": 189123,
-            "idMal": 61323,
-            "title": {
-              "romaji": "Ao no Hako Season 2",
-              "english": "Blue Box Season 2"
+              "romaji": "Shinja Zero no Megami-sama to Hajimeru Isekai Kouryaku",
+              "english": "Full Clearing Another World under a Goddess with Zero Believers"
             },
             "format": "TV",
             "status": "RELEASING",
-            "episodes": 12,
+            "episodes": null,
             "season": "FALL",
             "seasonYear": 2026,
-            "averageScore": 81,
-            "popularity": 51286,
-            "duration": 24,
+            "averageScore": 65,
+            "popularity": 19297,
+            "duration": null,
             "genres": [
-              "Romance",
-              "Slice of Life",
-              "Sports"
+              "Adventure",
+              "Fantasy"
             ],
-            "siteUrl": "https://anilist.co/anime/189123",
+            "siteUrl": "https://anilist.co/anime/205896",
             "nextAiringEpisode": {
-              "airingAt": 1794123000,
+              "airingAt": 1794148200,
               "episode": 5
             },
             "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx189123-0secXELIhkIW.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg",
-              "color": "#e4ae50"
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx205896-ElrV8oVAsuax.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205896-ElrV8oVAsuax.jpg",
+              "color": "#5dbbe4"
             },
-            "studio": "Electric Circus",
+            "studio": "HORNETS",
+            "rank": 4,
+            "badge": "TRENDING"
+          },
+          {
+            "id": 186541,
+            "idMal": 60948,
+            "title": {
+              "romaji": "Mezametara Saikyou Soubi to Uchuusen-mochi datta node, Ikkodate Mezashite Youhei to shite Jiyuu ni Ikitai",
+              "english": "Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship!"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 13,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 69,
+            "popularity": 27547,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Comedy",
+              "Drama",
+              "Mecha",
+              "Romance",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/186541",
+            "nextAiringEpisode": {
+              "airingAt": 1794141000,
+              "episode": 6
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx186541-caYpLsLmbCh7.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186541-caYpLsLmbCh7.jpg",
+              "color": "#d6bb78"
+            },
+            "studio": "studio A-CAT",
             "rank": 5,
-            "movement": 0
+            "badge": "TRENDING"
           }
         ],
         "season": "FALL",
         "year": 2026,
-        "min_popularity_label": "20K"
+        "lens": {
+          "id": "trending",
+          "hook": [
+            "TOP 5",
+            "TRENDING",
+            "THIS WEEK"
+          ],
+          "cover_title": "TRENDING NOW",
+          "banner": "WHAT FANS ARE WATCHING",
+          "header": "TRENDING THIS WEEK",
+          "chip": "THIS WEEK",
+          "footnote": "Ranked by AniList trending activity this week"
+        },
+        "min_popularity_label": "20K",
+        "seed": 45
       },
       "anime_ids": [
+        212888,
+        206814,
         195604,
-        210482,
-        195516,
-        195539,
-        189123
+        205896,
+        186541
       ],
-      "caption": "Best anime of Fall 2026 so far — our Top 5 this season 🏆\n\n#1 Black Clover Season 2 — 8.7/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.3/10\n#5 Blue Box Season 2 — 8.1/10\n\nBlack Clover Season 2 leads with 8.7/10. Agree or not? Comment your #1 👇\nRankings use AniList average scores (popular titles only). Track them all in MyAnimeDex — link in bio.\n\n#anime #animerecommendations #fall2026anime #blackclover #myanimedex"
+      "caption": "Top 5 trending anime this week 🏆\n\n#1 Overgeared — 7.6/10\n#2 Dragon Ball Super: Beerus — 8.1/10\n#3 Black Clover Season 2 — 8.7/10\n#4 Full Clearing Another World under a Goddess with Zero Believers — 6.5/10\n#5 Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship! — 6.9/10\n\nWhich one are you watching right now? 👇\nTrack them all in MyAnimeDex — free anime tracker, link in bio.\n\n#anime #animerecommendations #fall2026anime #overgeared #myanimedex"
     },
     "2026-11-08:reel": {
       "kind": "reel_top5",
@@ -821,188 +840,197 @@
       "data": {
         "items": [
           {
-            "id": 195604,
-            "idMal": 61967,
+            "id": 20996,
+            "idMal": 28977,
             "title": {
-              "romaji": "Black Clover 2nd Season",
-              "english": "Black Clover Season 2"
+              "romaji": "Gintama°",
+              "english": "Gintama Season 3"
             },
             "format": "TV",
-            "status": "RELEASING",
-            "episodes": null,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 87,
-            "popularity": 102567,
-            "duration": 24,
-            "genres": [
-              "Action",
-              "Adventure",
-              "Comedy",
-              "Fantasy"
-            ],
-            "siteUrl": "https://anilist.co/anime/195604",
-            "nextAiringEpisode": {
-              "airingAt": 1794060000,
-              "episode": 6
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg",
-              "color": "#f1a143"
-            },
-            "studio": "Studio Pierrot",
-            "rank": 1,
-            "movement": 0
-          },
-          {
-            "id": 210482,
-            "idMal": 61469,
-            "title": {
-              "romaji": "JoJo no Kimyou na Bouken: Steel Ball Run - 2nd & 3rd STAGE",
-              "english": "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE"
-            },
-            "format": "ONA",
-            "status": "RELEASING",
-            "episodes": 11,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 86,
-            "popularity": 48340,
-            "duration": 23,
-            "genres": [
-              "Action",
-              "Adventure",
-              "Drama",
-              "Mystery",
-              "Supernatural"
-            ],
-            "siteUrl": "https://anilist.co/anime/210482",
-            "nextAiringEpisode": {
-              "airingAt": 1793952000,
-              "episode": 7
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210482-P1VNKbqdJ6Zj.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210482-P1VNKbqdJ6Zj.jpg",
-              "color": "#f1ae50"
-            },
-            "studio": "david production",
-            "rank": 2,
-            "movement": 0
-          },
-          {
-            "id": 195516,
-            "idMal": 61987,
-            "title": {
-              "romaji": "Kusuriya no Hitorigoto 3rd Season",
-              "english": "The Apothecary Diaries Season 3"
-            },
-            "format": "TV",
-            "status": "RELEASING",
-            "episodes": 12,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 85,
-            "popularity": 108141,
-            "duration": 24,
-            "genres": [
-              "Drama",
-              "Mystery"
-            ],
-            "siteUrl": "https://anilist.co/anime/195516",
-            "nextAiringEpisode": {
-              "airingAt": 1793973600,
-              "episode": 6
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
-              "color": "#e4a128"
-            },
-            "studio": "OLM",
-            "rank": 3,
-            "movement": 0
-          },
-          {
-            "id": 195539,
-            "idMal": 61990,
-            "title": {
-              "romaji": "Cyberpunk: Edgerunners 2",
-              "english": "Cyberpunk: Edgerunners 2"
-            },
-            "format": "ONA",
             "status": "FINISHED",
-            "episodes": 10,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 83,
-            "popularity": 114005,
-            "duration": 28,
+            "episodes": 51,
+            "season": "SPRING",
+            "seasonYear": 2015,
+            "averageScore": 90,
+            "popularity": 121066,
+            "duration": 24,
             "genres": [
               "Action",
+              "Comedy",
               "Drama",
               "Sci-Fi"
             ],
-            "siteUrl": "https://anilist.co/anime/195539",
+            "siteUrl": "https://anilist.co/anime/20996",
             "nextAiringEpisode": null,
             "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195539-4LdfmKIHzuxr.png",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195539-4LdfmKIHzuxr.png",
-              "color": "#fe286b"
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx20996-kBEGEGdeK1r7.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx20996-kBEGEGdeK1r7.jpg",
+              "color": "#e45d86"
             },
-            "studio": "TRIGGER",
-            "rank": 4,
-            "movement": 0
+            "studio": "Bandai Namco Pictures",
+            "rank": 1,
+            "badge": "2015"
           },
           {
-            "id": 189123,
-            "idMal": 61323,
+            "id": 21745,
+            "idMal": 35247,
             "title": {
-              "romaji": "Ao no Hako Season 2",
-              "english": "Blue Box Season 2"
+              "romaji": "Owarimonogatari (Ge)",
+              "english": "Owarimonogatari Second Season"
             },
             "format": "TV",
-            "status": "RELEASING",
-            "episodes": 12,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 81,
-            "popularity": 51286,
+            "status": "FINISHED",
+            "episodes": 7,
+            "season": "SUMMER",
+            "seasonYear": 2017,
+            "averageScore": 89,
+            "popularity": 124980,
             "duration": 24,
             "genres": [
+              "Comedy",
+              "Mystery",
+              "Psychological",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/21745",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21745-VrhhJjZNdBXV.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx21745-VrhhJjZNdBXV.png",
+              "color": "#5dbbe4"
+            },
+            "studio": "Shaft",
+            "rank": 2,
+            "badge": "2017"
+          },
+          {
+            "id": 124194,
+            "idMal": 42938,
+            "title": {
+              "romaji": "Fruits Basket: The Final",
+              "english": "Fruits Basket The Final Season"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SPRING",
+            "seasonYear": 2021,
+            "averageScore": 89,
+            "popularity": 179358,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Psychological",
               "Romance",
               "Slice of Life",
-              "Sports"
+              "Supernatural"
             ],
-            "siteUrl": "https://anilist.co/anime/189123",
-            "nextAiringEpisode": {
-              "airingAt": 1794123000,
-              "episode": 5
-            },
+            "siteUrl": "https://anilist.co/anime/124194",
+            "nextAiringEpisode": null,
             "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx189123-0secXELIhkIW.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg",
-              "color": "#e4ae50"
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124194-TJlqMMR7BGn9.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx124194-TJlqMMR7BGn9.jpg",
+              "color": "#35bbf1"
             },
-            "studio": "Electric Circus",
+            "studio": "TMS Entertainment",
+            "rank": 3,
+            "badge": "2021"
+          },
+          {
+            "id": 125367,
+            "idMal": 43608,
+            "title": {
+              "romaji": "Kaguya-sama wa Kokurasetai: Ultra Romantic",
+              "english": "Kaguya-sama: Love is War -Ultra Romantic-"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SPRING",
+            "seasonYear": 2022,
+            "averageScore": 89,
+            "popularity": 297609,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Psychological",
+              "Romance",
+              "Slice of Life"
+            ],
+            "siteUrl": "https://anilist.co/anime/125367",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125367-1yuq9NFcQuLI.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx125367-1yuq9NFcQuLI.png",
+              "color": "#d6f1a1"
+            },
+            "studio": "A-1 Pictures",
+            "rank": 4,
+            "badge": "2022"
+          },
+          {
+            "id": 17074,
+            "idMal": 17074,
+            "title": {
+              "romaji": "Monogatari Series: Second Season",
+              "english": "Monogatari Series Second Season"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 26,
+            "season": "SUMMER",
+            "seasonYear": 2013,
+            "averageScore": 88,
+            "popularity": 173586,
+            "duration": 26,
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Mystery",
+              "Psychological",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/17074",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx17074-xMhVAZsEDH66.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx17074-xMhVAZsEDH66.png",
+              "color": "#43a1e4"
+            },
+            "studio": "Shaft",
             "rank": 5,
-            "movement": 0
+            "badge": "2013"
           }
         ],
         "season": "FALL",
         "year": 2026,
+        "lens": {
+          "id": "alltime_genre",
+          "hook": [
+            "ALL-TIME",
+            "TOP 5",
+            "COMEDY"
+          ],
+          "cover_title": "ALL-TIME COMEDY",
+          "banner": "THE BEST EVER, BY FAN SCORE",
+          "header": "ALL-TIME TOP 5 COMEDY",
+          "chip": "ALL-TIME",
+          "footnote": "Finished series with 50K+ fans on AniList"
+        },
         "min_popularity_label": "20K",
         "seed": 45
       },
       "anime_ids": [
-        195604,
-        210482,
-        195516,
-        195539,
-        189123
+        20996,
+        21745,
+        124194,
+        125367,
+        17074
       ],
-      "caption": "The best new anime of Fall 2026, ranked by fans ⭐ Watch till #1.\n\n#1 Black Clover Season 2 — 8.7/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.3/10\n#5 Blue Box Season 2 — 8.1/10\n\nSave this for your next watch night and tell us what's missing.\nMyAnimeDex · free anime tracker · link in bio.\n\n#anime #animerecommendations #fall2026anime #blackclover #myanimedex"
+      "caption": "The best comedy anime of all time — our Top 5. Watch till #1 👀\n\n#1 Gintama Season 3 — 9.0/10\n#2 Owarimonogatari Second Season — 8.9/10\n#3 Fruits Basket The Final Season — 8.9/10\n#4 Kaguya-sama: Love is War -Ultra Romantic- — 8.9/10\n#5 Monogatari Series Second Season — 8.8/10\n\nWhat's missing from this list? 👇\nMyAnimeDex · free on iOS & Android · link in bio.\n\n#anime #animerecommendations #comedyanime #gintama #myanimedex"
     }
   }
 }

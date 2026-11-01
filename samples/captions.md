@@ -63,33 +63,33 @@ Never miss an episode with MyAnimeDex (link in bio).
 ## Post · Top 5 this season (carousel)
 
 ```
-Best anime of Fall 2026 so far — our Top 5 this season 🏆
+Top 5 trending anime this week 🏆
 
-#1 Black Clover Season 2 — 8.7/10
-#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10
-#3 The Apothecary Diaries Season 3 — 8.5/10
-#4 Cyberpunk: Edgerunners 2 — 8.3/10
-#5 Blue Box Season 2 — 8.1/10
+#1 Overgeared — 7.6/10
+#2 Dragon Ball Super: Beerus — 8.1/10
+#3 Black Clover Season 2 — 8.7/10
+#4 Full Clearing Another World under a Goddess with Zero Believers — 6.5/10
+#5 Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship! — 6.9/10
 
-Black Clover Season 2 leads with 8.7/10. Agree or not? Comment your #1 👇
-Rankings use AniList average scores (popular titles only). Track them all in MyAnimeDex — link in bio.
+Which one are you watching right now? 👇
+Track them all in MyAnimeDex — free anime tracker, link in bio.
 
-#anime #animerecommendations #fall2026anime #blackclover #myanimedex
+#anime #animerecommendations #fall2026anime #overgeared #myanimedex
 ```
 
 ## Reel · Top 5 countdown
 
 ```
-The best new anime of Fall 2026, ranked by fans ⭐ Watch till #1.
+The best comedy anime of all time — our Top 5. Watch till #1 👀
 
-#1 Black Clover Season 2 — 8.7/10
-#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10
-#3 The Apothecary Diaries Season 3 — 8.5/10
-#4 Cyberpunk: Edgerunners 2 — 8.3/10
-#5 Blue Box Season 2 — 8.1/10
+#1 Gintama Season 3 — 9.0/10
+#2 Owarimonogatari Second Season — 8.9/10
+#3 Fruits Basket The Final Season — 8.9/10
+#4 Kaguya-sama: Love is War -Ultra Romantic- — 8.9/10
+#5 Monogatari Series Second Season — 8.8/10
 
-Save this for your next watch night and tell us what's missing.
-MyAnimeDex · free anime tracker · link in bio.
+What's missing from this list? 👇
+MyAnimeDex · free on iOS & Android · link in bio.
 
-#anime #animerecommendations #fall2026anime #blackclover #myanimedex
+#anime #animerecommendations #comedyanime #gintama #myanimedex
 ```
