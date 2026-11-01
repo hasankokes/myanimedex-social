@@ -217,6 +217,7 @@ Her **Pazar 12:00 UTC**'de *Weekly preview* workflow'u şunları yapar:
 **Değişiklik yapmak için** `plans/<hafta>.json` dosyasını GitHub üzerinde düzenleyin:
 - Açıklamayı değiştirmek: ilgili slotun `"caption"` alanını düzenleyin.
 - Bir paylaşımı atlamak: slota `"skip": true` ekleyin.
+- "Trending" lensli Top 5 slotları paylaşım anında canlı veriyle yenilenir (açıklama dahil). Plandaki hâliyle kalmasını istiyorsanız slota `"refresh": false` ekleyin.
 - Haftayı baştan seçmek: *Weekly preview → Run workflow → force* ✅. Önizleme yeniden üretilir ve Issue güncellenir.
 - Anime değiştirmek: en kolay yol `force` ile yeniden üretmek. Ya da `config.yaml` eşiklerini değiştirip yeniden üretin.
 

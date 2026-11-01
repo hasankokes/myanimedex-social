@@ -22,7 +22,7 @@ from .render import templates
 KIND_LABELS = {
     "airing_week": "Post · Airing this week (carousel)",
     "feature": "Post · App feature",
-    "top5": "Post · Top 5 this season (carousel)",
+    "top5": "Post · Top 5 (carousel)",
     "story_anime_of_day": "Story · Anime of the day",
     "story_tip": "Story · App tip",
     "story_your_pick": "Story · Your pick (reply A/B)",
@@ -101,6 +101,13 @@ def _resolve_scheduled(day: date, slot_name: str, st: dict[str, Any]):
     if slot.get("skip"):
         log(f"{key} is marked skip in plans/{week}.json — nothing to do")
         return None
+    lens = (slot.get("data") or {}).get("lens", {}).get("id")
+    if lens == "trending" and slot.get("refresh", True):
+        # Trending changes daily; the plan was locked on Sunday. Set "refresh": false to keep it.
+        with group("Refresh trending list"):
+            fresh = planner._top5(planner.Ctx(day, st, set()), slot["kind"], "trending")
+            slot.update({k: fresh[k] for k in ("data", "anime_ids", "caption")})
+            planner.save_plan(plan)
     return kind, key, slot
 
 
@@ -308,6 +315,8 @@ def cmd_preview(args) -> int:
                 for p in rendered[key]:
                     lines.append(f'<img src="{url(p.name)}" width="{width}">')
             lines.append("")
+        if (slot.get("data") or {}).get("lens", {}).get("id") == "trending" and slot.get("refresh", True):
+            lines += ["_Trending list and caption are refreshed with live AniList data when it's published._", ""]
         if slot.get("caption"):
             lines += ["<details><summary>Caption</summary>", "", "```", slot["caption"], "```", "", "</details>", ""]
     md = "\n".join(lines)
