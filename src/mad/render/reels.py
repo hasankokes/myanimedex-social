@@ -310,7 +310,7 @@ def render_reel_top5(data: dict[str, Any], out_dir: Path) -> list[Path]:
 
     lens = top5_lens(data)
     st = lens_style(lens)
-    hook = [(line, 400 if i == 0 and len(line) <= 6 else 170, st["top"] if i == 0 else WHITE)
+    hook = [(line, 400 if line == "TOP 5" else 170, st["top"] if line == "TOP 5" or i == 0 else WHITE)
             for i, line in enumerate(lens["hook"])]
     scenes = [hook_scene(hook, lens["chip"], st["bg"], chip_fill=st["chip"], top=470)]
     scenes += [_rank_scene(m) for m in sorted(data["items"], key=lambda m: -m["rank"])]
