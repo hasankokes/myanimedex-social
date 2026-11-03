@@ -131,10 +131,16 @@
       "kind": "story_anime_of_day",
       "media_id": "18134053078770579",
       "published_at": "2026-11-02T14:01:28+00:00"
+    },
+    "2026-11-03:story": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18109052879308128",
+      "published_at": "2026-11-03T14:01:54+00:00"
     }
   },
   "tips": {
-    "last_id": "calendar-today"
+    "last_id": "episode-plus"
   },
   "top5_last": [
     195604,
