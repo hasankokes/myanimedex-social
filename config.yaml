@@ -51,6 +51,13 @@ instagram:
   video_status_timeout_seconds: 900
   max_retries: 4
 
+facebook:
+  # After each Instagram post/reel goes live, the same media is posted to this Facebook Page
+  # (stories are not). A Facebook failure never affects the Instagram post. false = off.
+  enabled: true
+  page_id: "1442763398916337"
+  link: "https://myanimedex.com"   # replaces "link in bio" in Facebook captions
+
 schedule:
   # Slot times (UTC). The tick workflow checks every 10 minutes and publishes what is due.
   post_hour_utc: 19

@@ -156,6 +156,25 @@ def _publish(day: date, slot_name: str, kind: str, key: str, slot: dict[str, Any
     state_mod.save(st)
     log(f"Published {key} as media {media_id}")
     summary(f"### ✅ Published {key} — {KIND_LABELS[kind]}\n\nMedia id `{media_id}` · {len(urls)} file(s)")
+    if slot_name != "story":
+        _cross_post_facebook(ig, slot_name, key, urls, slot["caption"], st)
+
+
+def _cross_post_facebook(ig, slot_name: str, key: str, urls: list[str], caption: str, st: dict[str, Any]) -> None:
+    """Best effort: the Instagram post is already live, so a failure here only warns."""
+    from . import facebook
+
+    with group("Cross-post to Facebook"):
+        try:
+            fb_id = facebook.cross_post(ig, slot_name, urls, caption)
+        except Exception as exc:  # noqa: BLE001 — never fail a published run
+            warn(f"Facebook cross-post failed (Instagram post is live): {exc}")
+            summary(f"⚠️ Facebook cross-post failed: {str(exc)[:300]}")
+            return
+        if fb_id:
+            st["slots"][key]["fb_id"] = fb_id
+            state_mod.save(st)
+            summary(f"📘 Also posted to Facebook (`{fb_id}`)")
 
 
 def cmd_run(args) -> int:
@@ -355,9 +374,55 @@ def cmd_check(args) -> int:
             log(f"{'✓' if perm in info['permissions'] else '✗'} {perm} ({use})")
     for page in info.get("pages", []):
         log(f"Facebook page: {page.get('name')} ({page.get('id')}) tasks: {', '.join(page.get('tasks') or [])}")
+    if settings().get("facebook", {}).get("enabled"):
+        from .facebook import FacebookPage
+        from .instagram import Instagram as _IG
+        try:
+            log(f"Facebook cross-posting ON → Page token OK for '{FacebookPage(_IG()).name()}'")
+        except MadError as exc:
+            warn(f"Facebook cross-posting is on but the Page token failed: {exc}")
     log("Token OK")
     summary(f"Token OK for @{info['username']} · quota {info['quota'].get('quota_usage', '?')} used in 24h")
     return 0
+
+
+def cmd_fb_backfill(args) -> int:
+    """Copy already-published Instagram posts/reels to the Facebook Page (media taken from Instagram)."""
+    from .facebook import FacebookPage, fb_caption
+    from .instagram import Instagram
+
+    st = state_mod.load()
+    todo = [(k, v) for k, v in sorted(st["slots"].items())
+            if ":story" not in k and str(v.get("media_id", "")).isdigit() and not v.get("fb_id")
+            and (args.all or k in args.keys)]
+    for key, rec in todo:
+        log(f"{key}: {rec['kind']} (Instagram {rec['media_id']})")
+    if args.list or not todo:
+        log(f"{len(todo)} post(s) not on Facebook yet" + ("" if todo else " — nothing to do"))
+        return 0
+    ig = Instagram()
+    page = FacebookPage(ig)
+    failed = 0
+    for key, rec in todo:
+        with group(f"Facebook ← {key}"):
+            try:
+                m = ig._call("GET", rec["media_id"], {"fields": "media_type,media_url,caption,children{media_type,media_url}"})
+                text = fb_caption(m.get("caption") or "")
+                if m.get("media_type") == "VIDEO":
+                    fb_id = page.reel(m["media_url"], text)
+                elif m.get("media_type") == "CAROUSEL_ALBUM":
+                    fb_id = page.album([c["media_url"] for c in m["children"]["data"] if c.get("media_type") == "IMAGE"], text)
+                else:
+                    fb_id = page.photo(m["media_url"], text)
+            except Exception as exc:  # noqa: BLE001 — keep going with the rest
+                failed += 1
+                warn(f"{key}: Facebook post failed: {exc}")
+                continue
+            st["slots"][key]["fb_id"] = fb_id
+            state_mod.save(st)
+            log(f"{key} → Facebook {fb_id}")
+            summary(f"📘 {key} → Facebook `{fb_id}`")
+    return 1 if failed else 0
 
 
 def cmd_report(args) -> int:
@@ -420,12 +485,17 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("check", help="verify IG_USER_ID / ACCESS_TOKEN and permissions")
     sub.add_parser("report", help="weekly performance report (followers + per-post insights) -> out/report.md")
+    fb = sub.add_parser("fb-backfill", help="post already-published Instagram posts/reels to the Facebook Page")
+    fb.add_argument("keys", nargs="*", help="slot keys from state, e.g. 2026-11-01:reel")
+    fb.add_argument("--all", action="store_true", help="every published post/reel not on Facebook yet")
+    fb.add_argument("--list", action="store_true", help="only list what would be posted")
     tk = sub.add_parser("tick", help="publish every slot that is due now (run by cron every few minutes)")
     tk.add_argument("--list", action="store_true", help="only print the due slots")
 
     args = p.parse_args(argv)
     handler = {"run": cmd_run, "plan": cmd_plan, "preview": cmd_preview, "check": cmd_check,
-               "samples": cmd_samples, "tick": cmd_tick, "report": cmd_report}[args.cmd]
+               "samples": cmd_samples, "tick": cmd_tick, "report": cmd_report,
+               "fb-backfill": cmd_fb_backfill}[args.cmd]
     try:
         return handler(args)
     except MadError as exc:

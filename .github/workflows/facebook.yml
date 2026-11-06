@@ -1,0 +1,47 @@
+name: Facebook backfill
+
+on:
+  # Manual: copy Instagram posts/reels that are already live to the Facebook Page.
+  # New posts are cross-posted automatically right after Instagram (config.yaml → facebook).
+  workflow_dispatch:
+    inputs:
+      keys:
+        description: "Slot keys separated by spaces (e.g. 2026-11-01:reel), or 'all'"
+        required: true
+        default: "all"
+      list_only:
+        description: "Only list what would be posted"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PYTHONPATH: src
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      IN_KEYS: ${{ inputs.keys }}
+      IN_LIST: ${{ inputs.list_only }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Post to Facebook
+        run: |
+          args=()
+          if [ "$IN_KEYS" = "all" ]; then args+=(--all); else read -ra k <<< "$IN_KEYS"; args+=("${k[@]}"); fi
+          [ "$IN_LIST" = "true" ] && args+=(--list)
+          python -m mad fb-backfill "${args[@]}"
+      - name: Commit state
+        if: always()
+        run: scripts/commit_state.sh "state: facebook backfill ${{ github.run_id }}"
