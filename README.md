@@ -125,8 +125,17 @@ state/posted_state.json   plans/   samples/
 | `pages_show_list` | Bağlı sayfayı ve IG hesabını bulmak |
 | `pages_read_engagement` | Sayfa üzerinden IG hesabına erişim (Meta bunu birlikte ister) |
 | `business_management` | System User token'ının portföy varlıklarına erişimi |
+| `instagram_manage_insights` | Pazar raporundaki paylaşım bazlı istatistikler |
+| `pages_manage_posts` | Facebook sayfasına otomatik paylaşım |
+| `instagram_manage_comments` | Yorum yazma/sabitleme (ileride) |
 
-`python -m mad check` komutu (ve her Pazar önizleme workflow'u) token'daki izinleri listeler ve eksik varsa hata verir.
+`python -m mad check` komutu (her Pazar önizleme workflow'u ve *Actions → Token check*) token'daki izinleri, Facebook sayfa erişimini listeler ve zorunlu izin eksikse hata verir. Token'ı değiştirdikten sonra **Token check** workflow'unu çalıştırın.
+
+### Facebook sayfası
+
+Her post ve Reel, Instagram'da yayınlandıktan hemen sonra aynı görsel/video ile **Myanimedex** Facebook sayfasına da gider (carousel → çoklu fotoğraf postu, Reel → Facebook Reel). Hikâyeler gitmez. Açıklamadaki "link in bio" Facebook'ta `https://myanimedex.com` linkine çevrilir. Facebook tarafı hata verirse Instagram paylaşımı etkilenmez; sadece uyarı yazılır. Kapatmak için `config.yaml → facebook.enabled: false`.
+
+Geçmiş paylaşımları aktarmak: *Actions → Facebook backfill* (`keys: all`, önce `list_only` açık deneyin) veya `python -m mad fb-backfill --all`.
 
 ---
 
