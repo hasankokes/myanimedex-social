@@ -312,7 +312,7 @@ def build_feature(ctx: Ctx) -> dict[str, Any]:
     swipe = "👉 Swipe to see it in the app." if feature.get("screenshot") else None
     if feature.get("caption"):
         body = feature["caption"].strip() + (f"\n\n{swipe}" if swipe else "")
-        caption = f"{body}\n\n{' '.join(tags)}"
+        caption = f"{body}\n\n{' '.join(captions.with_format_tags('feature', tags))}"
     else:
         caption = captions.build("feature", ctx.seed, fields, tags, extra=swipe)
     return {"data": {"feature": feature}, "anime_ids": [], "caption": caption}
