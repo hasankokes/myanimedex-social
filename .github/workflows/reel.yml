@@ -7,7 +7,7 @@ on:
       type:
         description: "Content type (scheduled = today's planned reel)"
         type: choice
-        options: [scheduled, reel_app_demo, reel_weekend, reel_top5, reel_teaser]
+        options: [scheduled, reel_quiz, reel_recs, reel_tierlist, reel_top5, reel_weekend, reel_app_demo, reel_teaser]
         default: scheduled
       date:
         description: "Act as this UTC date, YYYY-MM-DD (empty = today)"

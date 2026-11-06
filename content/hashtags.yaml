@@ -1,9 +1,26 @@
-# Each post gets 3–5 hashtags in this order:
-#   base tags → season tag (#fall2026anime) → anime name tag (if any) → brand tag.
-base: ["#anime", "#animerecommendations"]
+# Each post gets 3–5 hashtags (Instagram's own advice): see format_tags for the final order.
+# One broad tag only: giant tags (#anime) bury a small account's posts within seconds, so the
+# rest are mid-size, format-specific tags (format_tags) plus the anime / season / genre tag.
+base: ["#anime"]
 brand: "#myanimedex"
 season_format: "#{season}{year}anime"   # -> #fall2026anime
 max_tags: 5
+
+# Per content type: up to 2 tags that describe the format. Final order (max 5):
+#   #anime, format tag 1, season/genre/anime tag(s), format tag 2, #myanimedex
+format_tags:
+  airing_week: ["#newanime", "#animeseason"]
+  reel_weekend: ["#newanime", "#whattowatch"]
+  top5: ["#animeranking", "#topanime"]
+  top5_lens: ["#animeranking", "#topanime"]
+  reel_top5: ["#animeranking", "#topanime"]
+  reel_top5_lens: ["#animeranking", "#topanime"]
+  reel_quiz: ["#animequiz", "#guesstheanime"]
+  reel_recs: ["#animerecommendations", "#animetowatch"]
+  reel_tierlist: ["#animetierlist", "#animeranking"]
+  feature: ["#animeapp", "#animetracker"]
+  reel_app_demo: ["#animeapp", "#animetracker"]
+  reel_teaser: ["#animeapp", "#animetracker"]
 # Longer generated name tags are skipped (they look spammy and nobody searches them).
 max_name_tag_length: 24
 

@@ -308,7 +308,7 @@ def build_feature(ctx: Ctx) -> dict[str, Any]:
     feature = _rotate(load_yaml("features.yaml").get("features") or [], ctx.state["features"]["last_id"], "features")
     fields = {"season_label": captions.season_label(ctx.season, ctx.year),
               "title": feature["title"], "description": feature["description"].strip()}
-    tags = captions.hashtags(ctx.season, ctx.year, None)
+    tags = captions.hashtags(ctx.season, ctx.year, None, season_tag=False)
     swipe = "👉 Swipe to see it in the app." if feature.get("screenshot") else None
     if feature.get("caption"):
         body = feature["caption"].strip() + (f"\n\n{swipe}" if swipe else "")

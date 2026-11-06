@@ -93,7 +93,26 @@ def hashtags(season: str, year: int, media: dict[str, Any] | None, extra: list[s
     return tags
 
 
+def with_format_tags(kind: str, tags: list[str]) -> list[str]:
+    """Reorder/trim to: broad tag, format tag, specific tag(s), 2nd format tag, brand (max 5)."""
+    cfg = load_yaml("hashtags.yaml")
+    fmt = (cfg.get("format_tags") or {}).get(kind) or []
+    brand, base = cfg["brand"], list(cfg["base"])
+    specific = [t for t in tags if t not in base and t != brand and t not in fmt]
+    order = base + fmt[:1] + specific + fmt[1:]
+    seen: list[str] = []
+    for t in order:
+        if t not in seen:
+            seen.append(t)
+    final = seen[: cfg["max_tags"] - 1] + [brand]
+    for tag in final:
+        if not re.fullmatch(r"#[a-z0-9_]+", tag) or _is_banned(tag, cfg["banned_substrings"]):
+            raise MadError(f"Invalid or banned hashtag {tag!r} (content/hashtags.yaml)")
+    return final
+
+
 def build(kind: str, variant_seed: int, fields: dict[str, Any], tags: list[str], extra: str | None = None) -> str:
+    tags = with_format_tags(kind, tags)
     templates = load_yaml("captions.yaml").get(kind)
     if not templates:
         raise MadError(f"content/captions.yaml has no templates for '{kind}'")
