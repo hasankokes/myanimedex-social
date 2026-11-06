@@ -4,18 +4,14 @@
 
 | Gün (UTC) | TR saati | İçerik | Format |
 |---|---|---|---|
-| Pzt 19:00 | 22:00 | **Airing this week**: bu hafta yayınlanan öne çıkan 5 anime | Carousel (kapak + 5 + kapanış) |
-| Çar 19:00 | 22:00 | **App feature**: `content/features.yaml` sırasıyla | Tek görsel |
-| Cmt 19:00 | 22:00 | **Top 5 this season**: puana göre, az üyeli olanlar elenmiş | Carousel (kapak + 5 + kapanış) |
-| Pzt 14:00 | 17:00 | Hikâye: Anime of the day | Story |
-| Sal 14:00 | 17:00 | Hikâye: App tip (`content/tips.yaml`) | Story |
-| Çar 14:00 | 17:00 | Hikâye: "Which one are you watching?" (A/B, yanıtla) | Story |
-| Per 14:00 | 17:00 | Hikâye: Uygulamayı indir | Story |
-| Cum 14:00 | 17:00 | Hikâye: Weekend binge pick | Story |
-| Sal 19:00 | 22:00 | **Reel: App demo**: uygulama ekran kaydı + hook (`content/reels.yaml` sırasıyla) | Reel ~8 sn |
-| Per 19:00 | 22:00 | **Reel: Episodes this weekend**: Cuma–Pazar yayınlanan 5 anime, posterli | Reel ~13 sn |
-| Paz 19:00 | 22:00 | **Reel: Top 5 countdown**: Cumartesi Top 5'in videosu (#5 → #1) | Reel ~15 sn |
-| **Paz 12:00** | 15:00 | Haftanın planını kilitler, önizleme Issue'su + artifact | — |
+| Pzt 19:00 | 22:00 | **Airing this week**: bu hafta yayınlanan öne çıkan 5 anime | Carousel |
+| Sal 19:00 | 22:00 | **Guess the anime**: 3 soruluk quiz (zoom + pikselli poster, kolay → zor) | Reel ~18 sn |
+| Çar 19:00 | 22:00 | **App feature**: `content/features.yaml` sırasıyla (haftanın tek uygulama tanıtımı) | Carousel |
+| Per 19:00 | 22:00 | **If you liked X, watch these 3** (AniList önerileri) / **Episodes this weekend**, haftalar arasında dönüşümlü | Reel ~11–13 sn |
+| Cmt 19:00 | 22:00 | **Top 5** — her hafta farklı lens (trending, hidden gems, tür, all-time tür, sezon puanı) | Carousel |
+| Paz 19:00 | 22:00 | **Season tier list (S→D)** / **Top 5 countdown** (Cumartesi'den farklı lens), dönüşümlü | Reel ~12–15 sn |
+| Pzt–Cum 14:00 | 17:00 | Hikâyeler: günün animesi, uygulama ipucu, A/B seçimi, uygulamayı indir, hafta sonu önerisi | Story |
+| **Paz 12:00** | 15:00 | Haftanın planını kilitler; önizleme + **haftalık performans raporu** Issue'su | — |
 
 Örnek çıktılar `samples/` klasöründe, örnek açıklamalar `samples/captions.md` dosyasında.
 
@@ -39,6 +35,13 @@
 
 
 ## Reels
+
+Takipçi kazandıran formatlar öncelikli: quiz (yorum), "If you liked X" (kaydetme), tier list (tartışma). Uygulama tanıtımı feed'de haftada bir (Çarşamba); uygulama demosu Reel'i artık elle (`reel_app_demo`).
+
+- **Quiz**: popülerliği yüksek animelerden 3 tur (kolay/orta/zor), aynı anime 180 gün tekrar sorulmaz (`quiz_used`). Cevaplar açıklamada yazmaz, sadece videoda açılır.
+- **If you liked X**: 200K+ fanlı bitmiş bir anime ve AniList topluluğunun en çok oyladığı 3 öneri (aynı seri hariç). Aynı çıpa 1 yıl tekrar etmez.
+- **Tier list**: sezonun en popüler 12 animesi, AniList puanına göre S (85+), A (80+), B (75+), C (70+), D.
+- **Haftalık rapor** (`python -m mad report`, Pazar Issue'sunun başında): takipçi sayısı ve haftalık değişim, son 7 günün her paylaşımı için izlenme/erişim/kaydetme/paylaşım/ortalama izlenme süresi, formata göre ortalama izlenme. Paylaşım bazlı sayılar için token'da `instagram_manage_insights` izni gerekir.
 
 - Videolar Python'da kare kare çizilir (Pillow) ve ffmpeg ile H.264/AAC 1080×1920 30 fps olarak kodlanır (`src/mad/render/reels.py`). GitHub Actions'ta ffmpeg hazır gelir.
 - **Müzik**: teaser için Python'da sentezlenmiş özgün müzikten (`assets/audio/`, tamamen sizin) her hafta farklı bir bölüm. Instagram'ın müzik kütüphanesi API ile eklenemez.

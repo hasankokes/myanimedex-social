@@ -76,6 +76,14 @@ jobs:
             exit 1
           fi
 
+      - name: Weekly performance report
+        id: report
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: python -m mad report
+
       - name: Commit plan
         run: |
           scripts/commit_state.sh "plan: ${{ steps.week.outputs.week }}"
@@ -100,6 +108,7 @@ jobs:
             echo ""
             echo "📦 Full-size images: [preview artifact]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) (Pages images may take a minute to appear)."
             echo ""
+            [ -f out/report.md ] && cat out/report.md && echo "" && echo "---" && echo ""
             cat "out/preview/$WEEK/preview.md"
           } > "$body"
           gh label create preview --color FACC15 --description "Weekly content preview" --force

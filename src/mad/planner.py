@@ -13,8 +13,8 @@ from typing import Any, Callable
 from . import anilist, captions, state as state_mod
 from .config import PLANS_DIR, MadError, load_yaml, log, settings, warn
 
-# (ISO weekday 1=Mon, slot, kind)
-SCHEDULE: list[tuple[int, str, str]] = [
+# (ISO weekday 1=Mon, slot, kind). A tuple of kinds alternates by ISO week (week % len).
+SCHEDULE: list[tuple[int, str, str | tuple[str, ...]]] = [
     (1, "post", "airing_week"),
     (3, "post", "feature"),
     (6, "post", "top5"),
@@ -23,13 +23,13 @@ SCHEDULE: list[tuple[int, str, str]] = [
     (3, "story", "story_your_pick"),
     (4, "story", "story_download"),
     (5, "story", "story_weekend"),
-    (2, "reel", "reel_app_demo"),
-    (4, "reel", "reel_weekend"),
-    (7, "reel", "reel_top5"),
+    (2, "reel", "reel_quiz"),
+    (4, "reel", ("reel_recs", "reel_weekend")),
+    (7, "reel", ("reel_tierlist", "reel_top5")),
 ]
 POST_KINDS = ["airing_week", "feature", "top5"]
 STORY_KINDS = ["story_anime_of_day", "story_tip", "story_your_pick", "story_download", "story_weekend"]
-REEL_KINDS = ["reel_app_demo", "reel_weekend", "reel_top5", "reel_teaser"]
+REEL_KINDS = ["reel_quiz", "reel_recs", "reel_tierlist", "reel_app_demo", "reel_weekend", "reel_top5", "reel_teaser"]
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 KEEP_FIELDS = ["id", "idMal", "title", "format", "status", "episodes", "season", "seasonYear",
@@ -52,7 +52,10 @@ def slot_key(day: date, slot: str) -> str:
 
 
 def kind_for(day: date, slot: str) -> str | None:
-    return next((k for wd, s, k in SCHEDULE if wd == day.isoweekday() and s == slot), None)
+    kind = next((k for wd, s, k in SCHEDULE if wd == day.isoweekday() and s == slot), None)
+    if isinstance(kind, tuple):
+        kind = kind[day.isocalendar()[1] % len(kind)]
+    return kind
 
 
 def snapshot(media: dict[str, Any]) -> dict[str, Any]:
@@ -404,6 +407,115 @@ def build_reel_teaser(ctx: Ctx) -> dict[str, Any]:
     return {"data": dict(teaser), "anime_ids": [], "caption": captions.build("reel_teaser", 0, fields, tags)}
 
 
+# ---------------------------------------------------------------- engagement reels
+
+def _used_recently(st: dict[str, Any], bucket: str, day: date, days: int) -> set[int]:
+    cutoff = (day - timedelta(days=days)).isoformat()
+    return {int(k) for k, d in st.get(bucket, {}).items() if d >= cutoff}
+
+
+def build_reel_quiz(ctx: Ctx) -> dict[str, Any]:
+    """Tuesday reel: "Guess the anime" — 3 zoomed/pixelated posters, easy -> hard, answers revealed."""
+    import random
+
+    pool = [m for m in anilist.find_media(popularity_greater=120000, sort=["POPULARITY_DESC"], pages=3)
+            if (m.get("coverImage") or {}).get("extraLarge")]
+    pool = _scored(pool)  # one per franchise
+    used = _used_recently(ctx.state, "quiz_used", ctx.day, 180) | ctx.taken
+    fresh = [m for m in pool if m["id"] not in used] or pool
+    rnd = random.Random(ctx.day.toordinal())
+    third = max(1, len(fresh) // 3)
+    tiers = [fresh[:third], fresh[third:2 * third], fresh[2 * third:]]
+    rounds: list[dict[str, Any]] = []
+    for level, tier in zip(("EASY", "MEDIUM", "HARD"), tiers):
+        options = [m for m in (tier or fresh) if m["id"] not in {r["id"] for r in rounds}]
+        m = rnd.choice(options)
+        snap = snapshot(m)
+        snap["level"] = level
+        snap["focus"] = [round(rnd.uniform(0.3, 0.7), 2), round(rnd.uniform(0.25, 0.6), 2)]
+        rounds.append(snap)
+    tags = captions.hashtags(ctx.season, ctx.year, None, extra=["#animequiz"], season_tag=False)
+    fields = {"count": len(rounds)}
+    return {"data": {"rounds": rounds, "seed": ctx.seed}, "anime_ids": [m["id"] for m in rounds],
+            "caption": captions.build("reel_quiz", ctx.seed, fields, tags)}
+
+
+RECS_QUERY = """
+query ($id: Int) {
+  Media(id: $id) {
+    recommendations(sort: [RATING_DESC], perPage: 25) {
+      nodes { rating mediaRecommendation { %s } }
+    }
+  }
+}"""
+
+
+def build_reel_recs(ctx: Ctx) -> dict[str, Any]:
+    """Thursday reel (alternating): "If you liked X, watch these 3" from AniList community recommendations."""
+    anchors = _scored(anilist.find_media(status="FINISHED", popularity_greater=200000, sort=["POPULARITY_DESC"],
+                                         pages=2))
+    used = _used_recently(ctx.state, "recs_used", ctx.day, 365)
+    anchors = [m for m in anchors if m["id"] not in used] or anchors
+    anchor = anchors[ctx.day.toordinal() % min(len(anchors), 25)]
+    nodes = anilist.graphql(RECS_QUERY % anilist.MEDIA_FIELDS, {"id": anchor["id"]})["Media"]["recommendations"]["nodes"]
+    anchor_key = captions._slug(captions._name_core((anchor.get("title") or {}).get("romaji") or ""))[:12]
+    recs = []
+    for n in nodes:
+        m = n.get("mediaRecommendation")
+        if not m or not anilist._eligible(m) or not m.get("averageScore") or m["id"] in ctx.blocked:
+            continue
+        key = captions._slug(captions._name_core((m.get("title") or {}).get("romaji") or ""))[:12]
+        if key == anchor_key or any(key == r["_key"] for r in recs):
+            continue
+        snap = snapshot(m)
+        snap["_key"] = key
+        snap["shared"] = [g for g in (m.get("genres") or []) if g in (anchor.get("genres") or [])][:2]
+        recs.append(snap)
+        if len(recs) == 3:
+            break
+    if len(recs) < 3:
+        raise MadError(f"Recs: only {len(recs)} usable recommendations for {captions.display_title(anchor)}")
+    for r in recs:
+        r.pop("_key", None)
+    a = snapshot(anchor)
+    tags = captions.hashtags(ctx.season, ctx.year, anchor, season_tag=False)
+    fields = {"anchor": captions.display_title(a),
+              "list": "\n".join(f"{i}. {captions.display_title(m)} — {captions.score10(m)}/10"
+                                for i, m in enumerate(recs, 1))}
+    return {"data": {"anchor": a, "recs": recs, "seed": ctx.seed}, "anime_ids": [m["id"] for m in recs],
+            "caption": captions.build("reel_recs", ctx.seed, fields, tags)}
+
+
+TIERS = [("S", 85), ("A", 80), ("B", 75), ("C", 70), ("D", 0)]
+
+
+def build_reel_tierlist(ctx: Ctx) -> dict[str, Any]:
+    """Sunday reel (alternating): the season's most popular shows sorted into S–D tiers by fan score."""
+    season, year = ctx.season, ctx.year
+    for _ in range(2):
+        pool = _scored(anilist.season_ranked(season, year, 10000, "POPULARITY_DESC"))
+        if len(pool) >= 10:
+            break
+        season, year = anilist.previous_season(season, year)
+    pool = pool[:12]
+    if len(pool) < 8:
+        raise MadError("Tier list: not enough scored anime this season")
+    items = []
+    for m in pool:
+        snap = snapshot(m)
+        snap["tier"] = next(t for t, floor in TIERS if m["averageScore"] >= floor)
+        items.append(snap)
+    label = captions.season_label(season, year)
+    by_tier = {t: [captions.display_title(m) for m in items if m["tier"] == t] for t, _ in TIERS}
+    fields = {"season_label": label,
+              "list": "\n".join(f"{t}: {', '.join(names)}" for t, names in by_tier.items() if names)}
+    tags = captions.hashtags(season, year, None, extra=["#animetierlist"])
+    return {"data": {"items": items, "season": season, "year": year, "seed": ctx.seed},
+            "anime_ids": [m["id"] for m in items],
+            "caption": captions.build("reel_tierlist", ctx.seed, fields, tags)}
+
+
+
 BUILDERS: dict[str, Callable[[Ctx], dict[str, Any]]] = {
     "airing_week": build_airing_week,
     "feature": build_feature,
@@ -417,6 +529,9 @@ BUILDERS: dict[str, Callable[[Ctx], dict[str, Any]]] = {
     "reel_weekend": build_reel_weekend,
     "reel_top5": build_reel_top5,
     "reel_teaser": build_reel_teaser,
+    "reel_quiz": build_reel_quiz,
+    "reel_recs": build_reel_recs,
+    "reel_tierlist": build_reel_tierlist,
 }
 
 
@@ -447,8 +562,9 @@ def build_plan(week: str, st: dict[str, Any]) -> dict[str, Any]:
     slots: dict[str, Any] = {}
     # Posts first so they get first choice of anime, stories fill around them.
     order = {"post": 0, "reel": 1, "story": 2}
-    for weekday, slot, kind in sorted(SCHEDULE, key=lambda s: (order[s[1]], s[0])):
+    for weekday, slot, _ in sorted(SCHEDULE, key=lambda s: (order[s[1]], s[0])):
         day = monday + timedelta(days=weekday - 1)
+        kind = kind_for(day, slot)
         slots[slot_key(day, slot)] = build_slot(kind, day, st, taken)
     return {"week": week, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "slots": dict(sorted(slots.items()))}

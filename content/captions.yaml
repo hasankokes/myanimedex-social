@@ -176,3 +176,49 @@ reel_top5_lens:
 
     {cta}
     MyAnimeDex · free on iOS & Android · link in bio.
+
+# ---------------------------------------------------------------- engagement reels
+# reel_quiz: {count}   (answers are only revealed in the video — no spoilers here)
+reel_quiz:
+  - |
+    Guess the anime from the zoomed-in poster 🔍 {count} rounds: easy, medium, HARD.
+
+    How many did you get? Comment your score /{count} 👇
+    Tag the friend who thinks they know every anime.
+  - |
+    Only real otaku get all {count} 👀 Guess the anime before the reveal!
+
+    Drop your score in the comments (no cheating 😤)
+    New quiz every Tuesday — follow so you don't miss it.
+
+# reel_recs: {anchor} {list}
+reel_recs:
+  - |
+    If you liked {anchor}, watch these next 👇
+
+    {list}
+
+    Save this for your next binge 📌
+    Picked from fan recommendations. Track them all in MyAnimeDex — link in bio.
+  - |
+    Finished {anchor} and don't know what to watch? 🍿
+
+    {list}
+
+    Which one would you add? Comment below 👇 Save this so you don't lose it.
+
+# reel_tierlist: {season_label} {list}
+reel_tierlist:
+  - |
+    {season_label} anime tier list, ranked by fan score 📊
+
+    {list}
+
+    Agree? Which one is in the wrong tier? 👇
+    Track the whole season in MyAnimeDex — link in bio.
+  - |
+    We ranked this season's biggest anime from S to D 🔥 ({season_label})
+
+    {list}
+
+    Hot takes welcome in the comments 👇 Save this for your watchlist.

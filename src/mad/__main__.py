@@ -32,6 +32,9 @@ KIND_LABELS = {
     "reel_weekend": "Reel · Episodes this weekend",
     "reel_top5": "Reel · Top 5 countdown",
     "reel_teaser": "Reel · App teaser",
+    "reel_quiz": "Reel · Guess the anime (quiz)",
+    "reel_recs": "Reel · If you liked X, watch these 3",
+    "reel_tierlist": "Reel · Season tier list",
 }
 
 
@@ -98,6 +101,7 @@ def _resolve_scheduled(day: date, slot_name: str, st: dict[str, Any]):
             plan = planner.add_slot(plan, day, slot_name, st)
             planner.save_plan(plan)
     slot = plan["slots"][key]
+    kind = slot.get("kind", kind)  # a locked plan wins over a later schedule change
     if slot.get("skip"):
         log(f"{key} is marked skip in plans/{week}.json — nothing to do")
         return None
@@ -347,6 +351,17 @@ def cmd_check(args) -> int:
     return 0
 
 
+def cmd_report(args) -> int:
+    from .report import build_report
+
+    md = build_report()
+    out = OUT_DIR / "report.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(md + "\n", "utf-8")
+    print(md)
+    return 0
+
+
 def cmd_samples(args) -> int:
     """Render one example of every template into samples/ (uses live AniList data)."""
     from .config import load_yaml
@@ -395,12 +410,13 @@ def main(argv: list[str] | None = None) -> int:
             s.add_argument("--pages", action="store_true", help="upload preview images to GitHub Pages")
 
     sub.add_parser("check", help="verify IG_USER_ID / ACCESS_TOKEN and permissions")
+    sub.add_parser("report", help="weekly performance report (followers + per-post insights) -> out/report.md")
     tk = sub.add_parser("tick", help="publish every slot that is due now (run by cron every few minutes)")
     tk.add_argument("--list", action="store_true", help="only print the due slots")
 
     args = p.parse_args(argv)
     handler = {"run": cmd_run, "plan": cmd_plan, "preview": cmd_preview, "check": cmd_check,
-               "samples": cmd_samples, "tick": cmd_tick}[args.cmd]
+               "samples": cmd_samples, "tick": cmd_tick, "report": cmd_report}[args.cmd]
     try:
         return handler(args)
     except MadError as exc:

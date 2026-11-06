@@ -21,6 +21,9 @@ EMPTY: dict[str, Any] = {
     "top5_last": [],    # anilist ids of the last published Top 5, rank order
     "failures": {},     # slot key -> {count, last, error} (tick retry bookkeeping)
     "dry_done": {},     # slot key -> when a DRY_RUN tick rendered it (don't repeat every tick)
+    "quiz_used": {},    # anilist id -> date used in a "Guess the anime" reel
+    "recs_used": {},    # anilist id -> date used as the "If you liked X" anchor
+    "followers": {},    # YYYY-MM-DD -> followers_count (weekly report)
 }
 
 
@@ -56,6 +59,11 @@ def record_publish(state: dict[str, Any], slot_key: str, slot: dict[str, Any], m
         state["anime"][str(aid)] = day
     if slot["kind"] == "feature":
         state["features"]["last_id"] = slot["data"]["feature"]["id"]
+    elif slot["kind"] == "reel_quiz":
+        for r in slot["data"]["rounds"]:
+            state["quiz_used"][str(r["id"])] = day
+    elif slot["kind"] == "reel_recs":
+        state["recs_used"][str(slot["data"]["anchor"]["id"])] = day
     elif slot["kind"] == "reel_app_demo":
         state["reel_demos"]["last_id"] = slot["data"]["demo"]["id"]
     elif slot["kind"] == "story_tip":

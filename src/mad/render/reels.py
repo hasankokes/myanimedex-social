@@ -459,6 +459,226 @@ def render_reel_app_demo(data: dict[str, Any], out_dir: Path) -> list[Path]:
         reader.close()
 
 
+# ---------------------------------------------------------------- Tuesday: Guess the anime
+
+def _cover_base(m: dict[str, Any], w: int, h: int) -> Image.Image | None:
+    path = cover_path(m)
+    if not path:
+        return None
+    src = Image.open(path).convert("RGB")
+    scale = max(w / src.width, h / src.height)
+    src = src.resize((max(w, round(src.width * scale)), max(h, round(src.height * scale))), Image.LANCZOS)
+    left, top = (src.width - w) // 2, (src.height - h) // 4
+    return src.crop((left, top, left + w, top + h))
+
+
+def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
+    pw, ph = 640, 900
+    base = _cover_base(m, pw, ph)
+    if base is None:  # no cover -> typographic card, still guessable from the hint
+        base = poster_sprite(None, pw, ph, title="?", accent=TEAL).convert("RGB").resize((pw, ph))
+    bg = background(INK, mix(INK, MAGENTA, 0.22), mix(INK, TEAL, 0.4), seed=40 + i)
+    frame_c = Canvas.layer((pw + 60, ph + 60))
+    frame_c.panel((0, 0, pw + 24, ph + 24), fill=INK, border=10, shadow=22, shadow_color=YELLOW)
+    frame = frame_c.im
+    fx, fy = (m.get("focus") or [0.5, 0.4])
+    level_fill = {"EASY": TEAL, "MEDIUM": YELLOW, "HARD": MAGENTA}.get(m.get("level"), YELLOW)
+    head = chip_sprite(f"ROUND {i}/{total}  ·  {m.get('level', '')}", 62, fill=level_fill,
+                       fg=WHITE if level_fill == MAGENTA else INK, name="display", pad=(30, 12))
+    hint_parts = [str(m.get("seasonYear") or ""), (m.get("genres") or [""])[0],
+                  f"{m['episodes']} EPS" if m.get("episodes") else ""]
+    hint = chip_sprite("HINT: " + "  ·  ".join(x for x in hint_parts if x), 46, fill=CREAM)
+    counts = [burst_sprite(95, YELLOW, str(n), 110, seed=n) for n in (3, 2, 1)]
+    title = block_sprite(960, 200, display_title(m).upper(), "display", 110, 50, fill=YELLOW, stroke=6,
+                         shadow=(8, 8), max_lines=2)
+    score = score10(m)
+    meta = chip_sprite(f"{score}/10  ·  {_fmt_count(m.get('popularity'))} FANS" if score else "", 42, fill=TEAL)
+    reveal_at = 3.3
+    px, py = (W - pw) // 2, 470
+
+    def view(t):
+        if t >= reveal_at:
+            return base
+        p = in_out_sine(clamp(t / reveal_at))
+        z = 4.2 - 3.0 * p                       # 4.2x -> 1.2x zoom while guessing
+        cw, ch = pw / z, ph / z
+        cx = min(max(fx * pw, cw / 2), pw - cw / 2)
+        cy = min(max(fy * ph, ch / 2), ph - ch / 2)
+        img = base.crop((round(cx - cw / 2), round(cy - ch / 2), round(cx + cw / 2), round(cy + ch / 2)))
+        img = img.resize((pw, ph), Image.BICUBIC)
+        block = max(1, round(34 * (1 - p) ** 1.5))
+        if block > 1:
+            img = img.resize((max(1, pw // block), max(1, ph // block)), Image.NEAREST).resize((pw, ph), Image.NEAREST)
+        return img
+
+    def draw(t):
+        f = bg.copy()
+        f.paste(frame, (px - 12, py - 12), frame)
+        f.paste(view(t), (px, py))
+        place(f, head, (W / 2, 330), scale=out_back(seg(t, 0, 0.3)))
+        if t < reveal_at:
+            k = min(2, int(t / 1.1))
+            place(f, counts[k], (900, 520), scale=out_back(seg(t - k * 1.1, 0, 0.25)))
+            place(f, hint, (W / 2, 1480), alpha=seg(t, 0.6, 0.3))
+        else:
+            dx, dy = shake(t, reveal_at, seed=i)
+            p = seg(t, reveal_at, 0.3)
+            place(f, title, (W / 2 + dx, 1480 + 60 * (1 - out_cubic(p)) + dy), alpha=p)
+            place(f, meta, (W / 2, 1620), alpha=seg(t, reveal_at + 0.2, 0.3))
+            flash(f, t - reveal_at, WHITE)
+        flash(f, t)
+        return f
+
+    return dur, draw
+
+
+def render_reel_quiz(data: dict[str, Any], out_dir: Path) -> list[Path]:
+    rounds = data["rounds"]
+    scenes = [hook_scene([("GUESS", 330, YELLOW), ("THE ANIME", 200, WHITE)],
+                         f"{len(rounds)} ROUNDS  ·  EASY TO HARD", MAGENTA, chip_fill=YELLOW, top=560)]
+    scenes += [_quiz_round(m, i, len(rounds)) for i, m in enumerate(rounds, 1)]
+    scenes.append(outro_scene("HOW MANY DID YOU GET?", f"Comment your score /{len(rounds)} · new quiz every Tuesday"))
+    return encode(scenes, out_dir, cover_at=1.3, music_seed=data.get("seed", 0))
+
+
+# ---------------------------------------------------------------- Thursday: If you liked X
+
+def render_reel_recs(data: dict[str, Any], out_dir: Path) -> list[Path]:
+    a = data["anchor"]
+    bg = background(TEAL, mix(TEAL, WHITE, 0.22), mix(TEAL, INK, 0.25), origin="bl")
+    poster = poster_sprite(cover_path(a), 470, 663, shadow_color=INK, title=display_title(a), accent=MAGENTA)
+    liked = text_sprite("IF YOU LIKED", "comic", 150, fill=YELLOW, stroke=12, shadow=(14, 14))
+    name = block_sprite(960, 190, display_title(a).upper(), "display", 100, 46, fill=WHITE, stroke=6,
+                        shadow=(8, 8), max_lines=2)
+    watch = chip_sprite("WATCH THESE 3 NEXT", 62, fill=MAGENTA, fg=WHITE, name="display", pad=(34, 14))
+
+    def hook(t):
+        f = bg.copy()
+        dx, dy = shake(t, 0.3)
+        place(f, liked, (W / 2 + dx, 300 + dy), scale=2.0 - out_back(seg(t, 0, 0.3)), alpha=seg(t, 0, 0.2) * 2)
+        p = seg(t, 0.2, 0.4)
+        place(f, poster, (W / 2, 880 + 700 * (1 - out_cubic(p))), angle=-3, scale=1 + 0.03 * seg(t, 0.6, 1.6))
+        place(f, name, (W / 2, 1330), alpha=seg(t, 0.5, 0.3))
+        place(f, watch, (W / 2, 1520), scale=out_back(seg(t, 1.2, 0.3)))
+        return f
+
+    scenes: list[Scene] = [(2.4, hook)]
+    for i, m in enumerate(data["recs"]):
+        dur, card = _episode_like_card(m, i, f"PICK {i + 1}", " · ".join(g.upper() for g in m.get("shared") or [])
+                                       or (m.get("genres") or [""])[0].upper())
+        scenes.append((dur, card))
+    scenes.append(outro_scene("SAVE THIS FOR LATER", "Follow for new picks every week · MyAnimeDex"))
+    return encode(scenes, out_dir, cover_at=1.9, music_seed=data.get("seed", 0))
+
+
+def _episode_like_card(m: dict[str, Any], i: int, label: str, sub: str, dur=2.4) -> Scene:
+    color = [INK, MAGENTA, INK][i % 3]
+    accent = [YELLOW, YELLOW, TEAL][i % 3]
+    bg = background(color, mix(color, WHITE, 0.14), mix(color, TEAL if color == INK else INK, 0.35), seed=i + 9)
+    poster = poster_sprite(cover_path(m), 560, 790, shadow_color=accent, title=display_title(m), accent=TEAL)
+    top = chip_sprite(label, 60, fill=accent, name="display", pad=(34, 14))
+    title = block_sprite(940, 190, display_title(m).upper(), "display", 92, 44, fill=WHITE, stroke=5,
+                         shadow=(8, 8), max_lines=2)
+    score = score10(m)
+    burst = burst_sprite(110, accent, score or "NEW", 92 if score else 70, sub="FAN SCORE" if score else None,
+                         seed=i + 2)
+    subchip = chip_sprite(sub, 42, fill=CREAM) if sub else None
+
+    def draw(t):
+        f = bg.copy()
+        p = seg(t, 0, 0.35)
+        place(f, poster, (540, 900 + 900 * (1 - out_cubic(p))), scale=1 + 0.04 * seg(t, 0.35, dur), angle=-2)
+        place(f, top, (540, 330), scale=1.8 - 0.8 * out_back(seg(t, 0.12, 0.3)), alpha=seg(t, 0.12, 0.2) * 2)
+        place(f, burst, (850, 560), scale=out_back(seg(t, 0.45, 0.3)))
+        place(f, title, (540, 1440 + 60 * (1 - out_cubic(seg(t, 0.4, 0.3)))), alpha=seg(t, 0.4, 0.3))
+        if subchip:
+            place(f, subchip, (540, 1590), alpha=seg(t, 0.7, 0.25))
+        flash(f, t)
+        return f
+
+    return dur, draw
+
+
+# ---------------------------------------------------------------- Sunday: season tier list
+
+TIER_COLORS = {"S": MAGENTA, "A": YELLOW, "B": TEAL, "C": CREAM, "D": mix(CREAM, INK, 0.35)}
+
+
+def render_reel_tierlist(data: dict[str, Any], out_dir: Path) -> list[Path]:
+    items = data["items"]
+    label = f"{(data['season'] or '').upper()} {data['year']}"
+    tiers = list(TIER_COLORS)
+    top_y, row_h, gap = 360, 232, 14
+    lab_w, x0, x1 = 150, 70, 1010
+    # board background (static)
+    board_c = Canvas((W, H), INK)
+    board_c.halftone(mix(INK, MAGENTA, 0.35), origin="br", max_r=11)
+    board_c.text((W / 2, 250), f"{label} TIER LIST", "comic", 96, fill=YELLOW, anchor="ms", stroke=6,
+                 shadow=(8, 8))
+    for r, t in enumerate(tiers):
+        y = top_y + r * (row_h + gap)
+        board_c.panel((x0, y, x1, y + row_h), fill=mix(INK, WHITE, 0.08), border=4, shadow=0,
+                      outline=mix(INK, WHITE, 0.25))
+        board_c.d.rectangle((x0, y, x0 + lab_w, y + row_h), fill=TIER_COLORS[t])
+        board_c.text((x0 + lab_w / 2, y + row_h / 2), t, "comic", 130, fill=INK if t != "S" else WHITE,
+                     anchor="mm")
+    board_c.text((W / 2, top_y + 5 * (row_h + gap) + 30), "Ranked by AniList fan score", "body_bold", 30,
+                 fill=CREAM, anchor="mt")
+    board = board_c.im
+    # slot positions
+    th = row_h - 24
+    pos: list[tuple[float, float, int]] = []
+    counters = {t: 0 for t in tiers}
+    per_row = {t: sum(1 for m in items if m["tier"] == t) for t in tiers}
+    for m in items:
+        t = m["tier"]
+        r = tiers.index(t)
+        n = max(per_row[t], 1)
+        avail = x1 - (x0 + lab_w) - 24
+        tw = min(round(th * 0.71), (avail - (n - 1) * 10) // n)
+        k = counters[t]
+        counters[t] += 1
+        cx = x0 + lab_w + 12 + k * (tw + 10) + tw / 2
+        cy = top_y + r * (row_h + gap) + row_h / 2
+        pos.append((cx, cy, tw))
+    thumbs = []
+    for m, (_, _, tw) in zip(items, pos):
+        base = _cover_base(m, tw, round(tw / 0.71)) or poster_sprite(None, tw, round(tw / 0.71),
+                                                                    title=display_title(m)).convert("RGB")
+        thumbs.append(base.resize((tw, min(th, round(tw / 0.71)))))
+    big = [poster_sprite(cover_path(m), 420, 592, shadow_color=TIER_COLORS[m["tier"]], title=display_title(m))
+           for m in items]
+    names = [chip_sprite(f"{display_title(m)[:30].upper()}  ·  {score10(m)}", 44, fill=TIER_COLORS[m["tier"]],
+                         fg=WHITE if m["tier"] == "S" else INK) for m in items]
+    step = 0.62
+
+    def draw(t):
+        f = board.copy()
+        cur = min(len(items) - 1, int(t / step))
+        for j in range(len(items)):
+            start = j * step
+            if t < start:
+                break
+            cx, cy, tw = pos[j]
+            p = out_cubic(seg(t, start + 0.25, 0.3))
+            if p >= 1:
+                f.paste(thumbs[j], (round(cx - tw / 2), round(cy - thumbs[j].height / 2)))
+            elif j == cur:
+                # big poster pops in the middle, then flies to its slot
+                sx, sy = W / 2 + (cx - W / 2) * p, 960 + (cy - 960) * p
+                scale = (1 - p) + p * (tw / 420)
+                place(f, big[j], (sx, sy), scale=scale * (0.6 + 0.4 * out_back(seg(t, start, 0.2))))
+        if t < len(items) * step:
+            place(f, names[cur], (W / 2, 1650), alpha=seg(t, cur * step, 0.1))
+        return f
+
+    dur = len(items) * step + 1.8
+    hook = hook_scene([("TIER LIST", 280, YELLOW), (label, 170, WHITE)], "S  ·  A  ·  B  ·  C  ·  D", MAGENTA,
+                      top=560, dur=1.5)
+    scenes = [hook, (dur, draw), outro_scene("AGREE OR NOT?", "Tell us which one is in the wrong tier.")]
+    return encode(scenes, out_dir, cover_at=1.5 + dur - 0.5, music_seed=data.get("seed", 0))
+
+
 # ---------------------------------------------------------------- teaser (pre-made video)
 
 def render_reel_teaser(data: dict[str, Any], out_dir: Path) -> list[Path]:
@@ -477,6 +697,9 @@ def render_reel_teaser(data: dict[str, Any], out_dir: Path) -> list[Path]:
 
 
 REEL_RENDERERS = {
+    "reel_quiz": render_reel_quiz,
+    "reel_recs": render_reel_recs,
+    "reel_tierlist": render_reel_tierlist,
     "reel_top5": render_reel_top5,
     "reel_weekend": render_reel_weekend,
     "reel_app_demo": render_reel_app_demo,
