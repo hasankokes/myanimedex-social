@@ -38,6 +38,8 @@ def _insights(ig: Instagram, media_id: str, slot: str) -> dict[str, Any]:
             data = ig._call("GET", f"{media_id}/insights", {"metric": ",".join(metrics)}, retry=False)
             return {d["name"]: _value(d) for d in data.get("data", [])}
         except GraphError as exc:
+            if "not enough viewers" in str(exc).lower():
+                return {}  # Instagram hides numbers for media seen by very few accounts
             if exc.code in (10, 200, 190):
                 raise
             continue
