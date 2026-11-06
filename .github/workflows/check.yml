@@ -1,0 +1,24 @@
+name: Token check
+
+on:
+  # Manual: run after replacing ACCESS_TOKEN to see its permissions, Facebook page access and insights.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: src
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: Token and permissions
+        run: python -m mad check
+      - name: Insights (weekly report dry run)
+        run: python -m mad report

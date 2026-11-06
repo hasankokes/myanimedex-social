@@ -100,7 +100,11 @@ class Instagram:
             granted = sorted(p["permission"] for p in perms if p.get("status") == "granted")
         except GraphError:
             granted = []
-        return {"username": account.get("username"), "quota": quota, "permissions": granted}
+        try:
+            pages = self._call("GET", "me/accounts", {"fields": "id,name,tasks"}, retry=False).get("data", [])
+        except GraphError:
+            pages = []
+        return {"username": account.get("username"), "quota": quota, "permissions": granted, "pages": pages}
 
     def quota(self) -> dict[str, Any]:
         data = self._call("GET", f"{self.ig_user_id}/content_publishing_limit",

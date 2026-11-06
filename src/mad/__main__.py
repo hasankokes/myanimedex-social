@@ -333,6 +333,11 @@ def cmd_preview(args) -> int:
 # ---------------------------------------------------------------- misc
 
 REQUIRED_PERMISSIONS = {"instagram_basic", "instagram_content_publish", "pages_show_list"}
+OPTIONAL_PERMISSIONS = {
+    "instagram_manage_insights": "per-post numbers in the weekly report",
+    "pages_manage_posts": "cross-posting to the Facebook page",
+    "instagram_manage_comments": "posting/pinning comments",
+}
 
 
 def cmd_check(args) -> int:
@@ -346,6 +351,10 @@ def cmd_check(args) -> int:
         missing = REQUIRED_PERMISSIONS - set(info["permissions"])
         if missing:
             raise MadError(f"Token is missing permissions: {', '.join(sorted(missing))}")
+        for perm, use in OPTIONAL_PERMISSIONS.items():
+            log(f"{'✓' if perm in info['permissions'] else '✗'} {perm} ({use})")
+    for page in info.get("pages", []):
+        log(f"Facebook page: {page.get('name')} ({page.get('id')}) tasks: {', '.join(page.get('tasks') or [])}")
     log("Token OK")
     summary(f"Token OK for @{info['username']} · quota {info['quota'].get('quota_usage', '?')} used in 24h")
     return 0
