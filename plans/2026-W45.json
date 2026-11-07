@@ -632,75 +632,6 @@
       "data": {
         "items": [
           {
-            "id": 212888,
-            "idMal": 64340,
-            "title": {
-              "romaji": "Tempal: Item no Chikara",
-              "english": "Overgeared"
-            },
-            "format": "ONA",
-            "status": "RELEASING",
-            "episodes": 12,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 76,
-            "popularity": 54201,
-            "duration": 24,
-            "genres": [
-              "Action",
-              "Adventure",
-              "Comedy",
-              "Fantasy"
-            ],
-            "siteUrl": "https://anilist.co/anime/212888",
-            "nextAiringEpisode": {
-              "airingAt": 1794148200,
-              "episode": 7
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212888-NhyvqPt5aIuJ.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212888-NhyvqPt5aIuJ.jpg",
-              "color": "#f19335"
-            },
-            "studio": "J.C.STAFF",
-            "rank": 1,
-            "badge": "TRENDING"
-          },
-          {
-            "id": 206814,
-            "idMal": 63367,
-            "title": {
-              "romaji": "Dragon Ball Super: Beerus",
-              "english": "Dragon Ball Super: Beerus"
-            },
-            "format": "TV",
-            "status": "RELEASING",
-            "episodes": null,
-            "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 81,
-            "popularity": 29212,
-            "duration": 23,
-            "genres": [
-              "Action",
-              "Adventure",
-              "Sci-Fi"
-            ],
-            "siteUrl": "https://anilist.co/anime/206814",
-            "nextAiringEpisode": {
-              "airingAt": 1794147360,
-              "episode": 5
-            },
-            "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx206814-PVVzRbf1IQpe.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206814-PVVzRbf1IQpe.jpg",
-              "color": "#e48643"
-            },
-            "studio": "Toei Animation",
-            "rank": 2,
-            "badge": "TRENDING"
-          },
-          {
             "id": 195604,
             "idMal": 61967,
             "title": {
@@ -713,7 +644,7 @@
             "season": "FALL",
             "seasonYear": 2026,
             "averageScore": 87,
-            "popularity": 102567,
+            "popularity": 105993,
             "duration": 24,
             "genres": [
               "Action",
@@ -723,8 +654,8 @@
             ],
             "siteUrl": "https://anilist.co/anime/195604",
             "nextAiringEpisode": {
-              "airingAt": 1794060000,
-              "episode": 6
+              "airingAt": 1794664800,
+              "episode": 7
             },
             "coverImage": {
               "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
@@ -732,76 +663,143 @@
               "color": "#f1a143"
             },
             "studio": "Studio Pierrot",
+            "rank": 1,
+            "badge": "TRENDING"
+          },
+          {
+            "id": 195516,
+            "idMal": 61987,
+            "title": {
+              "romaji": "Kusuriya no Hitorigoto 3rd Season",
+              "english": "The Apothecary Diaries Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 85,
+            "popularity": 110573,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "siteUrl": "https://anilist.co/anime/195516",
+            "nextAiringEpisode": {
+              "airingAt": 1794578400,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
+              "color": "#e4a128"
+            },
+            "studio": "OLM",
+            "rank": 2,
+            "badge": "TRENDING"
+          },
+          {
+            "id": 204389,
+            "idMal": 63140,
+            "title": {
+              "romaji": "Yasei no Last Boss ga Arawareta! 2nd Season",
+              "english": "A Wild Last Boss Appeared! Season 2"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 73,
+            "popularity": 24507,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/204389",
+            "nextAiringEpisode": {
+              "airingAt": 1794663000,
+              "episode": 8
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx204389-jCoFCeTthDMy.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204389-jCoFCeTthDMy.jpg",
+              "color": "#e45dc9"
+            },
+            "studio": "WAO World",
             "rank": 3,
             "badge": "TRENDING"
           },
           {
-            "id": 205896,
-            "idMal": 63292,
+            "id": 21,
+            "idMal": 21,
             "title": {
-              "romaji": "Shinja Zero no Megami-sama to Hajimeru Isekai Kouryaku",
-              "english": "Full Clearing Another World under a Goddess with Zero Believers"
+              "romaji": "ONE PIECE",
+              "english": "ONE PIECE"
             },
             "format": "TV",
             "status": "RELEASING",
             "episodes": null,
             "season": "FALL",
-            "seasonYear": 2026,
-            "averageScore": 65,
-            "popularity": 19297,
-            "duration": null,
+            "seasonYear": 1999,
+            "averageScore": 87,
+            "popularity": 767285,
+            "duration": 24,
             "genres": [
+              "Action",
               "Adventure",
+              "Comedy",
+              "Drama",
               "Fantasy"
             ],
-            "siteUrl": "https://anilist.co/anime/205896",
+            "siteUrl": "https://anilist.co/anime/21",
             "nextAiringEpisode": {
-              "airingAt": 1794148200,
-              "episode": 5
+              "airingAt": 1798985760,
+              "episode": 1181
             },
             "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx205896-ElrV8oVAsuax.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205896-ElrV8oVAsuax.jpg",
-              "color": "#5dbbe4"
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-ELSYx3yMPcKM.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx21-ELSYx3yMPcKM.jpg",
+              "color": "#e49335"
             },
-            "studio": "HORNETS",
+            "studio": "Toei Animation",
             "rank": 4,
             "badge": "TRENDING"
           },
           {
-            "id": 186541,
-            "idMal": 60948,
+            "id": 187402,
+            "idMal": 61153,
             "title": {
-              "romaji": "Mezametara Saikyou Soubi to Uchuusen-mochi datta node, Ikkodate Mezashite Youhei to shite Jiyuu ni Ikitai",
-              "english": "Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship!"
+              "romaji": "Tensei shita Dai Seijo wa, Seijo de Aru Koto wo Hita Kakusu",
+              "english": "A Tale of the Secret Saint"
             },
-            "format": "TV",
+            "format": "ONA",
             "status": "RELEASING",
-            "episodes": 13,
+            "episodes": null,
             "season": "FALL",
             "seasonYear": 2026,
             "averageScore": 69,
-            "popularity": 27547,
+            "popularity": 19467,
             "duration": 24,
             "genres": [
               "Action",
-              "Comedy",
-              "Drama",
-              "Mecha",
-              "Romance",
-              "Sci-Fi"
+              "Adventure",
+              "Fantasy"
             ],
-            "siteUrl": "https://anilist.co/anime/186541",
+            "siteUrl": "https://anilist.co/anime/187402",
             "nextAiringEpisode": {
-              "airingAt": 1794141000,
-              "episode": 6
+              "airingAt": 1794661200,
+              "episode": 8
             },
             "coverImage": {
-              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx186541-caYpLsLmbCh7.jpg",
-              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186541-caYpLsLmbCh7.jpg",
-              "color": "#d6bb78"
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx187402-ReKkLwFmMV3q.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx187402-ReKkLwFmMV3q.jpg",
+              "color": "#50bbe4"
             },
-            "studio": "studio A-CAT",
+            "studio": "Felix Film",
             "rank": 5,
             "badge": "TRENDING"
           }
@@ -825,13 +823,13 @@
         "seed": 45
       },
       "anime_ids": [
-        212888,
-        206814,
         195604,
-        205896,
-        186541
+        195516,
+        204389,
+        21,
+        187402
       ],
-      "caption": "Top 5 trending anime this week 🏆\n\n#1 Overgeared — 7.6/10\n#2 Dragon Ball Super: Beerus — 8.1/10\n#3 Black Clover Season 2 — 8.7/10\n#4 Full Clearing Another World under a Goddess with Zero Believers — 6.5/10\n#5 Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship! — 6.9/10\n\nWhich one are you watching right now? 👇\nTrack them all in MyAnimeDex — free anime tracker, link in bio.\n\n#anime #animerecommendations #fall2026anime #overgeared #myanimedex"
+      "caption": "Top 5 trending anime this week 🏆\n\n#1 Black Clover Season 2 — 8.7/10\n#2 The Apothecary Diaries Season 3 — 8.5/10\n#3 A Wild Last Boss Appeared! Season 2 — 7.3/10\n#4 ONE PIECE — 8.7/10\n#5 A Tale of the Secret Saint — 6.9/10\n\nWhich one are you watching right now? 👇\nTrack them all in MyAnimeDex — free anime tracker, link in bio.\n\n#anime #animeranking #fall2026anime #blackclover #myanimedex"
     },
     "2026-11-08:reel": {
       "kind": "reel_top5",
