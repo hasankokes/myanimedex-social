@@ -37,10 +37,10 @@
   },
   "dry_done": {},
   "failures": {
-    "2026-11-05:reel": {
+    "2026-11-09:story": {
       "count": 1,
-      "error": "GitHub Pages did not serve 2 image(s) within 600s (first: https://hasankokes.github.io/myanimedex-social/media/2026-11-05-reel-193004/reel.mp4). Check Settings → Pages (source: gh-pages branch). Nothing was published.",
-      "last": "2026-11-05T19:29:39+00:00"
+      "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
+      "last": "2026-11-09T14:00:17+00:00"
     }
   },
   "features": {
