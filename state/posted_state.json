@@ -38,9 +38,9 @@
   "dry_done": {},
   "failures": {
     "2026-11-09:story": {
-      "count": 1,
+      "count": 2,
       "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
-      "last": "2026-11-09T14:00:17+00:00"
+      "last": "2026-11-09T14:35:21+00:00"
     }
   },
   "features": {
