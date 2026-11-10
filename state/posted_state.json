@@ -47,6 +47,11 @@
       "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
       "last": "2026-11-09T15:10:14+00:00"
     },
+    "2026-11-10:reel": {
+      "count": 1,
+      "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
+      "last": "2026-11-10T19:00:38+00:00"
+    },
     "2026-11-10:story": {
       "count": 3,
       "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
