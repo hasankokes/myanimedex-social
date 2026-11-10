@@ -88,9 +88,7 @@ def hashtags(season: str, year: int, media: dict[str, Any] | None, extra: list[s
             raise MadError(f"Invalid hashtag {tag!r} (lowercase letters, digits, underscore only)")
         if _is_banned(tag, cfg["banned_substrings"]):
             raise MadError(f"Hashtag {tag} is on the banned list (content/hashtags.yaml)")
-    if not 3 <= len(tags) <= 5:
-        raise MadError(f"Expected 3–5 hashtags, got {len(tags)}: {tags}")
-    return tags
+    return tags  # the 3–5 count is enforced in with_format_tags, after the format tags are added
 
 
 def with_format_tags(kind: str, tags: list[str]) -> list[str]:
@@ -108,6 +106,8 @@ def with_format_tags(kind: str, tags: list[str]) -> list[str]:
     for tag in final:
         if not re.fullmatch(r"#[a-z0-9_]+", tag) or _is_banned(tag, cfg["banned_substrings"]):
             raise MadError(f"Invalid or banned hashtag {tag!r} (content/hashtags.yaml)")
+    if not 3 <= len(final) <= 5:
+        raise MadError(f"Expected 3–5 hashtags for {kind}, got {len(final)}: {final}")
     return final
 
 
