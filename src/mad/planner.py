@@ -560,14 +560,24 @@ def build_plan(week: str, st: dict[str, Any]) -> dict[str, Any]:
     monday = week_monday(week)
     taken: set[int] = set()
     slots: dict[str, Any] = {}
+    errors: dict[str, str] = {}
     # Posts first so they get first choice of anime, stories fill around them.
     order = {"post": 0, "reel": 1, "story": 2}
     for weekday, slot, _ in sorted(SCHEDULE, key=lambda s: (order[s[1]], s[0])):
         day = monday + timedelta(days=weekday - 1)
         kind = kind_for(day, slot)
-        slots[slot_key(day, slot)] = build_slot(kind, day, st, taken)
-    return {"week": week, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        try:
+            slots[slot_key(day, slot)] = build_slot(kind, day, st, taken)
+        except MadError as exc:
+            # One broken slot must not block the whole week: leave it out of the plan, the publish
+            # run rebuilds just that slot (add_slot) and the preview issue flags it.
+            warn(f"Could not build {kind} for {day}: {exc}")
+            errors[slot_key(day, slot)] = f"{kind}: {exc}"
+    plan = {"week": week, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "slots": dict(sorted(slots.items()))}
+    if errors:
+        plan["errors"] = errors
+    return plan
 
 
 def add_slot(plan: dict[str, Any], day: date, slot: str, st: dict[str, Any]) -> dict[str, Any]:
@@ -578,6 +588,7 @@ def add_slot(plan: dict[str, Any], day: date, slot: str, st: dict[str, Any]) -> 
     taken = {aid for s in plan["slots"].values() for aid in s.get("anime_ids", [])}
     plan["slots"][slot_key(day, slot)] = build_slot(kind, day, st, taken)
     plan["slots"] = dict(sorted(plan["slots"].items()))
+    plan.get("errors", {}).pop(slot_key(day, slot), None)
     return plan
 
 

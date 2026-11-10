@@ -323,6 +323,9 @@ def cmd_preview(args) -> int:
              "so this is exactly what will be posted.", "",
              "To change something: edit the caption in the plan file, set `\"skip\": true` on a slot, or rebuild "
              "with *Weekly preview → force*. Times: posts 19:00 UTC, stories 14:00 UTC.", ""]
+    if plan.get("errors"):
+        lines += ["> 🔴 **Some slots could not be built** — they are retried at publish time, but check them:", ">"]
+        lines += [f"> - `{k}` {v}" for k, v in plan["errors"].items()] + [""]
     for key, slot in plan["slots"].items():
         day = date.fromisoformat(slot["date"])
         lines.append(f"### {day:%a %b %-d} — {KIND_LABELS[slot['kind']]}" + (" — ⏭️ SKIPPED" if slot.get("skip") else ""))
