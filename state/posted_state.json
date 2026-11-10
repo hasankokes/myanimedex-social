@@ -48,9 +48,9 @@
       "last": "2026-11-09T15:10:14+00:00"
     },
     "2026-11-10:story": {
-      "count": 2,
+      "count": 3,
       "error": "Expected 3–5 hashtags, got 2: ['#anime', '#myanimedex']",
-      "last": "2026-11-10T14:35:17+00:00"
+      "last": "2026-11-10T15:10:23+00:00"
     }
   },
   "features": {
