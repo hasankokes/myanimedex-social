@@ -58,7 +58,7 @@
     }
   },
   "features": {
-    "last_id": "languages"
+    "last_id": "shared-lists"
   },
   "followers": {
     "2026-11-06": 16
@@ -265,6 +265,13 @@
       "kind": "reel_quiz",
       "media_id": "18124547528289094",
       "published_at": "2026-11-10T20:12:40+00:00"
+    },
+    "2026-11-11:post": {
+      "anime_ids": [],
+      "fb_id": "1442763398916337_122109322749523437",
+      "kind": "feature",
+      "media_id": "18132484687842555",
+      "published_at": "2026-11-11T19:01:26+00:00"
     },
     "2026-11-11:story": {
       "anime_ids": [
