@@ -48,4 +48,5 @@ jobs:
         run: python -m mad run --slot story --type story_tip --extra
       - name: Commit state
         if: always() && steps.window.outputs.on == 'true'
-        run: scripts/commit_state.sh "state: extra tip ${{ github.run_id }}"
+        run: |
+          scripts/commit_state.sh "state: extra tip ${{ github.run_id }}"
