@@ -298,10 +298,16 @@
       "kind": "story_download",
       "media_id": "18183144955431636",
       "published_at": "2026-11-12T14:01:18+00:00"
+    },
+    "2026-11-12:story#extra-2213": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18154704202544185",
+      "published_at": "2026-11-12T22:14:18+00:00"
     }
   },
   "tips": {
-    "last_id": "episode-plus"
+    "last_id": "favorites-filter"
   },
   "top5_last": [
     195604,
