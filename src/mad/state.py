@@ -9,7 +9,7 @@ import json
 from datetime import date, timedelta
 from typing import Any
 
-from .config import STATE_FILE
+from .config import STATE_FILE, load_yaml
 
 EMPTY: dict[str, Any] = {
     "version": 1,
@@ -67,7 +67,11 @@ def record_publish(state: dict[str, Any], slot_key: str, slot: dict[str, Any], m
     elif slot["kind"] == "reel_app_demo":
         state["reel_demos"]["last_id"] = slot["data"]["demo"]["id"]
     elif slot["kind"] == "story_tip":
-        state["tips"]["last_id"] = slot["data"]["tip"]["id"]
+        tip_id = slot["data"]["tip"]["id"]
+        state["tips"]["last_id"] = tip_id
+        used = [t for t in state["tips"].get("used") or [] if t != tip_id] + [tip_id]
+        enabled = {t["id"] for t in (load_yaml("tips.yaml").get("tips") or []) if t.get("enabled", True)}
+        state["tips"]["used"] = [] if enabled <= set(used) else used  # full cycle done -> start over
     elif slot["kind"] == "top5" and slot["data"].get("lens", {}).get("id", "season_score") == "season_score":
         state["top5_last"] = [a["id"] for a in slot["data"]["items"]]
     # Keep the file small: drop anime entries older than a year.

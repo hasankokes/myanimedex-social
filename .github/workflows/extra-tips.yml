@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 30
     env:
       PYTHONPATH: src
-      EXTRA_UNTIL: "2026-11-18"
+      EXTRA_UNTIL: "2026-11-17"
       DRY_RUN: ${{ vars.DRY_RUN == 'true' }}
     steps:
       - name: Campaign window

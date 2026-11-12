@@ -348,9 +348,32 @@ def build_story_weekend(ctx: Ctx) -> dict[str, Any]:
     return {"data": {"anime": snapshot(m)}, "anime_ids": [m["id"]]}
 
 
+def _planned_tips(day: date, published: dict[str, Any]) -> set[str]:
+    """Tips already locked into this/next week's plan for a later slot that hasn't gone out yet."""
+    ids = set()
+    for week in {week_id(day), week_id(day + timedelta(days=7))}:
+        for key, slot in ((load_plan(week) or {}).get("slots") or {}).items():
+            if slot.get("kind") == "story_tip" and key not in published and slot.get("date", "") > day.isoformat():
+                ids.add(((slot.get("data") or {}).get("tip") or {}).get("id"))
+    return ids
+
+
 def build_story_tip(ctx: Ctx) -> dict[str, Any]:
-    tip = _rotate(load_yaml("tips.yaml").get("tips") or [], ctx.state["tips"]["last_id"], "tips")
-    return {"data": {"tip": tip}, "anime_ids": []}
+    """Next tip in file order that hasn't been posted yet (and isn't reserved by a planned slot);
+    starts over once every tip has been used."""
+    tips = [t for t in (load_yaml("tips.yaml").get("tips") or []) if t.get("enabled", True)]
+    if not tips:
+        raise MadError("content/tips.yaml has no enabled entries")
+    used = set(ctx.state["tips"].get("used") or [])
+    reserved = _planned_tips(ctx.day, ctx.state["slots"])
+    ids = [t["id"] for t in tips]
+    last = ctx.state["tips"].get("last_id")
+    start = (ids.index(last) + 1) if last in ids else 0
+    ordered = tips[start:] + tips[:start]
+    fresh = [t for t in ordered if t["id"] not in used | reserved]
+    if not fresh:  # everything posted: new cycle, still skipping reserved ones
+        fresh = [t for t in ordered if t["id"] not in reserved] or ordered
+    return {"data": {"tip": fresh[0]}, "anime_ids": []}
 
 
 def build_story_download(ctx: Ctx) -> dict[str, Any]:

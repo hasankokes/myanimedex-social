@@ -307,7 +307,12 @@
     }
   },
   "tips": {
-    "last_id": "favorites-filter"
+    "last_id": "favorites-filter",
+    "used": [
+      "calendar-today",
+      "episode-plus",
+      "favorites-filter"
+    ]
   },
   "top5_last": [
     195604,
