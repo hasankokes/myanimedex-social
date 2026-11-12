@@ -191,7 +191,9 @@ def cmd_run(args) -> int:
         kind = args.type
         slot_name = planner.slot_of(kind)
         key = planner.slot_key(day, slot_name)
-        if planner.kind_for(day, slot_name) != kind:
+        if args.extra:
+            key += f"#extra-{datetime.now(timezone.utc):%H%M}"  # several extras a day, each its own slot
+        elif planner.kind_for(day, slot_name) != kind:
             key += f"#{kind}"  # manual extra post: don't collide with the scheduled slot
         with group(f"Build {kind} (manual)"):
             slot = planner.build_slot(kind, day, st)
@@ -474,6 +476,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--type", choices=list(planner.BUILDERS), help="ignore the schedule and build this type now")
     r.add_argument("--dry-run", action="store_true", help="render only, never upload or publish")
     r.add_argument("--force", action="store_true", help="publish even if this slot was already published")
+    r.add_argument("--extra", action="store_true", help="with --type: an extra post on top of the schedule")
     r.add_argument("--scheduled", action="store_true",
                    help="cron run: resolve the slot's day from the schedule and skip if far too late")
 

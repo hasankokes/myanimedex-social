@@ -1,0 +1,51 @@
+name: Extra tip stories
+
+# Temporary campaign: extra app-tip stories (on top of the normal schedule) so the
+# "App tips" highlight fills up quickly. Tips rotate through content/tips.yaml without repeats.
+# Stops by itself after EXTRA_UNTIL; delete this file afterwards.
+on:
+  schedule:
+    - cron: "0 10,20 * * *"   # 13:00 and 23:00 TR
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  tip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+      EXTRA_UNTIL: "2026-11-18"
+      DRY_RUN: ${{ vars.DRY_RUN == 'true' }}
+    steps:
+      - name: Campaign window
+        id: window
+        run: |
+          if [[ "$(date -u +%F)" > "$EXTRA_UNTIL" ]]; then
+            echo "Campaign ended on $EXTRA_UNTIL — nothing to do"; echo "on=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "on=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v7
+        if: steps.window.outputs.on == 'true'
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        if: steps.window.outputs.on == 'true'
+      - name: Publish an extra tip story
+        if: steps.window.outputs.on == 'true'
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m mad run --slot story --type story_tip --extra
+      - name: Commit state
+        if: always() && steps.window.outputs.on == 'true'
+        run: scripts/commit_state.sh "state: extra tip ${{ github.run_id }}"
