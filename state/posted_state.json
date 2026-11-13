@@ -308,14 +308,21 @@
       "kind": "story_weekend",
       "media_id": "18018394289958416",
       "published_at": "2026-11-13T14:01:24+00:00"
+    },
+    "2026-11-13:story#extra-1737": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "17880371733565528",
+      "published_at": "2026-11-13T17:38:32+00:00"
     }
   },
   "tips": {
-    "last_id": "favorites-filter",
+    "last_id": "reminders-bell",
     "used": [
       "calendar-today",
       "episode-plus",
-      "favorites-filter"
+      "favorites-filter",
+      "reminders-bell"
     ]
   },
   "top5_last": [
