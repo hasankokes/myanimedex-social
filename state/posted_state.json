@@ -338,17 +338,24 @@
       "kind": "story_tip",
       "media_id": "17896453776683772",
       "published_at": "2026-11-14T16:30:45+00:00"
+    },
+    "2026-11-14:story#extra-2348": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18138613801788353",
+      "published_at": "2026-11-14T23:49:43+00:00"
     }
   },
   "tips": {
-    "last_id": "discover-genres",
+    "last_id": "invite-friend",
     "used": [
       "calendar-today",
       "episode-plus",
       "favorites-filter",
       "reminders-bell",
       "rate-review",
-      "discover-genres"
+      "discover-genres",
+      "invite-friend"
     ]
   },
   "top5_last": [
