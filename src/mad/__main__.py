@@ -414,7 +414,7 @@ def cmd_fb_backfill(args) -> int:
                 m = ig._call("GET", rec["media_id"], {"fields": "media_type,media_url,caption,children{media_type,media_url}"})
                 text = fb_caption(m.get("caption") or "")
                 if m.get("media_type") == "VIDEO":
-                    fb_id = page.reel(m["media_url"], text)
+                    fb_id = page.reel(m["media_url"], text, download=True)  # FB can't fetch IG's CDN
                 elif m.get("media_type") == "CAROUSEL_ALBUM":
                     fb_id = page.album([c["media_url"] for c in m["children"]["data"] if c.get("media_type") == "IMAGE"], text)
                 else:

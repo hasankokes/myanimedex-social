@@ -61,13 +61,25 @@ class FacebookPage:
             params[f"attached_media[{i}]"] = json.dumps({"media_fbid": fbid})
         return self.api._call("POST", f"{self.page_id}/feed", params, retry=False)["id"]
 
-    def reel(self, video_url: str, caption: str) -> str:
+    def reel(self, video_url: str, caption: str, download: bool = False) -> str:
+        """download=True fetches the video here and uploads the bytes (for URLs Facebook can't fetch,
+        e.g. Instagram's CDN); otherwise Facebook pulls it from video_url (GitHub Pages)."""
+        data = None
+        if download:
+            got = requests.get(video_url, timeout=180)
+            if not got.ok:
+                raise MadError(f"Could not download the video for Facebook (HTTP {got.status_code})")
+            data = got.content
         start = self.api._call("POST", f"{self.page_id}/video_reels", {"upload_phase": "start"})
         video_id = start["video_id"]
         upload_url = start.get("upload_url") or \
             f"https://rupload.facebook.com/video-upload/{settings()['instagram']['graph_version']}/{video_id}"
-        resp = requests.post(upload_url, headers={"Authorization": f"OAuth {self.api.token}", "file_url": video_url},
-                             timeout=120)
+        headers = {"Authorization": f"OAuth {self.api.token}"}
+        if data is None:
+            headers["file_url"] = video_url
+        else:
+            headers.update({"offset": "0", "file_size": str(len(data))})
+        resp = requests.post(upload_url, headers=headers, data=data, timeout=300)
         if not resp.ok or not (resp.json() if resp.content else {}).get("success"):
             raise MadError(f"Facebook reel upload failed (HTTP {resp.status_code}): {resp.text[:300]}")
         self.api._call("POST", f"{self.page_id}/video_reels", {
