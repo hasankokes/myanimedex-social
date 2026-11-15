@@ -44,4 +44,5 @@ jobs:
           python -m mad fb-backfill "${args[@]}"
       - name: Commit state
         if: always()
-        run: scripts/commit_state.sh "state: facebook backfill ${{ github.run_id }}"
+        run: |
+          scripts/commit_state.sh "state: facebook backfill ${{ github.run_id }}"
