@@ -1,0 +1,1134 @@
+{
+  "week": "2026-W47",
+  "generated_at": "2026-11-15T12:00:53+00:00",
+  "slots": {
+    "2026-11-16:post": {
+      "kind": "airing_week",
+      "slot": "post",
+      "date": "2026-11-16",
+      "data": {
+        "items": [
+          {
+            "id": 152677,
+            "idMal": 52480,
+            "title": {
+              "romaji": "Tantei wa mou, Shindeiru. Season 2",
+              "english": "The Detective Is Already Dead Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 13,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 70,
+            "popularity": 27227,
+            "duration": null,
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Mystery",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/152677",
+            "nextAiringEpisode": {
+              "airingAt": 1795005000,
+              "episode": 7
+            },
+            "airing": {
+              "airingAt": 1795005000,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx152677-gtJbgjE94lCN.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx152677-gtJbgjE94lCN.png",
+              "color": null
+            },
+            "studio": "ENGI",
+            "airing_day": "Wed"
+          },
+          {
+            "id": 204011,
+            "idMal": 63098,
+            "title": {
+              "romaji": "PSYЯEN",
+              "english": "PSYREN"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 70,
+            "popularity": 24663,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/204011",
+            "nextAiringEpisode": {
+              "airingAt": 1794837600,
+              "episode": 6
+            },
+            "airing": {
+              "airingAt": 1794837600,
+              "episode": 6
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx204011-j45RZoqYbdZK.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx204011-j45RZoqYbdZK.jpg",
+              "color": "#0dd6e4"
+            },
+            "studio": "Satelight",
+            "airing_day": "Mon"
+          },
+          {
+            "id": 209502,
+            "idMal": 63754,
+            "title": {
+              "romaji": "Shiotaiou no Satou-san ga Ore ni dake Amai",
+              "english": "The Cold Sato-san is Only Sweet to Me"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 68,
+            "popularity": 24184,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Romance"
+            ],
+            "siteUrl": "https://anilist.co/anime/209502",
+            "nextAiringEpisode": {
+              "airingAt": 1794920400,
+              "episode": 7
+            },
+            "airing": {
+              "airingAt": 1794920400,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx209502-C81oN8M4Smlo.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx209502-C81oN8M4Smlo.jpg",
+              "color": "#f1bb50"
+            },
+            "studio": "Tezuka Productions",
+            "airing_day": "Tue"
+          },
+          {
+            "id": 212503,
+            "idMal": 64254,
+            "title": {
+              "romaji": "Hyouken no Majutsushi ga Sekai wo Suberu II",
+              "english": "The Iceblade Sorcerer Shall Rule the World II"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 66,
+            "popularity": 23805,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/212503",
+            "nextAiringEpisode": {
+              "airingAt": 1795105680,
+              "episode": 7
+            },
+            "airing": {
+              "airingAt": 1795105680,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212503-sXBpRZr96c4e.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212503-sXBpRZr96c4e.jpg",
+              "color": "#4378e4"
+            },
+            "studio": "Zero-G",
+            "airing_day": "Thu"
+          },
+          {
+            "id": 211778,
+            "idMal": 64084,
+            "title": {
+              "romaji": "Sekai Saikyou no Majo, Hajimemashita",
+              "english": "The World's Strongest Witch"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 70,
+            "popularity": 22475,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/211778",
+            "nextAiringEpisode": {
+              "airingAt": 1795006800,
+              "episode": 7
+            },
+            "airing": {
+              "airingAt": 1795006800,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx211778-0MXK5HqVFBYH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx211778-0MXK5HqVFBYH.jpg",
+              "color": "#5dbbf1"
+            },
+            "studio": "Bridge",
+            "airing_day": "Wed"
+          }
+        ],
+        "date_range": "Nov 16 – 22",
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        152677,
+        204011,
+        209502,
+        212503,
+        211778
+      ],
+      "caption": "This week's anime episodes you shouldn't miss — Fall 2026 edition ⚡\n\n1. The Detective Is Already Dead Season 2 — Ep 7 (Wed)\n2. PSYREN — Ep 6 (Mon)\n3. The Cold Sato-san is Only Sweet to Me — Ep 7 (Tue)\n4. The Iceblade Sorcerer Shall Rule the World II — Ep 7 (Thu)\n5. The World's Strongest Witch — Ep 7 (Wed)\n\nDrop a 🔥 for your favorite of the week.\nNever miss a drop: MyAnimeDex tracks your watchlist and airing calendar. Link in bio.\n\n#anime #newanime #fall2026anime #tanteiwamoushindeiru #myanimedex"
+    },
+    "2026-11-16:story": {
+      "kind": "story_anime_of_day",
+      "slot": "story",
+      "date": "2026-11-16",
+      "data": {
+        "anime": {
+          "id": 180894,
+          "idMal": 59787,
+          "title": {
+            "romaji": "Romelia Senki: Maou wo Taoshita nochi mo Jinrui Yabasou dakara Guntai Soshiki Shita",
+            "english": "Romelia War Chronicle"
+          },
+          "format": "ONA",
+          "status": "RELEASING",
+          "episodes": 12,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 73,
+          "popularity": 19527,
+          "duration": 24,
+          "genres": [
+            "Adventure",
+            "Drama",
+            "Fantasy"
+          ],
+          "siteUrl": "https://anilist.co/anime/180894",
+          "nextAiringEpisode": {
+            "airingAt": 1795262400,
+            "episode": 8
+          },
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx180894-o3pz4DWFm3je.png",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx180894-o3pz4DWFm3je.png",
+            "color": "#4393e4"
+          },
+          "studio": "Atra"
+        },
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        180894
+      ]
+    },
+    "2026-11-17:reel": {
+      "kind": "reel_quiz",
+      "slot": "reel",
+      "date": "2026-11-17",
+      "data": {
+        "rounds": [
+          {
+            "id": 21459,
+            "idMal": 31964,
+            "title": {
+              "romaji": "Boku no Hero Academia",
+              "english": "My Hero Academia"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SPRING",
+            "seasonYear": 2016,
+            "averageScore": 76,
+            "popularity": 890747,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy"
+            ],
+            "siteUrl": "https://anilist.co/anime/21459",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21459-nYh85uj2Fuwr.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx21459-nYh85uj2Fuwr.jpg",
+              "color": "#f1d643"
+            },
+            "studio": "bones",
+            "level": "EASY",
+            "focus": [
+              0.62,
+              0.3
+            ]
+          },
+          {
+            "id": 154587,
+            "idMal": 52991,
+            "title": {
+              "romaji": "Sousou no Frieren",
+              "english": "Frieren: Beyond Journey’s End"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 28,
+            "season": "FALL",
+            "seasonYear": 2023,
+            "averageScore": 90,
+            "popularity": 499391,
+            "duration": 24,
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/154587",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-qQTzQnEJJ3oB.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx154587-qQTzQnEJJ3oB.jpg",
+              "color": "#bbf1a1"
+            },
+            "studio": "MADHOUSE",
+            "level": "MEDIUM",
+            "focus": [
+              0.65,
+              0.51
+            ]
+          },
+          {
+            "id": 20829,
+            "idMal": 26243,
+            "title": {
+              "romaji": "Owari no Seraph",
+              "english": "Seraph of the End: Vampire Reign"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 12,
+            "season": "SPRING",
+            "seasonYear": 2015,
+            "averageScore": 73,
+            "popularity": 335284,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Drama",
+              "Fantasy",
+              "Mystery",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/20829",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx20829-pgsXVjrfyI5V.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx20829-pgsXVjrfyI5V.png",
+              "color": "#e4a15d"
+            },
+            "studio": "WIT STUDIO",
+            "level": "HARD",
+            "focus": [
+              0.54,
+              0.48
+            ]
+          }
+        ],
+        "seed": 47
+      },
+      "anime_ids": [
+        21459,
+        154587,
+        20829
+      ],
+      "caption": "Only real otaku get all 3 👀 Guess the anime before the reveal!\n\nDrop your score in the comments (no cheating 😤)\nNew quiz every Tuesday — follow so you don't miss it.\n\n#anime #animequiz #guesstheanime #myanimedex"
+    },
+    "2026-11-17:story": {
+      "kind": "story_tip",
+      "slot": "story",
+      "date": "2026-11-17",
+      "data": {
+        "tip": {
+          "id": "arena-play",
+          "title": "Anime Arena",
+          "text": "Pick favorites in head-to-head duels and crown your champion.",
+          "screenshot": "assets/screenshots/app/light/arena.jpg"
+        }
+      },
+      "anime_ids": []
+    },
+    "2026-11-18:post": {
+      "kind": "feature",
+      "slot": "post",
+      "date": "2026-11-18",
+      "data": {
+        "feature": {
+          "id": "arena",
+          "title": "Anime Arena",
+          "description": "Bracket battles between anime. Vote match by match and crown your all-time favorite.",
+          "kicker": "GAME MODE",
+          "screenshot": "assets/screenshots/app/dark/arena.jpg"
+        }
+      },
+      "anime_ids": [],
+      "caption": "Built for anime fans: Anime Arena 💛\n\nBracket battles between anime. Vote match by match and crown your all-time favorite.\n\nTrack what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.\n\n👉 Swipe to see it in the app.\n\n#anime #animeapp #animetracker #myanimedex"
+    },
+    "2026-11-18:story": {
+      "kind": "story_your_pick",
+      "slot": "story",
+      "date": "2026-11-18",
+      "data": {
+        "a": {
+          "id": 195571,
+          "idMal": 61999,
+          "title": {
+            "romaji": "Shuiro no Kamen",
+            "english": "The Vermilion Mask"
+          },
+          "format": "TV",
+          "status": "RELEASING",
+          "episodes": null,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 67,
+          "popularity": 18254,
+          "duration": 24,
+          "genres": [
+            "Action",
+            "Drama",
+            "Supernatural"
+          ],
+          "siteUrl": "https://anilist.co/anime/195571",
+          "nextAiringEpisode": {
+            "airingAt": 1795249800,
+            "episode": 7
+          },
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195571-fvj7u5GI7BRT.jpg",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195571-fvj7u5GI7BRT.jpg",
+            "color": "#e4bb5d"
+          },
+          "studio": "100studio"
+        },
+        "b": {
+          "id": 186742,
+          "idMal": 61014,
+          "title": {
+            "romaji": "Toaru Anbu no ITEM",
+            "english": "A Certain Dark Item"
+          },
+          "format": "TV",
+          "status": "RELEASING",
+          "episodes": null,
+          "season": "FALL",
+          "seasonYear": 2026,
+          "averageScore": 66,
+          "popularity": 17462,
+          "duration": 23,
+          "genres": [
+            "Action",
+            "Sci-Fi"
+          ],
+          "siteUrl": "https://anilist.co/anime/186742",
+          "nextAiringEpisode": {
+            "airingAt": 1795181400,
+            "episode": 7
+          },
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx186742-v7yfbefc8fuO.png",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186742-v7yfbefc8fuO.png",
+            "color": "#35f1a1"
+          },
+          "studio": "J.C.STAFF"
+        },
+        "season": "FALL",
+        "year": 2026
+      },
+      "anime_ids": [
+        195571,
+        186742
+      ]
+    },
+    "2026-11-19:reel": {
+      "kind": "reel_weekend",
+      "slot": "reel",
+      "date": "2026-11-19",
+      "data": {
+        "items": [
+          {
+            "id": 212888,
+            "idMal": 64340,
+            "title": {
+              "romaji": "Tempal: Item no Chikara",
+              "english": "Overgeared"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 76,
+            "popularity": 63691,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/212888",
+            "nextAiringEpisode": {
+              "airingAt": 1794753000,
+              "episode": 8
+            },
+            "airing": {
+              "airingAt": 1795357800,
+              "episode": 9
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212888-NhyvqPt5aIuJ.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx212888-NhyvqPt5aIuJ.jpg",
+              "color": "#f19335"
+            },
+            "studio": "J.C.STAFF",
+            "airing_day": "Sun"
+          },
+          {
+            "id": 205909,
+            "idMal": 63293,
+            "title": {
+              "romaji": "Hotaru no Yomeiri",
+              "english": "Firefly Wedding"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 75,
+            "popularity": 55604,
+            "duration": 23,
+            "genres": [
+              "Drama",
+              "Romance"
+            ],
+            "siteUrl": "https://anilist.co/anime/205909",
+            "nextAiringEpisode": {
+              "airingAt": 1795185000,
+              "episode": 7
+            },
+            "airing": {
+              "airingAt": 1795185000,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx205909-DM0fAzNQulod.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx205909-DM0fAzNQulod.jpg",
+              "color": "#aebb35"
+            },
+            "studio": "david production",
+            "airing_day": "Fri"
+          },
+          {
+            "id": 178083,
+            "idMal": 59088,
+            "title": {
+              "romaji": "Tokyo Revengers: Santen Sensou-hen",
+              "english": "Tokyo Revengers: War of the Three Titans Arc"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 13,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 77,
+            "popularity": 40246,
+            "duration": null,
+            "genres": [
+              "Action",
+              "Drama",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/178083",
+            "nextAiringEpisode": {
+              "airingAt": 1795193580,
+              "episode": 8
+            },
+            "airing": {
+              "airingAt": 1795193580,
+              "episode": 8
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178083-bg7pg6TCHwtG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx178083-bg7pg6TCHwtG.jpg",
+              "color": "#c99350"
+            },
+            "studio": "LIDENFILMS",
+            "airing_day": "Fri"
+          },
+          {
+            "id": 206814,
+            "idMal": 63367,
+            "title": {
+              "romaji": "Dragon Ball Super: Beerus",
+              "english": "Dragon Ball Super: Beerus"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 80,
+            "popularity": 31855,
+            "duration": 23,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/206814",
+            "nextAiringEpisode": {
+              "airingAt": 1794752160,
+              "episode": 6
+            },
+            "airing": {
+              "airingAt": 1795356960,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx206814-PVVzRbf1IQpe.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx206814-PVVzRbf1IQpe.jpg",
+              "color": "#e48643"
+            },
+            "studio": "Toei Animation",
+            "airing_day": "Sun"
+          },
+          {
+            "id": 185756,
+            "idMal": 60601,
+            "title": {
+              "romaji": "Tensei Kizoku, Kantei Skill de Nariagaru 3rd Season",
+              "english": "As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 68,
+            "popularity": 31107,
+            "duration": 24,
+            "genres": [
+              "Adventure",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/185756",
+            "nextAiringEpisode": {
+              "airingAt": 1794753000,
+              "episode": 8
+            },
+            "airing": {
+              "airingAt": 1795357800,
+              "episode": 9
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx185756-xPCl0RyQ7fXD.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx185756-xPCl0RyQ7fXD.jpg",
+              "color": "#d6f1c9"
+            },
+            "studio": "GeyeG Pictures",
+            "airing_day": "Sun"
+          }
+        ],
+        "date_range": "Nov 20 – 22",
+        "seed": 47
+      },
+      "anime_ids": [
+        212888,
+        205909,
+        178083,
+        206814,
+        185756
+      ],
+      "caption": "What to watch this weekend: new Fall 2026 episodes 🍿\n\n1. Overgeared — Ep 9 (Sun)\n2. Firefly Wedding — Ep 7 (Fri)\n3. Tokyo Revengers: War of the Three Titans Arc — Ep 8 (Fri)\n4. Dragon Ball Super: Beerus — Ep 7 (Sun)\n5. As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World Season 3 — Ep 9 (Sun)\n\nTag the friend you're watching Overgeared with.\nNever miss an episode with MyAnimeDex (link in bio).\n\n#anime #newanime #fall2026anime #overgeared #myanimedex"
+    },
+    "2026-11-19:story": {
+      "kind": "story_download",
+      "slot": "story",
+      "date": "2026-11-19",
+      "data": {
+        "variant": 1
+      },
+      "anime_ids": []
+    },
+    "2026-11-20:story": {
+      "kind": "story_weekend",
+      "slot": "story",
+      "date": "2026-11-20",
+      "data": {
+        "anime": {
+          "id": 210031,
+          "idMal": 63832,
+          "title": {
+            "romaji": "Seihantai na Kimi to Boku 2nd Season",
+            "english": "You and I Are Polar Opposites Season 2"
+          },
+          "format": "TV",
+          "status": "FINISHED",
+          "episodes": 13,
+          "season": "SUMMER",
+          "seasonYear": 2026,
+          "averageScore": 84,
+          "popularity": 72127,
+          "duration": 24,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance",
+            "Slice of Life"
+          ],
+          "siteUrl": "https://anilist.co/anime/210031",
+          "nextAiringEpisode": null,
+          "coverImage": {
+            "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210031-TppgcHZh46LY.jpg",
+            "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210031-TppgcHZh46LY.jpg",
+            "color": "#fe5093"
+          },
+          "studio": "Lapin Track"
+        }
+      },
+      "anime_ids": [
+        210031
+      ]
+    },
+    "2026-11-21:post": {
+      "kind": "top5",
+      "slot": "post",
+      "date": "2026-11-21",
+      "data": {
+        "items": [
+          {
+            "id": 124194,
+            "idMal": 42938,
+            "title": {
+              "romaji": "Fruits Basket: The Final",
+              "english": "Fruits Basket The Final Season"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SPRING",
+            "seasonYear": 2021,
+            "averageScore": 89,
+            "popularity": 179961,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Psychological",
+              "Romance",
+              "Slice of Life",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/124194",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124194-TJlqMMR7BGn9.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx124194-TJlqMMR7BGn9.jpg",
+              "color": "#35bbf1"
+            },
+            "studio": "TMS Entertainment",
+            "rank": 1,
+            "badge": "2021"
+          },
+          {
+            "id": 98478,
+            "idMal": 35180,
+            "title": {
+              "romaji": "3-gatsu no Lion 2nd Season",
+              "english": "March comes in like a lion Season 2"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 22,
+            "season": "FALL",
+            "seasonYear": 2017,
+            "averageScore": 89,
+            "popularity": 131543,
+            "duration": 25,
+            "genres": [
+              "Drama",
+              "Slice of Life"
+            ],
+            "siteUrl": "https://anilist.co/anime/98478",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx98478-Yua5iL9zbrji.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx98478-Yua5iL9zbrji.jpg",
+              "color": "#ffc993"
+            },
+            "studio": "Shaft",
+            "rank": 2,
+            "badge": "2017"
+          },
+          {
+            "id": 125367,
+            "idMal": 43608,
+            "title": {
+              "romaji": "Kaguya-sama wa Kokurasetai: Ultra Romantic",
+              "english": "Kaguya-sama: Love is War -Ultra Romantic-"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SPRING",
+            "seasonYear": 2022,
+            "averageScore": 89,
+            "popularity": 298981,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Psychological",
+              "Romance",
+              "Slice of Life"
+            ],
+            "siteUrl": "https://anilist.co/anime/125367",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125367-1yuq9NFcQuLI.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx125367-1yuq9NFcQuLI.png",
+              "color": "#d6f1a1"
+            },
+            "studio": "A-1 Pictures",
+            "rank": 3,
+            "badge": "2022"
+          },
+          {
+            "id": 4181,
+            "idMal": 4181,
+            "title": {
+              "romaji": "CLANNAD: After Story",
+              "english": "Clannad: After Story"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 24,
+            "season": "FALL",
+            "seasonYear": 2008,
+            "averageScore": 88,
+            "popularity": 227499,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Romance",
+              "Slice of Life",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/4181",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx4181-zUKE7BZC62OF.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx4181-zUKE7BZC62OF.png",
+              "color": "#f1e450"
+            },
+            "studio": "Kyoto Animation",
+            "rank": 4,
+            "badge": "2008"
+          },
+          {
+            "id": 101338,
+            "idMal": 37510,
+            "title": {
+              "romaji": "Mob Psycho 100 II",
+              "english": "Mob Psycho 100 II"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "WINTER",
+            "seasonYear": 2019,
+            "averageScore": 87,
+            "popularity": 457490,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Comedy",
+              "Drama",
+              "Psychological",
+              "Slice of Life",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/101338",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101338-rokVscjRYzdP.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx101338-rokVscjRYzdP.jpg",
+              "color": "#50e4f1"
+            },
+            "studio": "bones",
+            "rank": 5,
+            "badge": "2019"
+          }
+        ],
+        "season": "FALL",
+        "year": 2026,
+        "lens": {
+          "id": "alltime_genre",
+          "hook": [
+            "ALL-TIME",
+            "TOP 5",
+            "SLICE OF LIFE"
+          ],
+          "cover_title": "ALL-TIME SLICE OF LIFE",
+          "banner": "THE BEST EVER, BY FAN SCORE",
+          "header": "ALL-TIME TOP 5 SLICE OF LIFE",
+          "chip": "ALL-TIME",
+          "footnote": "Finished series with 50K+ fans on AniList"
+        },
+        "min_popularity_label": "20K",
+        "seed": 47
+      },
+      "anime_ids": [
+        124194,
+        98478,
+        125367,
+        4181,
+        101338
+      ],
+      "caption": "The best slice of life anime of all time — our Top 5 📊\n\n#1 Fruits Basket The Final Season — 8.9/10\n#2 March comes in like a lion Season 2 — 8.9/10\n#3 Kaguya-sama: Love is War -Ultra Romantic- — 8.9/10\n#4 Clannad: After Story — 8.8/10\n#5 Mob Psycho 100 II — 8.7/10\n\nIs Fruits Basket The Final Season really #1? What's missing from this list? 👇\nMyAnimeDex · track what you watch · link in bio.\n\n#anime #animeranking #sliceoflifeanime #fruitsbasketthefinal #myanimedex"
+    },
+    "2026-11-22:reel": {
+      "kind": "reel_top5",
+      "slot": "reel",
+      "date": "2026-11-22",
+      "data": {
+        "items": [
+          {
+            "id": 195604,
+            "idMal": 61967,
+            "title": {
+              "romaji": "Black Clover 2nd Season",
+              "english": "Black Clover Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": null,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 88,
+            "popularity": 110082,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Comedy",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/195604",
+            "nextAiringEpisode": {
+              "airingAt": 1795269600,
+              "episode": 8
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195604-tSZcfKbVqSEG.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195604-tSZcfKbVqSEG.jpg",
+              "color": "#f1a143"
+            },
+            "studio": "Studio Pierrot",
+            "rank": 1,
+            "movement": 0
+          },
+          {
+            "id": 210482,
+            "idMal": 61469,
+            "title": {
+              "romaji": "JoJo no Kimyou na Bouken: Steel Ball Run - 2nd & 3rd STAGE",
+              "english": "STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE"
+            },
+            "format": "ONA",
+            "status": "RELEASING",
+            "episodes": 11,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 86,
+            "popularity": 52083,
+            "duration": 23,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Drama",
+              "Mystery",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/210482",
+            "nextAiringEpisode": {
+              "airingAt": 1795161600,
+              "episode": 9
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx210482-P1VNKbqdJ6Zj.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx210482-P1VNKbqdJ6Zj.jpg",
+              "color": "#f1ae50"
+            },
+            "studio": "david production",
+            "rank": 2,
+            "movement": 0
+          },
+          {
+            "id": 195516,
+            "idMal": 61987,
+            "title": {
+              "romaji": "Kusuriya no Hitorigoto 3rd Season",
+              "english": "The Apothecary Diaries Season 3"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 85,
+            "popularity": 113761,
+            "duration": 24,
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "siteUrl": "https://anilist.co/anime/195516",
+            "nextAiringEpisode": {
+              "airingAt": 1795183200,
+              "episode": 8
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195516-MJpUZlOberqH.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195516-MJpUZlOberqH.jpg",
+              "color": "#e4a128"
+            },
+            "studio": "OLM",
+            "rank": 3,
+            "movement": 0
+          },
+          {
+            "id": 195539,
+            "idMal": 61990,
+            "title": {
+              "romaji": "Cyberpunk: Edgerunners 2",
+              "english": "Cyberpunk: Edgerunners 2"
+            },
+            "format": "ONA",
+            "status": "FINISHED",
+            "episodes": 10,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 83,
+            "popularity": 124398,
+            "duration": 28,
+            "genres": [
+              "Action",
+              "Drama",
+              "Sci-Fi"
+            ],
+            "siteUrl": "https://anilist.co/anime/195539",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx195539-4LdfmKIHzuxr.png",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx195539-4LdfmKIHzuxr.png",
+              "color": "#fe286b"
+            },
+            "studio": "TRIGGER",
+            "rank": 4,
+            "movement": 0
+          },
+          {
+            "id": 189123,
+            "idMal": 61323,
+            "title": {
+              "romaji": "Ao no Hako Season 2",
+              "english": "Blue Box Season 2"
+            },
+            "format": "TV",
+            "status": "RELEASING",
+            "episodes": 12,
+            "season": "FALL",
+            "seasonYear": 2026,
+            "averageScore": 81,
+            "popularity": 53452,
+            "duration": 24,
+            "genres": [
+              "Romance",
+              "Slice of Life",
+              "Sports"
+            ],
+            "siteUrl": "https://anilist.co/anime/189123",
+            "nextAiringEpisode": {
+              "airingAt": 1795332600,
+              "episode": 7
+            },
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx189123-0secXELIhkIW.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx189123-0secXELIhkIW.jpg",
+              "color": "#e4ae50"
+            },
+            "studio": "Electric Circus",
+            "rank": 5,
+            "movement": 0
+          }
+        ],
+        "season": "FALL",
+        "year": 2026,
+        "lens": {
+          "id": "season_score",
+          "hook": [
+            "TOP 5",
+            "ANIME THIS",
+            "SEASON"
+          ],
+          "cover_title": "THIS SEASON",
+          "banner": "RANKED BY FAN SCORE",
+          "header": "TOP 5 THIS SEASON",
+          "chip": "FALL 2026",
+          "footnote": "Popular titles only (20K+ on lists)"
+        },
+        "min_popularity_label": "20K",
+        "seed": 47
+      },
+      "anime_ids": [
+        195604,
+        210482,
+        195516,
+        195539,
+        189123
+      ],
+      "caption": "The best new anime of Fall 2026, ranked by fans ⭐ Watch till #1.\n\n#1 Black Clover Season 2 — 8.8/10\n#2 STEEL BALL RUN JoJo's Bizarre Adventure 2nd - 3rd STAGE — 8.6/10\n#3 The Apothecary Diaries Season 3 — 8.5/10\n#4 Cyberpunk: Edgerunners 2 — 8.3/10\n#5 Blue Box Season 2 — 8.1/10\n\nSave this for your next watch night and tell us what's missing.\nMyAnimeDex · free anime tracker · link in bio.\n\n#anime #animeranking #fall2026anime #blackclover #myanimedex"
+    }
+  }
+}
