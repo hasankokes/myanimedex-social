@@ -23,13 +23,14 @@ SCHEDULE: list[tuple[int, str, str | tuple[str, ...]]] = [
     (3, "story", "story_your_pick"),
     (4, "story", "story_download"),
     (5, "story", "story_weekend"),
-    (2, "reel", "reel_quiz"),
+    (1, "reel", "reel_quick_quiz"), (2, "reel", "reel_quiz"), (3, "reel", "reel_quick_quiz"),
+    (5, "reel", "reel_quick_quiz"), (6, "reel", "reel_quick_quiz"),
     (4, "reel", ("reel_recs", "reel_weekend")),
     (7, "reel", ("reel_tierlist", "reel_top5")),
 ]
 POST_KINDS = ["airing_week", "feature", "top5"]
 STORY_KINDS = ["story_anime_of_day", "story_tip", "story_your_pick", "story_download", "story_weekend"]
-REEL_KINDS = ["reel_quiz", "reel_recs", "reel_tierlist", "reel_app_demo", "reel_weekend", "reel_top5", "reel_teaser"]
+REEL_KINDS = ["reel_quick_quiz", "reel_quiz", "reel_recs", "reel_tierlist", "reel_app_demo", "reel_weekend", "reel_top5", "reel_teaser"]
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 KEEP_FIELDS = ["id", "idMal", "title", "format", "status", "episodes", "season", "seasonYear",
@@ -463,6 +464,24 @@ def build_reel_quiz(ctx: Ctx) -> dict[str, Any]:
             "caption": captions.build("reel_quiz", ctx.seed, fields, tags)}
 
 
+def build_reel_quick_quiz(ctx: Ctx) -> dict[str, Any]:
+    """Daily short reel (~8 s, loops): one zoomed/pixelated poster, 3-2-1, reveal, follow CTA."""
+    import random
+
+    pool = [m for m in anilist.find_media(popularity_greater=100000, sort=["POPULARITY_DESC"], pages=5)
+            if (m.get("coverImage") or {}).get("extraLarge")]
+    pool = _scored(pool)  # one per franchise
+    used = _used_recently(ctx.state, "quiz_used", ctx.day, 180) | ctx.taken
+    fresh = [m for m in pool if m["id"] not in used] or pool
+    rnd = random.Random(ctx.day.toordinal() * 7 + 1)
+    m = rnd.choice(fresh[: max(1, round(len(fresh) * 0.7))])  # skip the most obscure 30%
+    snap = snapshot(m)
+    snap["focus"] = [round(rnd.uniform(0.3, 0.7), 2), round(rnd.uniform(0.25, 0.6), 2)]
+    tags = captions.hashtags(ctx.season, ctx.year, None, extra=["#animequiz"], season_tag=False)
+    return {"data": {"rounds": [snap], "seed": ctx.seed}, "anime_ids": [m["id"]],
+            "caption": captions.build("reel_quick_quiz", ctx.seed, {}, tags)}
+
+
 RECS_QUERY = """
 query ($id: Int) {
   Media(id: $id) {
@@ -552,6 +571,7 @@ BUILDERS: dict[str, Callable[[Ctx], dict[str, Any]]] = {
     "reel_weekend": build_reel_weekend,
     "reel_top5": build_reel_top5,
     "reel_teaser": build_reel_teaser,
+    "reel_quick_quiz": build_reel_quick_quiz,
     "reel_quiz": build_reel_quiz,
     "reel_recs": build_reel_recs,
     "reel_tierlist": build_reel_tierlist,

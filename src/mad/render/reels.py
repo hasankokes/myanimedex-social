@@ -235,7 +235,8 @@ def outro_scene(headline: str, sub: str, dur=1.6) -> Scene:
     logo = crop_alpha(logo_c)
     head = block_sprite(940, 300, headline, "comic", 150, 80, fill=YELLOW, stroke=8, shadow=(10, 10))
     sub_spr = block_sprite(860, 120, sub, "body_bold", 50, 32, fill=CREAM)
-    chips = [chip_sprite("FREE ON iOS & ANDROID", 44, fill=TEAL), chip_sprite("LINK IN BIO", 44, fill=MAGENTA, fg=WHITE)]
+    chips = [chip_sprite("FOLLOW @MYANIMEDEX", 50, fill=MAGENTA, fg=WHITE, name="display", pad=(30, 14)),
+             chip_sprite("FREE APP · LINK IN BIO", 40, fill=TEAL)]
 
     def draw(t):
         f = bg.copy()
@@ -472,7 +473,8 @@ def _cover_base(m: dict[str, Any], w: int, h: int) -> Image.Image | None:
     return src.crop((left, top, left + w, top + h))
 
 
-def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
+def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0, reveal_at=3.3, head_text: str | None = None,
+                follow: bool = False) -> Scene:
     pw, ph = 640, 900
     base = _cover_base(m, pw, ph)
     if base is None:  # no cover -> typographic card, still guessable from the hint
@@ -483,7 +485,7 @@ def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
     frame = frame_c.im
     fx, fy = (m.get("focus") or [0.5, 0.4])
     level_fill = {"EASY": TEAL, "MEDIUM": YELLOW, "HARD": MAGENTA}.get(m.get("level"), YELLOW)
-    head = chip_sprite(f"ROUND {i}/{total}  ·  {m.get('level', '')}", 62, fill=level_fill,
+    head = chip_sprite(head_text or f"ROUND {i}/{total}  ·  {m.get('level', '')}", 62, fill=level_fill,
                        fg=WHITE if level_fill == MAGENTA else INK, name="display", pad=(30, 12))
     hint_parts = [str(m.get("seasonYear") or ""), (m.get("genres") or [""])[0],
                   f"{m['episodes']} EPS" if m.get("episodes") else ""]
@@ -493,8 +495,13 @@ def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
                          shadow=(8, 8), max_lines=2)
     score = score10(m)
     meta = chip_sprite(f"{score}/10  ·  {_fmt_count(m.get('popularity'))} FANS" if score else "", 42, fill=TEAL)
-    reveal_at = 3.3
     px, py = (W - pw) // 2, 470
+    step = reveal_at / 3
+    big = text_sprite("GUESS THE ANIME", "comic", 120, fill=YELLOW, stroke=10, shadow=(10, 10)) if follow else None
+    if big is not None and big.width > 1000:
+        big = big.resize((1000, round(big.height * 1000 / big.width)), Image.LANCZOS)
+    cta = chip_sprite("FOLLOW FOR A NEW ONE EVERY DAY", 50, fill=MAGENTA, fg=WHITE, name="display",
+                      pad=(30, 14)) if follow else None
 
     def view(t):
         if t >= reveal_at:
@@ -515,10 +522,14 @@ def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
         f = bg.copy()
         f.paste(frame, (px - 12, py - 12), frame)
         f.paste(view(t), (px, py))
-        place(f, head, (W / 2, 330), scale=out_back(seg(t, 0, 0.3)))
+        if big is not None:  # short quiz: the question is readable from the very first frame
+            place(f, big, (W / 2, 200))
+            place(f, head, (W / 2, 360))
+        else:
+            place(f, head, (W / 2, 330), scale=out_back(seg(t, 0, 0.3)))
         if t < reveal_at:
-            k = min(2, int(t / 1.1))
-            place(f, counts[k], (900, 520), scale=out_back(seg(t - k * 1.1, 0, 0.25)))
+            k = min(2, int(t / step))
+            place(f, counts[k], (900, 520), scale=out_back(seg(t - k * step, 0, 0.25)))
             place(f, hint, (W / 2, 1480), alpha=seg(t, 0.6, 0.3))
         else:
             dx, dy = shake(t, reveal_at, seed=i)
@@ -526,7 +537,11 @@ def _quiz_round(m: dict[str, Any], i: int, total: int, dur=5.0) -> Scene:
             place(f, title, (W / 2 + dx, 1480 + 60 * (1 - out_cubic(p)) + dy), alpha=p)
             place(f, meta, (W / 2, 1620), alpha=seg(t, reveal_at + 0.2, 0.3))
             flash(f, t - reveal_at, WHITE)
-        flash(f, t)
+            if cta is not None:
+                p = seg(t, reveal_at + 1.4, 0.3)
+                place(f, cta, (W / 2, 1760 + 40 * (1 - out_cubic(p))), scale=0.8 + 0.2 * out_back(p), alpha=p)
+        if big is None:
+            flash(f, t)
         return f
 
     return dur, draw
@@ -537,8 +552,15 @@ def render_reel_quiz(data: dict[str, Any], out_dir: Path) -> list[Path]:
     scenes = [hook_scene([("GUESS", 330, YELLOW), ("THE ANIME", 200, WHITE)],
                          f"{len(rounds)} ROUNDS  ·  EASY TO HARD", MAGENTA, chip_fill=YELLOW, top=560)]
     scenes += [_quiz_round(m, i, len(rounds)) for i, m in enumerate(rounds, 1)]
-    scenes.append(outro_scene("HOW MANY DID YOU GET?", f"Comment your score /{len(rounds)} · new quiz every Tuesday"))
+    scenes.append(outro_scene("HOW MANY DID YOU GET?", f"Comment your score /{len(rounds)} · follow for a quiz every day"))
     return encode(scenes, out_dir, cover_at=1.3, music_seed=data.get("seed", 0))
+
+
+def render_reel_quick_quiz(data: dict[str, Any], out_dir: Path) -> list[Path]:
+    """~8 s single round with no intro so it loops: the poster is on screen from frame 1."""
+    m = data["rounds"][0]
+    scene = _quiz_round(m, 1, 1, dur=8.2, reveal_at=3.6, head_text="IN 3 SECONDS", follow=True)
+    return encode([scene], out_dir, cover_at=0.9, music_seed=data.get("seed", 0))
 
 
 # ---------------------------------------------------------------- Thursday: If you liked X
@@ -697,6 +719,7 @@ def render_reel_teaser(data: dict[str, Any], out_dir: Path) -> list[Path]:
 
 
 REEL_RENDERERS = {
+    "reel_quick_quiz": render_reel_quick_quiz,
     "reel_quiz": render_reel_quiz,
     "reel_recs": render_reel_recs,
     "reel_tierlist": render_reel_tierlist,

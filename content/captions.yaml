@@ -189,7 +189,22 @@ reel_quiz:
     Only real otaku get all {count} 👀 Guess the anime before the reveal!
 
     Drop your score in the comments (no cheating 😤)
-    New quiz every Tuesday — follow so you don't miss it.
+    A new anime quiz every day — follow so you don't miss it.
+
+# reel_quick_quiz: no placeholders (answer only in the video)
+reel_quick_quiz:
+  - |
+    3 seconds. Can you name it? ⏱️ Answer in the comments before the reveal 👇
+
+    🔔 Follow @myanimedex — a new one every day.
+  - |
+    Only real anime fans get this in 3 seconds 👀 Comment your guess!
+
+    🔔 Follow for a new "guess the anime" every day.
+  - |
+    Zoomed in, pixelated, 3 seconds. Did you get it? 🔍
+
+    Comment ✅ or ❌ and follow @myanimedex for tomorrow's.
 
 # reel_recs: {anchor} {list}
 reel_recs:

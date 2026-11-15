@@ -16,6 +16,7 @@ format_tags:
   reel_top5: ["#animeranking", "#topanime"]
   reel_top5_lens: ["#animeranking", "#topanime"]
   reel_quiz: ["#animequiz", "#guesstheanime"]
+  reel_quick_quiz: ["#guesstheanime", "#animequiz"]
   reel_recs: ["#animerecommendations", "#animetowatch"]
   reel_tierlist: ["#animetierlist", "#animeranking"]
   feature: ["#animeapp", "#animetracker"]

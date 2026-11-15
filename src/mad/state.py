@@ -59,7 +59,7 @@ def record_publish(state: dict[str, Any], slot_key: str, slot: dict[str, Any], m
         state["anime"][str(aid)] = day
     if slot["kind"] == "feature":
         state["features"]["last_id"] = slot["data"]["feature"]["id"]
-    elif slot["kind"] == "reel_quiz":
+    elif slot["kind"] in ("reel_quiz", "reel_quick_quiz"):
         for r in slot["data"]["rounds"]:
             state["quiz_used"][str(r["id"])] = day
     elif slot["kind"] == "reel_recs":

@@ -208,6 +208,53 @@
       ],
       "caption": "This week's anime episodes you shouldn't miss — Fall 2026 edition ⚡\n\n1. The Detective Is Already Dead Season 2 — Ep 7 (Wed)\n2. PSYREN — Ep 6 (Mon)\n3. The Cold Sato-san is Only Sweet to Me — Ep 7 (Tue)\n4. The Iceblade Sorcerer Shall Rule the World II — Ep 7 (Thu)\n5. The World's Strongest Witch — Ep 7 (Wed)\n\nDrop a 🔥 for your favorite of the week.\nNever miss a drop: MyAnimeDex tracks your watchlist and airing calendar. Link in bio.\n\n#anime #newanime #fall2026anime #tanteiwamoushindeiru #myanimedex"
     },
+    "2026-11-16:reel": {
+      "kind": "reel_quick_quiz",
+      "slot": "reel",
+      "date": "2026-11-16",
+      "data": {
+        "rounds": [
+          {
+            "id": 113813,
+            "idMal": 40839,
+            "title": {
+              "romaji": "Kanojo, Okarishimasu",
+              "english": "Rent-a-Girlfriend"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 12,
+            "season": "SUMMER",
+            "seasonYear": 2020,
+            "averageScore": 65,
+            "popularity": 313543,
+            "duration": 24,
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Romance"
+            ],
+            "siteUrl": "https://anilist.co/anime/113813",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113813-SnljeXpU3Pw7.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113813-SnljeXpU3Pw7.jpg",
+              "color": "#f1c950"
+            },
+            "studio": "TMS Entertainment",
+            "focus": [
+              0.34,
+              0.33
+            ]
+          }
+        ],
+        "seed": 47
+      },
+      "anime_ids": [
+        113813
+      ],
+      "caption": "Zoomed in, pixelated, 3 seconds. Did you get it? 🔍\n\nComment ✅ or ❌ and follow @myanimedex for tomorrow's.\n\n#anime #guesstheanime #animequiz #myanimedex"
+    },
     "2026-11-16:story": {
       "kind": "story_anime_of_day",
       "slot": "story",
@@ -401,6 +448,54 @@
       },
       "anime_ids": [],
       "caption": "Built for anime fans: Anime Arena 💛\n\nBracket battles between anime. Vote match by match and crown your all-time favorite.\n\nTrack what you watch, what's next and what's airing this season with MyAnimeDex. Link in bio.\n\n👉 Swipe to see it in the app.\n\n#anime #animeapp #animetracker #myanimedex"
+    },
+    "2026-11-18:reel": {
+      "kind": "reel_quick_quiz",
+      "slot": "reel",
+      "date": "2026-11-18",
+      "data": {
+        "rounds": [
+          {
+            "id": 120120,
+            "idMal": 42249,
+            "title": {
+              "romaji": "Tokyo Revengers",
+              "english": "Tokyo Revengers"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 24,
+            "season": "SPRING",
+            "seasonYear": 2021,
+            "averageScore": 77,
+            "popularity": 455271,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Drama",
+              "Romance",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/120120",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx120120-cWDmnmeEntSe.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx120120-cWDmnmeEntSe.jpg",
+              "color": "#f1865d"
+            },
+            "studio": "LIDENFILMS",
+            "focus": [
+              0.41,
+              0.46
+            ]
+          }
+        ],
+        "seed": 47
+      },
+      "anime_ids": [
+        120120
+      ],
+      "caption": "Zoomed in, pixelated, 3 seconds. Did you get it? 🔍\n\nComment ✅ or ❌ and follow @myanimedex for tomorrow's.\n\n#anime #guesstheanime #animequiz #myanimedex"
     },
     "2026-11-18:story": {
       "kind": "story_your_pick",
@@ -691,6 +786,54 @@
       },
       "anime_ids": []
     },
+    "2026-11-20:reel": {
+      "kind": "reel_quick_quiz",
+      "slot": "reel",
+      "date": "2026-11-20",
+      "data": {
+        "rounds": [
+          {
+            "id": 140960,
+            "idMal": 50265,
+            "title": {
+              "romaji": "SPY×FAMILY",
+              "english": "SPY x FAMILY"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 12,
+            "season": "SPRING",
+            "seasonYear": 2022,
+            "averageScore": 83,
+            "popularity": 583984,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Comedy",
+              "Slice of Life",
+              "Supernatural"
+            ],
+            "siteUrl": "https://anilist.co/anime/140960",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx140960-Kb6R5nYQfjmP.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx140960-Kb6R5nYQfjmP.jpg",
+              "color": "#c9f1f1"
+            },
+            "studio": "CloverWorks",
+            "focus": [
+              0.37,
+              0.39
+            ]
+          }
+        ],
+        "seed": 47
+      },
+      "anime_ids": [
+        140960
+      ],
+      "caption": "Zoomed in, pixelated, 3 seconds. Did you get it? 🔍\n\nComment ✅ or ❌ and follow @myanimedex for tomorrow's.\n\n#anime #guesstheanime #animequiz #myanimedex"
+    },
     "2026-11-20:story": {
       "kind": "story_weekend",
       "slot": "story",
@@ -926,6 +1069,53 @@
         101338
       ],
       "caption": "The best slice of life anime of all time — our Top 5 📊\n\n#1 Fruits Basket The Final Season — 8.9/10\n#2 March comes in like a lion Season 2 — 8.9/10\n#3 Kaguya-sama: Love is War -Ultra Romantic- — 8.9/10\n#4 Clannad: After Story — 8.8/10\n#5 Mob Psycho 100 II — 8.7/10\n\nIs Fruits Basket The Final Season really #1? What's missing from this list? 👇\nMyAnimeDex · track what you watch · link in bio.\n\n#anime #animeranking #sliceoflifeanime #fruitsbasketthefinal #myanimedex"
+    },
+    "2026-11-21:reel": {
+      "kind": "reel_quick_quiz",
+      "slot": "reel",
+      "date": "2026-11-21",
+      "data": {
+        "rounds": [
+          {
+            "id": 20832,
+            "idMal": 29803,
+            "title": {
+              "romaji": "Overlord",
+              "english": "Overlord"
+            },
+            "format": "TV",
+            "status": "FINISHED",
+            "episodes": 13,
+            "season": "SUMMER",
+            "seasonYear": 2015,
+            "averageScore": 76,
+            "popularity": 413881,
+            "duration": 24,
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy"
+            ],
+            "siteUrl": "https://anilist.co/anime/20832",
+            "nextAiringEpisode": null,
+            "coverImage": {
+              "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx20832-vUNm5zrYWifc.jpg",
+              "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx20832-vUNm5zrYWifc.jpg",
+              "color": "#505de4"
+            },
+            "studio": "MADHOUSE",
+            "focus": [
+              0.53,
+              0.27
+            ]
+          }
+        ],
+        "seed": 47
+      },
+      "anime_ids": [
+        20832
+      ],
+      "caption": "Zoomed in, pixelated, 3 seconds. Did you get it? 🔍\n\nComment ✅ or ❌ and follow @myanimedex for tomorrow's.\n\n#anime #guesstheanime #animequiz #myanimedex"
     },
     "2026-11-22:reel": {
       "kind": "reel_top5",

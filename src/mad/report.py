@@ -19,7 +19,7 @@ METRICS = {
 }
 FALLBACK = ["reach", "likes", "comments", "saved", "shares"]
 FAMILY = {
-    "reel_quiz": "Quiz reel", "reel_recs": "Recs reel", "reel_tierlist": "Tier list reel",
+    "reel_quick_quiz": "Short quiz reel", "reel_quiz": "Quiz reel", "reel_recs": "Recs reel", "reel_tierlist": "Tier list reel",
     "reel_top5": "Top 5 reel", "reel_weekend": "Weekend reel", "reel_app_demo": "App demo reel",
     "reel_teaser": "Teaser reel", "top5": "Top 5 post", "airing_week": "Airing post", "feature": "Feature post",
 }

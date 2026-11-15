@@ -32,6 +32,7 @@ KIND_LABELS = {
     "reel_weekend": "Reel · Episodes this weekend",
     "reel_top5": "Reel · Top 5 countdown",
     "reel_teaser": "Reel · App teaser",
+    "reel_quick_quiz": "Reel · Guess in 3 seconds (short quiz)",
     "reel_quiz": "Reel · Guess the anime (quiz)",
     "reel_recs": "Reel · If you liked X, watch these 3",
     "reel_tierlist": "Reel · Season tier list",

@@ -6,12 +6,14 @@ from mad.config import ROOT
 from mad.render.base import CREAM, INK, MAGENTA, TEAL, WHITE, YELLOW, Canvas, mix
 
 DAYS = [
-    ("PAZARTESİ", [("17:00", "Hikâye", "Günün animesi"), ("22:00", "Post", "Bu hafta yayınlananlar · carousel")]),
+    ("PAZARTESİ", [("17:00", "Hikâye", "Günün animesi"), ("22:00", "Post", "Bu hafta yayınlananlar · carousel"),
+                   ("22:00", "Reel", "3 saniyede bil · kısa quiz")]),
     ("SALI", [("17:00", "Hikâye", "Uygulama ipucu"), ("22:00", "Reel", "Guess the anime · quiz")]),
-    ("ÇARŞAMBA", [("17:00", "Hikâye", "Hangisini izliyorsun? A / B"), ("22:00", "Post", "Uygulama özelliği · carousel")]),
+    ("ÇARŞAMBA", [("17:00", "Hikâye", "Hangisini izliyorsun? A / B"), ("22:00", "Post", "Uygulama özelliği · carousel"),
+                  ("22:00", "Reel", "3 saniyede bil · kısa quiz")]),
     ("PERŞEMBE", [("17:00", "Hikâye", "Uygulamayı indir"), ("22:00", "Reel", "If you liked X / Hafta sonu bölümleri")]),
-    ("CUMA", [("17:00", "Hikâye", "Hafta sonu binge önerisi")]),
-    ("CUMARTESİ", [("22:00", "Post", "Top 5 · her hafta farklı lens")]),
+    ("CUMA", [("17:00", "Hikâye", "Hafta sonu binge önerisi"), ("22:00", "Reel", "3 saniyede bil · kısa quiz")]),
+    ("CUMARTESİ", [("22:00", "Post", "Top 5 · her hafta farklı lens"), ("22:00", "Reel", "3 saniyede bil · kısa quiz")]),
     ("PAZAR", [("15:00", "Önizleme", "Gelecek hafta + performans raporu"), ("22:00", "Reel", "Tier list / Top 5 geri sayımı")]),
 ]
 NOTES = [

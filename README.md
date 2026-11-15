@@ -38,6 +38,7 @@
 
 Takipçi kazandıran formatlar öncelikli: quiz (yorum), "If you liked X" (kaydetme), tier list (tartışma). Uygulama tanıtımı feed'de haftada bir (Çarşamba); uygulama demosu Reel'i artık elle (`reel_app_demo`).
 
+- **Kısa quiz (Pzt/Çar/Cum/Cmt)**: ~8 sn, tek tur, giriş yok (döngüye girer): ilk karede soru ve pikselli poster, 3-2-1, cevap, en sonda "follow" çağrısı. Kısa video tamamlanma oranını, dolayısıyla erişimi artırır. Aynı anime 180 gün tekrar sorulmaz (quiz ile ortak `quiz_used`).
 - **Quiz**: popülerliği yüksek animelerden 3 tur (kolay/orta/zor), aynı anime 180 gün tekrar sorulmaz (`quiz_used`). Cevaplar açıklamada yazmaz, sadece videoda açılır.
 - **If you liked X**: 200K+ fanlı bitmiş bir anime ve AniList topluluğunun en çok oyladığı 3 öneri (aynı seri hariç). Aynı çıpa 1 yıl tekrar etmez.
 - **Tier list**: sezonun en popüler 12 animesi, AniList puanına göre S (85+), A (80+), B (75+), C (70+), D.
