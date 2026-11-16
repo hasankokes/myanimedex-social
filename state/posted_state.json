@@ -424,10 +424,16 @@
       "kind": "story_anime_of_day",
       "media_id": "18156738181535663",
       "published_at": "2026-11-16T14:36:25+00:00"
+    },
+    "2026-11-16:story#extra-2015": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18605276458067189",
+      "published_at": "2026-11-16T20:16:11+00:00"
     }
   },
   "tips": {
-    "last_id": "earn-xp",
+    "last_id": "reorder-list",
     "used": [
       "calendar-today",
       "episode-plus",
@@ -437,7 +443,8 @@
       "discover-genres",
       "invite-friend",
       "sort-favorites",
-      "earn-xp"
+      "earn-xp",
+      "reorder-list"
     ]
   },
   "top5_last": [
