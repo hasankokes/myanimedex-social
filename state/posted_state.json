@@ -430,10 +430,16 @@
       "kind": "story_tip",
       "media_id": "18605276458067189",
       "published_at": "2026-11-16T20:16:11+00:00"
+    },
+    "2026-11-17:story": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18109989053363130",
+      "published_at": "2026-11-17T14:01:52+00:00"
     }
   },
   "tips": {
-    "last_id": "reorder-list",
+    "last_id": "arena-play",
     "used": [
       "calendar-today",
       "episode-plus",
@@ -444,7 +450,8 @@
       "invite-friend",
       "sort-favorites",
       "earn-xp",
-      "reorder-list"
+      "reorder-list",
+      "arena-play"
     ]
   },
   "top5_last": [
