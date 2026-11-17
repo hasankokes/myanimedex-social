@@ -453,10 +453,16 @@
       "kind": "story_tip",
       "media_id": "18109989053363130",
       "published_at": "2026-11-17T14:01:52+00:00"
+    },
+    "2026-11-17:story#extra-1904": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "18143517703721641",
+      "published_at": "2026-11-17T19:05:23+00:00"
     }
   },
   "tips": {
-    "last_id": "arena-play",
+    "last_id": "trailer",
     "used": [
       "calendar-today",
       "episode-plus",
@@ -468,7 +474,8 @@
       "sort-favorites",
       "earn-xp",
       "reorder-list",
-      "arena-play"
+      "arena-play",
+      "trailer"
     ]
   },
   "top5_last": [
