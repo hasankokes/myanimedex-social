@@ -488,6 +488,12 @@
       "kind": "story_your_pick",
       "media_id": "18123123716055677",
       "published_at": "2026-11-18T14:01:22+00:00"
+    },
+    "2026-11-19:story": {
+      "anime_ids": [],
+      "kind": "story_download",
+      "media_id": "17914201482572864",
+      "published_at": "2026-11-19T14:01:20+00:00"
     }
   },
   "tips": {
