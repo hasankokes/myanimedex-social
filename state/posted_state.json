@@ -601,10 +601,16 @@
       "kind": "story_anime_of_day",
       "media_id": "18109804388263076",
       "published_at": "2026-11-23T14:01:35+00:00"
+    },
+    "2026-11-24:story": {
+      "anime_ids": [],
+      "kind": "story_tip",
+      "media_id": "17958622131297869",
+      "published_at": "2026-11-24T14:01:34+00:00"
     }
   },
   "tips": {
-    "last_id": "trailer",
+    "last_id": "language-switch",
     "used": [
       "calendar-today",
       "episode-plus",
@@ -617,7 +623,8 @@
       "earn-xp",
       "reorder-list",
       "arena-play",
-      "trailer"
+      "trailer",
+      "language-switch"
     ]
   },
   "top5_last": [
